@@ -1,13 +1,19 @@
+import { useEffect, useState, useContext } from 'react'
 import Head from 'next/head'
 import { 
   Container, 
   Box,
-  Center
+  Center,
+  Text
 } from '@chakra-ui/react'
 
 import LoginBox from '../components/LoginBox/LoginBox'
+import AuthContext from '../context/AuthContext'
 
 export default function Home() {
+
+  const { user } = useContext(AuthContext)
+
   return (
     <>
       <Head>
@@ -17,7 +23,7 @@ export default function Home() {
       </Head>
       <Container maxW='1200px' h='100vh' centerContent>
         <Center h='100%'>
-          <LoginBox />
+          { user ? <Text>Welcome {user.username} </Text> : <LoginBox />}
         </Center>
       </Container>
     </> 
