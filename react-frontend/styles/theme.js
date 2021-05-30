@@ -63,9 +63,9 @@ const styles = {
 }
 
 const Link = {
-    baseStyle: (props) => ({
-        color: mode("clubhouseorange.100", "clubhouseorange.100")(props)
-    })
+    baseStyle: {
+        color: "clubhouseorange.100"
+    }
 }
 
 const Button = {
