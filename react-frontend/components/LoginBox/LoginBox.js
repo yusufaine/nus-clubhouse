@@ -3,16 +3,26 @@ import {
     Text,
     Stack
 } from '@chakra-ui/react'
+const axios = require('axios').default
+
 
 import BoldText from '../BoldText/BoldText'
 import LoginGithubBtn from '../LoginGithubBtn/LoginGithubBtn'
 import LoginDiscordBtn from '../LoginDiscordBtn/LoginDiscordBtn'
+import { API_URL } from '../../utils/utils'
 
 function LoginBox() {
 
     const loginGithub = () => {
         // call API to log into github
+        axios
+        .get(`${API_URL}/auth/github`)
+        .then((response) => {
+            console.log('response from api auth: ', response)
+        })
     }
+
+    const loginGithubUrl = `${API_URL}/auth/github`
 
     return (
         <Stack direction='column' px='40px' py='44px' bgColor='clubhousegrey.300' w='400px' rounded='lg'>
@@ -22,7 +32,7 @@ function LoginBox() {
             </Text>
             <Stack spacing='30px' >
                 {/* <LoginNUSBtn /> */}
-                <LoginGithubBtn mt={10} />
+                <LoginGithubBtn href={`${loginGithubUrl}`} mt={10}/>
                 <LoginDiscordBtn />
             </Stack>
         </Stack>

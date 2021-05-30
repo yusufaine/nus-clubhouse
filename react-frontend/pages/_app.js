@@ -1,4 +1,3 @@
-import '@fontsource/ibm-plex-sans'
 import '@fontsource/inter'
 import { ChakraProvider } from '@chakra-ui/react'
 import customTheme from '../styles/theme'
