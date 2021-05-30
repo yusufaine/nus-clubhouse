@@ -104,10 +104,30 @@ defmodule ElixirBackend.Accounts do
 
   def insert_or_update_user(user_params) do
     case Repo.get_by(User, name: user_params.name) do
-      nil -> 
+      user -> 
+        case isNil?(user) do 
+          true ->
+            createdUser = create_user(user_params)
+            {:ok, createdUser}
+          false ->
+            {:ok, user}
+        end
+      true -> 
         create_user(user_params)
+    end
+  end
+
+  defp isNil?(nil), do: true
+
+  defp isNil?(user), do: false
+
+  def get_user_by_token(token) do 
+    case Repo.get_by(User, token: token) do 
       user -> 
         {:ok, user}
+      true -> 
+        {:error, "No such user"}
     end
   end
 end
+
