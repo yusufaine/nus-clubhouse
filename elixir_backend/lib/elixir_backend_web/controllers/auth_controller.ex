@@ -17,7 +17,8 @@ defmodule ElixirBackendWeb.AuthController do
                             email: auth.info.email,
                             bio: auth.info.description,
                             profile_img_url: auth.info.image,
-                            provider: "github" 
+                            provider: "github",
+                            token: auth.credentials.token
                         }
                         signin(conn, user_params)
                     :discord ->
@@ -27,7 +28,8 @@ defmodule ElixirBackendWeb.AuthController do
                             email: auth.info.email,
                             bio: auth.info.description,
                             profile_img_url: auth.info.image,
-                            provider: "discord" 
+                            provider: "discord",
+                            token: auth.credentials.token
                         }
                         signin(conn, user_params)
                 end
@@ -43,8 +45,9 @@ defmodule ElixirBackendWeb.AuthController do
     defp signin(conn, user_params) do
         case Accounts.insert_or_update_user(user_params) do
             {:ok, user} ->
+                IO.puts("putting username in session and redirecting: #{user.username}")
                 conn
-                |> json(user)
+                |> redirect(external: "https://nusclubhouse.games")
 
             {:error, reason} ->
                 conn
