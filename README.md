@@ -1,9 +1,8 @@
 ![](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/Banner.png)
 >  __The NUS-only voice chat web-app for anything and everything NUS.__
 
-Click [here](https://nusclubhouse.games/) for the latest version of the site. [Option 1]
+Click [here](https://nusclubhouse.games/) for the latest version of the site.
 
-<sup>Click [here](https://nusclubhouse.games/) for the latest version of the site. [Option 2]</sup>
 ## Motivation:
 
 Having gone through the first-year of university during the COVID-19 pandemic, we realised that there was one thing that was fundamentally missing in our lives as students--social interaction. We missed complaining about lectures, talking to friends and classmates, providing or requesting help for anything school-related, or just the simple small talk.
@@ -66,6 +65,6 @@ The web-based application would serve as a platform where users such as students
 
 ## Program flow
 
-![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png)
+![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png)
 
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png) for a clearer version.
+Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png) for a clearer version.
