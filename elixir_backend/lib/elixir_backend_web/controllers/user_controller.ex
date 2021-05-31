@@ -7,7 +7,7 @@ defmodule ElixirBackendWeb.UserController do
   action_fallback ElixirBackendWeb.FallbackController
 
   def me(conn, _params) do 
-    IO.puts(conn.fetch_query_params)
+    %{params: %{"token" => token}} = conn
     user_token = get_session(conn, :token)
     case Accounts.get_user_by_token(user_token) do
       {:ok, user} -> 

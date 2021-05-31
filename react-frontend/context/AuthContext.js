@@ -60,18 +60,19 @@ export const AuthProvider = (props) => {
 
     }
 
-    // const checkUserLoggedIn = async () => {
-    //     const user = await callAPI('/users/me', 'GET')
-    //     if (user.id) {
-    //         console.log('user logged in: ',)
-    //         setUser(user)
-    //     } else {
-    //         setUser(null)
-    //     }
-    // }
+    const checkUserLoggedIn = async () => {
+        console.log('checking if user logged in.....')
+        const user = await callAPI('/api/me', 'GET')
+        if (user.email) {
+            console.log('user logged in: ', user)
+            setUser(user)
+        } else {
+            setUser(null)
+        }
+    }
 
     useEffect(() => {
-        // checkUserLoggedIn()
+        checkUserLoggedIn()
     }, [])
 
     return (

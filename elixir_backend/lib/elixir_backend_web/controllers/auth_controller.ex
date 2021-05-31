@@ -5,7 +5,6 @@ defmodule ElixirBackendWeb.AuthController do
     alias ElixirBackend.Accounts
 
     def callback(%{assigns: response} = conn, params) do
-
         case response do
             %{ueberauth_auth: auth} ->
                 provider = auth.provider
@@ -47,7 +46,7 @@ defmodule ElixirBackendWeb.AuthController do
             {:ok, user} ->
                 IO.puts("putting username in session and redirecting: #{user.username}")
                 conn
-                |> redirect(external: "https://nusclubhouse.games")
+                |> redirect(external: "http://localhost:3000/connect/#{user_params.provider}/redirect?token=#{user_params.token}")
 
             {:error, reason} ->
                 conn

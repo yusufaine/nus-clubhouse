@@ -23,6 +23,7 @@ function LoginBox() {
     }
 
     const loginGithubUrl = `${API_URL}/auth/github`
+    const loginDiscordUrl = `${API_URL}/auth/discord`
 
     return (
         <Stack direction='column' px='40px' py='44px' bgColor='clubhousegrey.300' w='400px' rounded='lg'>
@@ -33,7 +34,7 @@ function LoginBox() {
             <Stack spacing='30px' >
                 {/* <LoginNUSBtn /> */}
                 <LoginGithubBtn href={`${loginGithubUrl}`} mt={10}/>
-                <LoginDiscordBtn />
+                <LoginDiscordBtn href={`${loginDiscordUrl}`} />
             </Stack>
         </Stack>
     )
