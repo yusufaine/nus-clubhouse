@@ -68,3 +68,25 @@ The web-based application would serve as a platform where users such as students
 ![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png)
 
 Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png) for a clearer version.
+
+## UI Mockup
+
+Login:
+
+![Login page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/01-Login.png)
+
+Homepage:
+
+![Homepage](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/02-Home.png)
+
+Room page:
+
+![Room page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/03-Room.png)
+
+Scheduled room page:
+
+![Scheduled room page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/04-Scheduled-Rooms.png)
+
+Another user's profile:
+
+![Other user's profile](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/05-User-Profile-Page.png)
