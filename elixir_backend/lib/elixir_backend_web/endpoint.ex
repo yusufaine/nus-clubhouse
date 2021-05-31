@@ -50,5 +50,6 @@ defmodule ElixirBackendWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug Corsica, origins: "*"
   plug ElixirBackendWeb.Router
 end

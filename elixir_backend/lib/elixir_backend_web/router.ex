@@ -11,6 +11,8 @@ defmodule ElixirBackendWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :put_secure_browser_headers
   end
 
   scope "/", ElixirBackendWeb do
@@ -30,6 +32,7 @@ defmodule ElixirBackendWeb.Router do
   scope "/api", ElixirBackendWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    get "/users/me", UserController, :me
   end
 
   # Enables LiveDashboard only for development

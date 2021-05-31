@@ -6,6 +6,20 @@ defmodule ElixirBackendWeb.UserController do
 
   action_fallback ElixirBackendWeb.FallbackController
 
+  def me(conn, _params) do 
+    %{params: %{"token" => token}} = conn
+    user_token = get_session(conn, :token)
+    case Accounts.get_user_by_token(user_token) do
+      {:ok, user} -> 
+        conn
+        |> put_session(:token, user.token)
+        |> json(user)
+      {:error, reason} ->
+        conn
+        |> json(%{error: "Error", reason: reason})
+    end
+  end
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.json", users: users)

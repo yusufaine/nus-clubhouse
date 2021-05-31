@@ -10,6 +10,7 @@ defmodule ElixirBackend.Account.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :token, :string
 
     timestamps()
   end
@@ -17,8 +18,8 @@ defmodule ElixirBackend.Account.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :username, :bio, :profile_img_url, :password])
-    |> validate_required([:email, :name, :username, :bio, :profile_img_url, :password])
+    |> cast(attrs, [:email, :name, :username, :bio, :profile_img_url, :token])
+    |> validate_required([:email, :username, :profile_img_url, :token])
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> put_password_hash()
