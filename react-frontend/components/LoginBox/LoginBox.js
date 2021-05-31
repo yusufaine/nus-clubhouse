@@ -34,7 +34,7 @@ function LoginBox() {
             <Stack spacing='30px' >
                 {/* <LoginNUSBtn /> */}
                 <LoginGithubBtn href={`${loginGithubUrl}`} mt={10}/>
-                <LoginDiscordBtn />
+                <LoginDiscordBtn href={`${loginDiscordUrl}`} />
             </Stack>
         </Stack>
     )

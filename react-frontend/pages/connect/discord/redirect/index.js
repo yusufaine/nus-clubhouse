@@ -4,15 +4,18 @@ import AuthContext from '../../../../context/AuthContext'
 
 function index() {
 
-    const { loginUserProvider } = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext)
     const router = useRouter()
 
-    // console.log('router access token: ', router.query.access_token)
+    console.log('user id: ', router.query.id)
 
     useEffect(() => {
-        loginUserProvider(router.query.access_token, 'discord')
-        router.push('/')
-    }, [router.query.access_token])
+        const id = router.query.id
+        if (id) {
+            loginUser(router.query.id)
+            router.push('/')
+        }
+    }, [router.query.id])
 
     return (
         <div>
