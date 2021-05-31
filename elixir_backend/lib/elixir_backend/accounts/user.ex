@@ -19,7 +19,6 @@ defmodule ElixirBackend.Accounts.User do
     user
     |> cast(attrs, [:name, :email, :username, :bio, :profile_img_url, :token])
     |> validate_required([:email, :username, :profile_img_url, :token])
-    |> unique_constraint(:email)
     |> unique_constraint(:username)
   end
 end

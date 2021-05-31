@@ -20,7 +20,6 @@ defmodule ElixirBackend.Account.User do
     user
     |> cast(attrs, [:email, :name, :username, :bio, :profile_img_url, :token])
     |> validate_required([:email, :username, :profile_img_url, :token])
-    |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> put_password_hash()
   end
