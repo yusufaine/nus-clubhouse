@@ -65,6 +65,6 @@ The web-based application would serve as a platform where users such as students
 
 ## Program flow
 
-![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png)
+![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png)
 
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png) for a clearer version.
+Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png) for a clearer version.
