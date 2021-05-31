@@ -1,6 +1,9 @@
 ![](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/Banner.png)
-> The exclusive NUS voice chat web-app for anything and everything NUS.
+>  __The NUS-only voice chat web-app for anything and everything NUS.__
 
+Click [here](https://nusclubhouse.games/) for the latest version of the site. [Option 1]
+
+<sup>Click [here](https://nusclubhouse.games/) for the latest version of the site. [Option 2]</sup>
 ## Motivation:
 
 Having gone through the first-year of university during the COVID-19 pandemic, we realised that there was one thing that was fundamentally missing in our lives as students--social interaction. We missed complaining about lectures, talking to friends and classmates, providing or requesting help for anything school-related, or just the simple small talk.
