@@ -1,11 +1,19 @@
-# NUS Clubhouse
-###### The exclusive NUS social voice chat platform for NUS students.
+![](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/Banner.png)
+> The exclusive NUS voice chat web-app for anything and everything NUS.
 
 ## Motivation:
 
 Having gone through the first-year of university during the COVID-19 pandemic, we realised that there was one thing that was fundamentally missing in our lives as students--social interaction. We missed complaining about lectures, talking to friends and classmates, providing or requesting help for anything school-related, or just the simple small talk.
 
-Current platforms and services, while fulfilling the role of remote communication, have felt lacking in some way as they are too clunky--coming in a form of a written medium, needing to schedule calls and getting specific parties onboard, or the invite links get lost in the inbox. _Sounds familiar?_
+Current platforms and services, while fulfilling the role of remote communication, have felt lacking in some way as they are too clunky--coming in a form of a written medium, needing to schedule calls and getting specific parties onboard, or the invite links get lost in the inbox. 
+
+_Sounds familiar?_
+
+## Poster
+
+![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/2810-2.png)
+
+Open [image in a new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/2810-2.png) for a clearer version.
 
 ## Aim
 
@@ -51,11 +59,10 @@ The web-based application would serve as a platform where users such as students
     * No need to specifically call an add people into calls to have a discussion among multiple people
 
 2. <span style="text-decoration:underline;">Zoom</span>
- * No longer need to look through emails or chat groups to find links to the appropriate Zoom room
+    * No longer need to look through emails or chat groups to find links to the appropriate Zoom room
 
 ## Program flow
 
-Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png) for a clearer version.
+![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png)
 
-![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png "image_tooltip")
-
+Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/nusch-prog-flow.png) for a clearer version.
