@@ -10,10 +10,10 @@ Click [here](https://nusclubhouse.games/) for the latest version of the site, an
 - [Motivation](#motivation)
 - [Poster](#poster)
 - [Aim](#aim)
-- [Ideal users](#ideal-users)
-- [Existing ways](#existing-ways)
+- [Ideal Users](#ideal-users)
+- [Existing Ways](#existing-ways)
 - [Scope of Project](#scope-of-project)
-- [How we are different from similar platforms](#how-we-are-different-from-similar-platforms)
+- [How We're Different](#how-were-different)
 - [Program flow](#program-flow)
 - [UI Mockup](#ui-mockup)
 - [Project Log](#project-log)
@@ -36,7 +36,7 @@ Open [image in a new tab](https://raw.githubusercontent.com/aidanaden/nus-clubho
 
 NUS Clubhouse is a voice-chat platform that is easy to use and navigate, and would fill the social void during this pandemic, all while catering to the student life that many had looked forward to.
 
-# Ideal users
+# Ideal Users
 1. NUS students looking to discuss controversial/interesting topics (best food in NUS, hall life, COVID changes, cheating in exams, making friends in online university, etc)
 2. CCA/Camp organisers looking for ways to market their CCAs/camps to NUS students that don’t know they exist (hard to discover NUS camp details without friends/connections)
 3. NUS students looking for more info about specific mods from wider range of students (reviews in NUSmods takes more effort, high chance reviewer did well--survivorship bias)
@@ -44,7 +44,7 @@ NUS Clubhouse is a voice-chat platform that is easy to use and navigate, and wou
 5. Students who believe that they can provide entertaining content in their own way, through setting up NUS-based podcasts (with their friends or other students as guests), showing their creativity by covering songs or debuting their original work to the student community.
 
 
-# Existing ways
+# Existing Ways
 1. Online forums like r/nus on Reddit or group chats with friends (hard to have deeper discussion live on online forums due to longer/unknown reply times and nature of text forums)
 2. Marketing via word-of-mouth through friends, posters, social media, website (hard to connect to NUS students who aren’t following their social media accounts)
 3. Can only find reviews on r/nus or NUSmods (may not be sufficiently detailed or updated)
@@ -79,7 +79,7 @@ The web-based application would serve as a platform where users such as students
         2. Replay rooms (available for 24 hours from when the room closed)
         3. Export rooms (upload events that happened in the room, podcast/performances, to other platforms)
 
-# How we are different from similar platforms
+# How We're Different
 
 1. Skype
     * No need to specifically call an add people into calls to have a discussion among multiple people
