@@ -13,6 +13,10 @@ Click [here](https://nusclubhouse.games/) for the latest version of the site, an
 - [Ideal Users](#ideal-users)
 - [Existing Ways](#existing-ways)
 - [Scope of Project](#scope-of-project)
+- [Problems Encountered](#problems-encountered)
+  - [Milestone 2](#milestone-2)
+    - [Voice Server Issues](#voice-server-issues)
+    - [Growing Pains with Elixir](#growing-pains-with-elixir)
 - [How We're Different](#how-were-different)
 - [Program flow](#program-flow)
 - [UI Mockup](#ui-mockup)
@@ -61,7 +65,7 @@ The web-based application would serve as a platform where users such as students
            - Completed: Authentication done using NUS email instead of NUS API.
            - Authentication by Github/Discord
         2. Voice chat functionality 
-           - Work-in-progress: Hit a major roadblock here.
+           - Work-in-progress: Hit a major roadblock here (more details in [Problems Encountered](#problems-encountered)).
            - Due to how we had planned our web application to work, there was not much available documentation and resources that helped us with setting up the voice-element to our web application.
            - We managed to get a barebones version of voice-chat functionality (with video for easier demonstration) before the end of June.
         3. Setting up rooms
@@ -78,6 +82,23 @@ The web-based application would serve as a platform where users such as students
         1. Private rooms (password needed to enter)
         2. Replay rooms (available for 24 hours from when the room closed)
         3. Export rooms (upload events that happened in the room, podcast/performances, to other platforms)
+
+# Problems Encountered
+## Milestone 2
+### Voice Server Issues
+When we entered Orbital, we had a certain technology stack in mind especially when it came to the voice server. The goal was to use [Mediasoup](https://github.com/versatica/mediasoup-client/), which is built on top of WebRTC as we believed that it would be simpler to implement for our use-case of creating and maintaining different voice rooms instead of just one sole instance, and [RabbitMQ](https://www.rabbitmq.com/) to help signal changes in the voice rooms such as who leaves, who joins, who are the speakers and listeners. 
+
+However, 2 weeks into working into the MS2 submission, we had encountered a large issue that is common when it comes to new technologies -- lack of available resources. While there are documentations, we had difficulty trying to implement the core feature of our web application, mainly in using RabbitMQ alongside Mediasoup. This is when we brought our issue up to our advisor (Neil) and had a discussion on how to move forward as we understood that we had to have at least some semblance of a functional core feature for MS2. We were given 3 situations which we may choose to pursue at our own discretion but was informed that we may be penalised.
+
+1. Changing the voice technology to WebRTC and consider changing RabbitMQ to something like web-sockets,
+2. Deliver the core feature late for MS2, but get heavily penalised for being unable to meet the deadline.
+
+We initially opted for option 2 as we weren't too confident in delivering some form of voice functionality as well as a front-end. However we managed to divide the work up nicely and got a very simple voice (and video) [demonstration](https://api.nusclubhouse.games:3016) up in our back-end but unfortunately did not have time to link it with our front-end. Additionally in doing so, we had to strike a compromise and opt for using web-sockets instead of RabbitMQ.
+
+### Growing Pains with Elixir
+While we had gone through a crash course in using Elixir back in Milestone 1, we realised that it barely sufficed to get a web application running and had to find other resources that focusses more on using Elixir and Phoenix to run and host web applications and how they interact with current web frameworks, which in our case is React.
+
+Thankfully, we had gone through a crash course on Elixir during MS1 and the we gathered later on was built on top of that. Having some background in React, this allowed us to design and deploy our front-end, but we have yet to connect it to our voice server so there are limitations to our MS2 submissions such as being unable to create and join rooms.
 
 # How We're Different
 
