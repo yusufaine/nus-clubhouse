@@ -16,26 +16,21 @@ defmodule ClubhousePhxWeb.Authorize do
 
   See the user controller for an example.
   """
-
   def user_check(conn, _opts) do
-    IO.puts("reviewing conn object in user_check plug")
-    IO.inspect(conn)
+    # CHECK for JWT token in cookies 
     %{cookies: auth_cookie} = fetch_cookies(conn, encrypted: ~w(auth_cookie))
+    IO.puts("fetching auth_cookie")
+    IO.inspect(auth_cookie)
     case auth_cookie do
-      %{"auth_cookie" => %{info: token}} -> 
+      %{"auth_cookie" => token} -> 
         case Token.verify(token) do
-          {:ok, value} ->
-            IO.puts("+++ token verify value +++")
-            IO.inspect(value) 
+          {:ok, %{"user_id" => user_id}} ->
+            assign(conn, :user_id, user_id)
             conn
           {:error, _value} -> error(conn, :error, 400)
         end
       %{} -> 
-        headers = conn.req_headers
-        {"authorization", auth_token} = headers |> List.keyfind("authorization", 0)
-        IO.puts("user not authenticated via auth_cookies...")
-        IO.puts("user auth token value: #{auth_token}")
-        conn
+        error(conn, :error, 400)
     end
   end
 
@@ -44,7 +39,6 @@ defmodule ClubhousePhxWeb.Authorize do
 
   See the session controller for an example.
   """
-
   def guest_check(conn, _opts) do
     %{cookies: auth_cookie} = fetch_cookies(conn, encrypted: ~w(auth_cookie))
     case auth_cookie do 

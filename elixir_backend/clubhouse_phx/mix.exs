@@ -21,6 +21,8 @@ defmodule ClubhousePhx.MixProject do
     [
       mod: {ClubhousePhx.Application, []},
       extra_applications: [
+        :bamboo,
+        :bamboo_smtp,
         :logger, 
         :runtime_tools,
         :corsica
@@ -45,10 +47,12 @@ defmodule ClubhousePhx.MixProject do
       {:jason, "~> 1.0"},
       {:phauxth, "~> 2.3"},
       {:argon2_elixir, "~> 2.0"},
-      {:bamboo, "~> 1.3"},
+      {:bamboo, "~> 2.1.0"},
+      {:bamboo_smtp, "~> 4.0.1"},
       {:plug_cowboy, "~> 2.0"},
       {:corsica, "~> 1.0"},
-      {:clubhouse_data, [path: "../clubhouse_data"]}
+      {:clubhouse_data, [path: "../clubhouse_data"]},
+      {:clubhouse, [path: "../clubhouse"]}
     ]
   end
 

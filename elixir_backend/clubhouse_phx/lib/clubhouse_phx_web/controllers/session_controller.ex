@@ -20,8 +20,8 @@ defmodule ClubhousePhxWeb.SessionController do
         # ClubhousePhx.Sessions and ClubhousePhx.Sessions.Session modules
         #{:ok, %{id: session_id}} = Sessions.create_session(%{user_id: user.id})
         token = Token.sign(%{"user_id" => user.id})
-        conn
-        |> put_resp_cookie("auth_cookie", %{info: token}, encrypt: true, http_only: true, secure: true, same_site: "none")
+        conn = conn |> put_resp_cookie("auth_cookie", token, encrypt: true, http_only: true, secure: false, same_site: "none")
+        conn 
         |> render("info.json", %{info: token})
       {:error, message} ->
         IO.puts("error: #{message}")

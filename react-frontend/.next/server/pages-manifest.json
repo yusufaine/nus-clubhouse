@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/connect/discord/redirect": "pages/connect/discord/redirect.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/room/[id]": "pages/room/[id].js",
+  "/": "pages/index.js"
 }

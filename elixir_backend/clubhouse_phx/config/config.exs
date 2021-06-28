@@ -29,7 +29,17 @@ config :phauxth,
 
 # Mailer configuration
 config :clubhouse_phx, ClubhousePhxWeb.Mailer,
-  adapter: Bamboo.LocalAdapter
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp.gmail.com",
+  port: 465,
+  username: "nusclubhouse@gmail.com",
+  password: "4Tmj@#mH$xB^R#JYC39w!qWN",
+  tls: :if_available,
+  allowed_tls_versions: [:"tlsv1", :"tlsv1.1", :"tlsv1.2"],
+  ssl: true,
+  retries: 1,
+  no_mx_lookups: false,
+  auth: :always
 
 # Configures Elixir's Logger
 config :logger, :console,

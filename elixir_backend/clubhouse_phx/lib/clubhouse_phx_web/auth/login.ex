@@ -9,7 +9,7 @@ defmodule ClubhousePhxWeb.Auth.Login do
   alias ClubhouseData.Users
 
   @impl true
-  def authenticate(%{"password" => password} = params, _, opts) do
+  def authenticate(%{"password" => password} = params, opts \\ []) do
     case Users.get_by(params) do
       nil -> {:error, "no user found"}
       %{confirmed_at: nil} -> {:error, "account unconfirmed"}

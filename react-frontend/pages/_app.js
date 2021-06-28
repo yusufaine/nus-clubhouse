@@ -1,5 +1,6 @@
 import '@fontsource/inter'
 import { ChakraProvider } from '@chakra-ui/react'
+import 'swiper/swiper.scss';
 
 import customTheme from '../styles/theme'
 import { AuthProvider } from '../context/AuthContext'

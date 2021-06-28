@@ -3,6 +3,7 @@ defmodule ClubhouseData.Users.User do
     import Ecto.Changeset
 
     alias ClubhouseData.Rooms.Room
+    alias ClubhouseData.Followings.Following
 
     @type t :: %__MODULE__{
         id: integer,
@@ -16,10 +17,13 @@ defmodule ClubhouseData.Users.User do
         reset_sent_at: DateTime.t() | nil,
         created_rooms: [Room.t()] | %Ecto.Association.NotLoaded{},
         rooms: [Room.t()] | %Ecto.Association.NotLoaded{},
+        following: [__MODULE__.t()] | %Ecto.Association.NotLoaded{},
+        followers: [__MODULE__.t()] | %Ecto.Association.NotLoaded{},
         inserted_at: DateTime.t(),
         updated_at: DateTime.t()
     }
 
+    @derive {Jason.Encoder, only: [:id, :name, :username, :email, :bio, :profileImgUrl, :rooms, :created_rooms, :following, :followers]}
     schema "users" do
         field :name, :string
         field :username, :string
@@ -30,8 +34,10 @@ defmodule ClubhouseData.Users.User do
         field :password_hash, :string
         field :confirmed_at, :utc_datetime
         field :reset_sent_at, :utc_datetime
-        has_many :created_rooms, ClubhouseData.Rooms.Room, foreign_key: :creator_id
-        many_to_many :rooms, ClubhouseData.Rooms.Room, join_through: "rooms_users"
+        has_many :created_rooms, Room, foreign_key: :creator_id
+        many_to_many :rooms, Room, join_through: "rooms_users"
+        many_to_many :following, __MODULE__, join_through: Following, join_keys: [following_id: :id, follower_id: :id]
+        many_to_many :followers, __MODULE__, join_through: Following, join_keys: [follower_id: :id, following_id: :id]
 
         timestamps()
     end
@@ -76,6 +82,10 @@ defmodule ClubhouseData.Users.User do
         |> validate_format(
         :email,
         ~r/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,}$/
+        )
+        |> validate_format(
+            :email,
+            ~r/(@|u.)nus.edu/
         )
         |> validate_length(:email, max: 255)
         |> unique_constraint(:email)

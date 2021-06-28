@@ -24,7 +24,8 @@ defmodule ClubhouseData.MixProject do
     [
       {:ecto_sql, "~> 3.6"},
       {:postgrex, "~> 0.15.9"},
-      {:argon2_elixir, "~> 2.0"}
+      {:argon2_elixir, "~> 2.0"},
+      {:jason, "~> 1.2"},
     ]
   end
 end
