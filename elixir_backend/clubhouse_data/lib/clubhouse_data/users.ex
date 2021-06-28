@@ -11,22 +11,35 @@ defmodule ClubhouseData.Users do
     Returns the list of users.
     """
     @spec list_users() :: [User.t()]
-    def list_users, do: Repo.all(User)
-
+    def list_users() do 
+        users = Repo.all(User)
+        preloaded_users = Enum.map(users, fn user -> get_by(%{"email" => user.email}) end)
+        preloaded_users
+    end
     @doc """
     Gets a single user.
     """
     @spec get_user!(integer) :: User.t() | no_return
-    def get_user!(id), do: Repo.get!(User, id)
+    def get_user!(id) do
+        Repo.preload(Repo.get!(User, id), [:created_rooms, :rooms, :followers, :following])
+    end
 
     @doc """
-    Gets a user based on the params.
+    Gets a user based on email.
 
     This is used by Phauxth to get user information.
     """
     @spec get_by(map) :: User.t() | nil
     def get_by(%{"email" => email}) do
-        Repo.get_by(User, email: email)
+        case Repo.get_by(User, email: email) do
+            user -> 
+                user = Repo.preload(user, [:created_rooms, :rooms, :followers, :following])
+                IO.puts("preloading data of user")
+                IO.inspect(user)
+                user
+            nil ->
+                nil
+        end
     end
 
     @doc """
@@ -95,5 +108,19 @@ defmodule ClubhouseData.Users do
         user
         |> User.update_password_changeset(attrs)
         |> Repo.update()
+    end
+
+    @doc """
+    Add user to following.
+    """
+    @spec follow_user(User.t(), User.t()) :: {:ok, User.t()} | changeset_error
+    def follow_user(%User{} = user, %User{} = userToFollow) do
+        user = Repo.preload(user, [:following, :followers])
+        userToFollow = Repo.preload(userToFollow, [:following, :followers])
+        following = [userToFollow | user.following]
+        user 
+        |> Ecto.Changeset.change()
+        |> Ecto.Changeset.put_assoc(:following, following)
+        |> Repo.insert_or_update()
     end
 end

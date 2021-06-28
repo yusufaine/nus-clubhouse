@@ -2,6 +2,7 @@ defmodule ClubhouseData.Rooms.Room do
     use Ecto.Schema
     import Ecto.Changeset
 
+    @derive {Jason.Encoder, only: [:name, :numUsers, :type, :creator, :users]}
     schema "rooms" do
         field :name, :string
         field :numUsers, :integer

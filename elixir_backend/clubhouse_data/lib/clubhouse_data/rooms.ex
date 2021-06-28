@@ -12,7 +12,7 @@ defmodule ClubhouseData.Rooms do
     def create_room_with_user(%User{} = user, attrs) do
         room = Ecto.build_assoc(user, :created_rooms, attrs)
         room = Repo.insert!(room)
-        add_user(room, user)
+        add_user(user, room)
     end
 
     def update_room(%Room{} = room, attrs) do
@@ -21,15 +21,23 @@ defmodule ClubhouseData.Rooms do
         |> Repo.update()
     end
 
-    def delete_room(%Room{} = room) do
-        Repo.delete(room)
-    end
-
     def list_rooms, do: Repo.all(Room)
 
-    def get_room!(id), do: Repo.get!(Room, id)
+    def get_room!(id) do 
+        Repo.preload(Repo.get!(Room, id), [:creator, :users])
+    end
 
-    def add_user(%Room{} = room, %User{} = user) do
+    def get_room_by_name_and_creator!(name, creator_id) do
+        creator = Users.get_user!(creator_id)
+        case Repo.get_by(Room, [name: name, creator: creator]) do
+            room -> 
+                Repo.preload(room, [:creator, :users])
+            _ ->
+                nil
+        end
+    end
+
+    def add_user(%User{} = user, %Room{} = room) do
         room = Repo.preload(room, [:creator, :users])
         user = Repo.preload(user, [:created_rooms, :rooms])
         users = [user | room.users]
@@ -40,9 +48,34 @@ defmodule ClubhouseData.Rooms do
         |> increment_user()
     end
 
+    def remove_user(%User{} = user, %Room{} = room) do
+        room = Repo.preload(room, [:creator, :users])
+        user = Repo.preload(user, [:created_rooms, :rooms])
+        roomUsers = Enum.reject(room.users, fn roomUser -> roomUser.id == user.id end)
+        room 
+        |> Ecto.Changeset.change()
+        |> Ecto.Changeset.put_assoc(:users, roomUsers)
+        |> Repo.insert_or_update()
+        |> increment_user()
+    end
+
+    def delete_room_if_creator(%User{} = user, room_id) do 
+        room = get_room!(room_id)
+        room = Repo.preload(room, [:creator])
+        if room.creator.id == user.id, do: delete_room(room)
+    end
+
+    defp delete_room(%Room{} = room) do
+        Repo.delete(room)
+    end
+
     defp increment_user({:ok, %Room{} = room}) do
         numUsers = room.numUsers + 1
         update_room(room, %{numUsers: numUsers})
     end
 
+    defp decrement_user({:ok, %Room{} = room}) do
+        numUsers = room.numUsers - 1
+        update_room(room, %{numUsers: numUsers})
+    end
 end

@@ -6,8 +6,8 @@ defmodule Clubhouse.RoomSessionSupervisor do
         DynamicSupervisor.start_link(__MODULE__, args, name: __MODULE__)
     end
 
-    def start_room(room_id, room_name, room_creator) do
-        spec = {RoomSession, {room_id, room_name, room_creator}}
+    def start_room(room_name, room_creator_id) do
+        spec = {RoomSession, {room_name, room_creator_id}}
         DynamicSupervisor.start_child(__MODULE__, spec)
     end
 

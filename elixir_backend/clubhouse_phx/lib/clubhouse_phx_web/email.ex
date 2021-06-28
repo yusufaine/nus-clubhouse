@@ -53,6 +53,7 @@ defmodule ClubhousePhxWeb.Email do
     address
     |> base_email()
     |> subject("Confirm email address")
+    |> text_body("Go to the link below to confirm this email: #{link}")
     |> html_body(
       "<h3>Click on the link below to confirm this email address</h3><p><a href=#{link}>Confirm email</a></p>"
     )

@@ -1,11 +1,12 @@
 import { 
+    Box,
     Link,
     Text,
     Stack
 } from '@chakra-ui/react'
 const axios = require('axios').default
 
-
+import LoginRegisterForm from '../LoginRegisterForm/LoginRegisterForm'
 import BoldText from '../BoldText/BoldText'
 import LoginGithubBtn from '../LoginGithubBtn/LoginGithubBtn'
 import LoginDiscordBtn from '../LoginDiscordBtn/LoginDiscordBtn'
@@ -26,16 +27,14 @@ function LoginBox() {
     const loginDiscordUrl = `${API_URL}/auth/discord`
 
     return (
-        <Stack direction='column' px='40px' py='44px' bgColor='clubhousegrey.300' w='400px' rounded='lg'>
-            <BoldText text='Welcome' />
-            <Text mt={4}>
-                By logging in you accept our <Link>Privacy Policy</Link> and <Link>Terms of Service</Link>
-            </Text>
-            <Stack spacing='30px' >
-                {/* <LoginNUSBtn /> */}
-                <LoginGithubBtn href={`${loginGithubUrl}`} mt={10}/>
-                <LoginDiscordBtn href={`${loginDiscordUrl}`} />
-            </Stack>
+        <Stack direction='column' px='40px' py='36px' bgColor='clubhousegrey.200' w='400px' rounded='lg' spacing={6}>
+            <Box>
+                <BoldText text='Welcome' />
+                <Text mt={2}>
+                    By logging in you accept our <Link>Privacy Policy</Link> and <Link>Terms of Service</Link>
+                </Text>
+            </Box>
+            <LoginRegisterForm />
         </Stack>
     )
 }
