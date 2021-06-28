@@ -15,8 +15,8 @@ Click [here](https://nusclubhouse.games/) for the latest version of the site, an
 - [Scope of Project](#scope-of-project)
 - [Problems Encountered](#problems-encountered)
   - [Milestone 2](#milestone-2)
-    - [Voice Server Issues](#voice-server-issues)
     - [Growing Pains with Elixir](#growing-pains-with-elixir)
+    - [Voice Server Issues](#voice-server-issues)
 - [How We're Different](#how-were-different)
 - [Program flow](#program-flow)
 - [UI Mockup](#ui-mockup)
@@ -85,6 +85,12 @@ The web-based application would serve as a platform where users such as students
 
 # Problems Encountered
 ## Milestone 2
+
+### Growing Pains with Elixir
+While we had gone through a crash course in using Elixir back in Milestone 1, we realised that it barely sufficed to get a web application running and had to find other resources that focusses more on using Elixir and Phoenix to run and host web applications and how they interact with current web frameworks, which in our case is React.
+
+Thankfully, we had gone through a crash course on Elixir during MS1 and the we gathered later on was built on top of that. Having some background in React, this allowed us to design and deploy our front-end, but we have yet to connect it to our voice server so there are limitations to our MS2 submissions such as being unable to create and join rooms.
+
 ### Voice Server Issues
 When we entered Orbital, we had a certain technology stack in mind especially when it came to the voice server. The goal was to use [Mediasoup](https://github.com/versatica/mediasoup-client/), which is built on top of WebRTC as we believed that it would be simpler to implement for our use-case of creating and maintaining different voice rooms instead of just one sole instance, and [RabbitMQ](https://www.rabbitmq.com/) to help signal changes in the voice rooms such as who leaves, who joins, who are the speakers and listeners. 
 
@@ -93,12 +99,7 @@ However, 2 weeks into working into the MS2 submission, we had encountered a larg
 1. Changing the voice technology to WebRTC and consider changing RabbitMQ to something like web-sockets,
 2. Deliver the core feature late for MS2, but get heavily penalised for being unable to meet the deadline.
 
-We initially opted for option 2 as we weren't too confident in delivering some form of voice functionality as well as a front-end. However we managed to divide the work up nicely and got a very simple voice (and video) [demonstration](https://api.nusclubhouse.games:3016) up in our back-end but unfortunately did not have time to link it with our front-end. Additionally in doing so, we had to strike a compromise and opt for using web-sockets instead of RabbitMQ.
-
-### Growing Pains with Elixir
-While we had gone through a crash course in using Elixir back in Milestone 1, we realised that it barely sufficed to get a web application running and had to find other resources that focusses more on using Elixir and Phoenix to run and host web applications and how they interact with current web frameworks, which in our case is React.
-
-Thankfully, we had gone through a crash course on Elixir during MS1 and the we gathered later on was built on top of that. Having some background in React, this allowed us to design and deploy our front-end, but we have yet to connect it to our voice server so there are limitations to our MS2 submissions such as being unable to create and join rooms.
+We initially opted for option 2 as we weren't too confident in delivering some form of voice functionality as well as a front-end. However we managed to divide the work up nicely and got a very simple voice (and video) [demonstration](https://api.nusclubhouse.games:3016) up in our back-end but unfortunately did not have time to link it with our front-end. Additionally in doing so, we had to strike a compromise and opt for using web-sockets instead of RabbitMQ for the demonstration for MS2. We still intend to learn and implement RabbitMQ if possible.
 
 # How We're Different
 
