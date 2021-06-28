@@ -1,0 +1,3 @@
+[submodule "mediasoup-sfu-video-room-demo"]
+	path = mediasoup-sfu-video-room-demo
+	url = https://github.com/Dirvann/mediasoup-sfu-webrtc-video-rooms.git
