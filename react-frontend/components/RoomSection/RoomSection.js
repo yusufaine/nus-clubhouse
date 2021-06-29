@@ -16,7 +16,7 @@ function RoomSection() {
     useEffect(() => {
         if (roomData && roomData.creator) {
             setRoomName(roomData.name)
-            setRoomCreatorName(roomData.creator.name)
+            setRoomCreatorName(roomData.creator.username)
         }
     }, [roomData])
 
