@@ -16,8 +16,17 @@ function RoomUsersSection() {
 
     useEffect(() => {
         if (roomData) {
-            setSpeakers(roomData.users)
-            setListeners(roomData.users)
+            const speakers = []
+            const listeners = []
+            roomData.users.map(user => {
+                if (user.isSpeaker) {
+                    speakers.push(user)
+                } else {
+                    listeners.push(user)
+                }
+            })
+            setSpeakers(speakers)
+            setListeners(listeners)
         }
     }, [roomData])
 
