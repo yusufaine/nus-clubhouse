@@ -28,7 +28,7 @@ function RoomUsersSection() {
             setSpeakers(speakers)
             setListeners(listeners)
         }
-    }, [roomData])
+    }, [roomData.users])
 
     return (
         <Box>
