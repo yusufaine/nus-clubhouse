@@ -20,7 +20,7 @@ function UserSignupForm({ handleSubmit }) {
                     .required('Your username is required'),
         signup_email: Yup.string()
                     .email('Invalid email')
-                    .matches(validNusEmailRegex, 'Your NUS email is required to join NUS Clubhouse')
+                    // .matches(validNusEmailRegex, 'Your NUS email is required to join NUS Clubhouse')
                     .required('Your NUS email is required'),
         signup_password: Yup.string()
                     .password()
