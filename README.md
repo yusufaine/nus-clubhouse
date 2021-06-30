@@ -1,7 +1,9 @@
 ![](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/Banner.png)
 >  __The NUS-only voice chat web-app for anything and everything NUS.__
 
-Click [here](https://nusclubhouse.games/) for the latest version of the site, and [here](https://api.nusclubhouse.games:3016/) a very basic voice server we have yet to integrate with our front-end.
+Click [here](https://nusclubhouse.games/) for the latest version of the site, and [here](https://api.nusclubhouse.games:3016/) a very basic voice server we have yet to integrate with our front-end. 
+
+*DISCLAIMER: The voice demo takes a while to load if you're accessing the page for the first time.*
 
 ###### README has been updated for Milestone 2 completion, refer to version history for changes.
 
