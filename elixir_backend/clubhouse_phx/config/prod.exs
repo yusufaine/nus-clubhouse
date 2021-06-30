@@ -18,7 +18,9 @@ config :clubhouse_phx, ClubhousePhxWeb.Endpoint,
     cipher_suite: :strong,
     keyfile: System.get_env("SSL_KEY_PATH"),
     certfile: System.get_env("SSL_CERT_PATH")
-  ]
+  ],
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  check_origin: ["https://nusclubhouse.games"]
 
 # Phauxth authentication configuration
 config :phauxth,
@@ -45,6 +47,18 @@ config :clubhouse_phx, ClubhousePhxWeb.Mailer,
   retries: 1,
   no_mx_lookups: false,
   auth: :always
+
+config :clubhouse_data, ClubhouseData.Repo,
+  database: "postgres",
+  username: System.get_env("DATABASE_USER"),
+  password: System.get_env("DATABASE_PASS"),
+  hostname: System.get_env("DATABASE_HOST"),
+  port: System.get_env("DATABASE_PORT"),
+  ssl: true,
+  pool_size: 15
+
+config :clubhouse_data,
+  ecto_repos: [ClubhouseData.Repo]
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -85,4 +99,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
