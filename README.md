@@ -69,14 +69,14 @@ The web-based application would serve as a platform where users such as students
            - Due to how we had planned our web application to work, there was not much available documentation and resources that helped us with setting up the voice-element to our web application.
            - We managed to get a barebones version of voice-chat functionality (with video for easier demonstration) before the end of June.
         3. Setting up rooms
-           - Work-in-progress: Dependent on (2).
+           - Work-in-progress: Dependent on (b).
            - While we have the front-end ready, we have yet to link it with the voice server.
 
     - <span style="text-decoration:underline;">July</span>:
         1. Voice chat with rooms (Deliver by 2<sup>nd</sup> week of July)
         2. Schedule rooms (Deliver by end of July)
         3. Calendar of events for upcoming rooms (Deliver by end of July)
-           - Dependency: Schedule rooms (2)
+           - Dependency: Schedule rooms (b)
 
     - <span style="text-decoration:underline;">Beyond Orbital timeframe</span>:
         1. Private rooms (password needed to enter)
