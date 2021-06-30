@@ -1,6 +1,7 @@
 defmodule ClubhouseData.Rooms do
     alias ClubhouseData.Repo
     alias ClubhouseData.Rooms.Room
+    alias ClubhouseData.Users
     alias ClubhouseData.Users.User
 
     def create_room(attrs) do

@@ -7,8 +7,20 @@ defmodule ClubhousePhxWeb.AuthView do
   end
 
   def render("user_login.json", %{user: user}) do
-    IO.puts("rendering user_login")
-    %{data: user}
+    created_room_ids = Enum.map(user.created_rooms, fn(room) -> room.id end)
+    room_ids = Enum.map(user.rooms, fn(room) -> room.id end)
+    %{data: %{
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        bio: user.bio,
+        email: user.email,
+        profileImgUrl: user.profileImgUrl,
+        followers: user.followers,
+        following: user.following,
+        rooms: room_ids,
+        created_rooms: created_room_ids
+    }}
   end
 
   def render("user_me.json", %{user: user}) do
