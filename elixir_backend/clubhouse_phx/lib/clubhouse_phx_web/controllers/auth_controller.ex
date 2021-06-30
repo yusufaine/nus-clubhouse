@@ -18,7 +18,7 @@ defmodule ClubhousePhxWeb.AuthController do
         # ClubhousePhx.Sessions and ClubhousePhx.Sessions.Session modules
         #{:ok, %{id: session_id}} = Sessions.create_session(%{user_id: user.id})
         token = Token.sign(%{"user_email" => user.email})
-        conn = conn |> put_resp_cookie("auth_cookie", token, encrypt: true, http_only: true, secure: false) 
+        conn = conn |> put_resp_cookie("auth_cookie", token, encrypt: true, http_only: true, secure: true) 
         IO.puts("User logged in")
         IO.inspect(user)
         conn
