@@ -9,7 +9,7 @@ defmodule Clubhouse.RoomSession do
     def start_link({room_name, creator_id}) do
         creator_data = Users.get_user!(creator_id)
         creator = User.new(creator_data.id, creator_data.username, creator_data.profileImgUrl, false, true)
-        {:ok, room} = Rooms.create_room_with_user(creator_data, %{name: room_name, numUsers: 0, type: "public"})
+        {:ok, room} = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, numUsers: 0, type: "public"})
         name = room_session_name(room.id)
         GenServer.start_link(__MODULE__, {room.id, room_name, creator}, name: name)
     end
@@ -46,20 +46,21 @@ defmodule Clubhouse.RoomSession do
 
     def handle_call(:get, _from, room) do
         creator = room.creator |> Map.from_struct()
-        speakers = 
+        speakers =
             for speaker <- room.speakers do
-                speaker 
+                speaker
                 |> Map.from_struct()
             end
-        listeners = 
+        listeners =
             for listener <- room.listeners do
-                listener 
+                listener
                 |> Map.from_struct()
             end
         users = speakers ++ listeners
         result = %{
             id: room.id,
             name: room.name,
+            isLive: room.isLive
             type: room.type,
             creator: creator,
             users: users
