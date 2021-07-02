@@ -60,7 +60,7 @@ defmodule Clubhouse.RoomSession do
         result = %{
             id: room.id,
             name: room.name,
-            isLive: room.isLive
+            isLive: room.isLive,
             type: room.type,
             creator: creator,
             users: users
