@@ -5,6 +5,7 @@ defmodule Clubhouse.Room do
         id: nil,
         name: nil,
         type: "public",
+        isLive: nil,
         numUsers: 0,
         speakers: [],
         listeners: [],
@@ -16,10 +17,11 @@ defmodule Clubhouse.Room do
         room = %Room{
             id: id,
             name: name,
+            isLive: true,
             creator: creator,
             startTime: DateTime.utc_now()
         }
-        room 
+        room
         |> add_user(creator)
     end
 
@@ -30,10 +32,10 @@ defmodule Clubhouse.Room do
 
     def add_user(room, user) do
         cond do
-            user.isSpeaker == false -> 
+            user.isSpeaker == false ->
                 add_listener(room, user)
             user.isSpeaker ->
-                add_speaker(room, user)    
+                add_speaker(room, user)
         end
     end
 

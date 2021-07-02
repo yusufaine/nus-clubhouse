@@ -6,6 +6,7 @@ defmodule ClubhouseData.Repo.Migrations.CreateRooms do
         add :name, :string
         add :numUsers, :integer
         add :type, :string
+        add :isLive, :boolean
         add :creator_id, references(:users)
 
         timestamps()
