@@ -17,16 +17,24 @@ defmodule Clubhouse.Room do
         room = %Room{
             id: id,
             name: name,
+            type: "public",
             isLive: true,
+            numUsers: 0,
             creator: creator,
+            speakers: [],
+            listeners: [],
             startTime: DateTime.utc_now()
         }
         room
-        |> add_user(creator)
     end
 
     defp increment_user(room) do
         numUsers = room.numUsers + 1
+        Map.put(room, :numUsers, numUsers)
+    end
+
+    defp decrement_user(room) do
+        numUsers = room.numUsers - 1
         Map.put(room, :numUsers, numUsers)
     end
 
@@ -39,11 +47,27 @@ defmodule Clubhouse.Room do
         end
     end
 
+    def remove_user(room, user_username) do
+        remove_listener(room, user_username)
+        remove_speaker(room, user_username)
+    end
+
     defp add_speaker(room, user) do
         speakers = [user | room.speakers]
         room
         |> Map.put(:speakers, speakers)
         |> increment_user()
+    end
+
+    defp remove_speaker(room, user_username) do
+        speakers = Enum.reject(room.speakers, fn speaker -> speaker.username == user_username end)
+        case speakers == room.speakers do
+            false ->
+                room 
+                |> Map.put(:speakers, speakers)
+                |> decrement_user()
+            true -> room
+        end
     end
 
     defp add_listener(room, user) do
@@ -53,4 +77,14 @@ defmodule Clubhouse.Room do
         |> increment_user()
     end
 
+    defp remove_listener(room, user_username) do
+        listeners = Enum.reject(room.listeners, fn listener -> listener.username == user_username end)
+        case listeners == room.listeners do
+            false -> 
+                room 
+                |> Map.put(:listeners, listeners)
+                |> decrement_user()
+            true -> room
+        end
+    end
 end

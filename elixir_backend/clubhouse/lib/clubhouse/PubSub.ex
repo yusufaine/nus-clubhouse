@@ -15,8 +15,15 @@ defmodule Clubhouse.PubSub do
         PubSub.unsubscribe(server_name(), topic)
     end
 
-    def broadcast_room(room_id, user) do
+    def broadcast_room(room_id, user, :user_joined) do
+        IO.puts("broadcasting user #{user.username} joined!")
         topic = room_topic(room_id)
-        PubSub.broadcast(server_name(), topic, {:room_update, user})
+        PubSub.broadcast(server_name(), topic, {:user_joined, user})
+    end
+
+    def broadcast_room(room_id, user_username, :user_left) do
+        IO.puts("broadcasting user #{user_username} left!")
+        topic = room_topic(room_id)
+        PubSub.broadcast(server_name(), topic, {:user_left, user_username})
     end
 end

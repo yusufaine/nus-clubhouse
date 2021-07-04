@@ -32,6 +32,7 @@ function UpcomingRoomsSection() {
                 px='20px' 
                 py='15px' 
                 bg='clubhousegrey.400'
+                transition="0.2s"
                 _hover={{
                     bg: 'clubhousegrey.600',
                     borderColor: 'clubhousegrey.600',

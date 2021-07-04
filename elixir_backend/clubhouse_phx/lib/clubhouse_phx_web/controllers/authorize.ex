@@ -24,8 +24,8 @@ defmodule ClubhousePhxWeb.Authorize do
     case auth_cookie do
       %{"auth_cookie" => token} -> 
         case Token.verify(token) do
-          {:ok, %{"user_id" => user_id}} ->
-            assign(conn, :user_id, user_id)
+          {:ok, %{"user_email" => user_email}} ->
+            assign(conn, :user_email, user_email)
             conn
           {:error, _value} -> error(conn, :error, 400)
         end

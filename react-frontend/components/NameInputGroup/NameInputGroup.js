@@ -1,15 +1,19 @@
-import {   
-    Input,
+import {
     InputGroup,
-    InputRightElement
+    InputLeftElement
 } from '@chakra-ui/react'
-import { CheckIcon } from '@chakra-ui/icons'
+import { FaUser } from 'react-icons/fa'
 
-function NameInputGroup({ field, valid }) {
+import ClubhouseInput from '../ClubhouseInput/ClubhouseInput'
+
+function NameInputGroup({ field, id }) {
     return (
         <InputGroup>
-            <Input {...field} id='name' placeholder='Name' focusBorderColor='mypets.100' />
-            <InputRightElement children={<CheckIcon color={valid ? 'green.400' : 'white' }/>} />
+            <InputLeftElement
+                pointerEvents='none'
+                children={<FaUser />}
+            />
+            <ClubhouseInput {...field} id={id} placeholder='Name' pl={10}/>
         </InputGroup>
     )
 }

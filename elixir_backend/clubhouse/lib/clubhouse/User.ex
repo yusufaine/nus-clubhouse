@@ -19,6 +19,26 @@ defmodule Clubhouse.User do
         }
     end
 
+    def new_speaker(id, username, profileImgUrl) do
+        %User{
+            id: id,
+            username: username,
+            profileImgUrl: profileImgUrl,
+            isMuted: False,
+            isSpeaker: True
+        }
+    end
+
+    def new_listener(id, username, profileImgUrl) do
+        %User{
+            id: id,
+            username: username,
+            profileImgUrl: profileImgUrl,
+            isMuted: False,
+            isSpeaker: False
+        }
+    end
+
     def mute_user(user) do
         Map.put(user, :isMuted, true)
     end

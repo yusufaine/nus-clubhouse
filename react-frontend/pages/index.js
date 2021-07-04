@@ -14,18 +14,25 @@ import RoomListFeed from '../components/RoomListFeed/RoomListFeed'
 import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSection/ProfileUpcomingRoomsSection'
 import AuthContext from '../context/AuthContext'
 
-export default function Login() {
-    const { user } = useContext(AuthContext)
+export default function Home() {
+    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const [rooms, setRooms] = useState([])
     const router = useRouter()
-
+    
     useEffect(() => {
         if (!user) {
             console.log('user not logged in')
             router.push('/login')
+        } else {
+            fetchLiveRooms().then(rooms => {
+                console.log('rooms value: ', rooms)
+                const liveRooms = rooms.filter(room => { return room.isLive })
+                setRooms(liveRooms)
+            })
         }
     }, [user])
 
-    return (
+    return (user && 
         <>
             <Head>
                 <title>NUS Clubhouse</title>
@@ -36,7 +43,7 @@ export default function Login() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
-                    <RoomListFeed />
+                    <RoomListFeed rooms={rooms}/>
                     <ProfileUpcomingRoomsSection />
                 </Stack>
             </Container>

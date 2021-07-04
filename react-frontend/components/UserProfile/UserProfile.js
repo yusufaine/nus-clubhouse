@@ -12,7 +12,7 @@ function UserProfile({ name='Ryan Aidan', username='aidanaden' }) {
         <Stack direction='row' spacing={4} mb={5}>
             <UserProfileAvatar />
             <Box>
-                <UserNameText text={username}/>
+                <UserNameText text={name}/>
                 <UserUsernameText text={username}/>
             </Box>
         </Stack>

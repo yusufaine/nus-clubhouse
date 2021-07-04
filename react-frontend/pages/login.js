@@ -28,7 +28,7 @@ export default function Login() {
       </Head>
       <Container maxW='1320px' h='100vh' centerContent>
         <Center h='100%'>
-          {user ? <Text>Welcome {user.username} </Text> : <LoginBox />}
+          <LoginBox />
         </Center>
       </Container>
     </>

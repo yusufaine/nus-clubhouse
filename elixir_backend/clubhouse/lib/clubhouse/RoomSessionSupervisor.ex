@@ -11,6 +11,10 @@ defmodule Clubhouse.RoomSessionSupervisor do
         DynamicSupervisor.start_child(__MODULE__, spec)
     end
 
+    def list_rooms() do
+        DynamicSupervisor.which_children(__MODULE__)
+    end
+
     # callbacks
 
     def init(_args), do: DynamicSupervisor.init(strategy: :one_for_one)

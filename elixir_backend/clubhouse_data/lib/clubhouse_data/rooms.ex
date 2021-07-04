@@ -4,6 +4,8 @@ defmodule ClubhouseData.Rooms do
     alias ClubhouseData.Users
     alias ClubhouseData.Users.User
 
+    import Ecto.Query, only: [from: 2]
+
     def create_room(attrs) do
         %Room{}
         |> Room.changeset(attrs)
@@ -12,8 +14,7 @@ defmodule ClubhouseData.Rooms do
 
     def create_room_with_user(%User{} = user, attrs) do
         room = Ecto.build_assoc(user, :created_rooms, attrs)
-        room = Repo.insert!(room)
-        add_user(user, room)
+        Repo.insert!(room)
     end
 
     def update_room(%Room{} = room, attrs) do
@@ -22,7 +23,10 @@ defmodule ClubhouseData.Rooms do
         |> Repo.update()
     end
 
-    def list_rooms, do: Repo.all(Room)
+    def list_rooms() do
+        preload_query = from rm in Room, where: rm.isLive == true, preload: [:creator, :users]
+        Repo.all(preload_query)
+    end
 
     def get_room!(id) do 
         Repo.preload(Repo.get!(Room, id), [:creator, :users])

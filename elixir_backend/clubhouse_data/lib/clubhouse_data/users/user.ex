@@ -78,14 +78,14 @@ defmodule ClubhouseData.Users.User do
     end
 
     defp unique_email(changeset) do
+        # |> validate_format(
+        #     :email,
+        #     ~r/(@|u.)nus.edu/
+        # )
         changeset
         |> validate_format(
         :email,
         ~r/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,}$/
-        )
-        |> validate_format(
-            :email,
-            ~r/(@|u.)nus.edu/
         )
         |> validate_length(:email, max: 255)
         |> unique_constraint(:email)

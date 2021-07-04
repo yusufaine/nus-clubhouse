@@ -9,21 +9,40 @@ defmodule Clubhouse.RoomSession do
     def start_link({room_name, creator_id}) do
         creator_data = Users.get_user!(creator_id)
         creator = User.new(creator_data.id, creator_data.username, creator_data.profileImgUrl, false, true)
-        {:ok, room} = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, numUsers: 0, type: "public"})
+        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, numUsers: 0, type: "public"})
         name = room_session_name(room.id)
         GenServer.start_link(__MODULE__, {room.id, room_name, creator}, name: name)
     end
 
     def room_session_name(id), do: :"roomsession:#{id}"
 
-    def add_user(room_id, user) do
+    def add_user(room_id, %{"id" => user_id, "username" => user_username, "profileImgUrl" => user_profileImgUrl}) do
         name = room_session_name(room_id)
+        user = User.new_listener(user_id, user_username, user_profileImgUrl)
+        IO.puts("created user with user params: ")
+        IO.inspect(user)
         GenServer.call(name, {:add_user, user})
+    end
+
+    def remove_user(room_id, user_username) do
+        name = room_session_name(room_id)
+        IO.puts("removing user #{user_username} from room #{room_id}")
+        GenServer.call(name, {:remove_user, user_username})
     end
 
     def get_room(room_id) do
         name = room_session_name(room_id)
         GenServer.call(name, :get)
+    end
+
+    def is_creator?(room_id, user_username) do
+        name = room_session_name(room_id)
+        GenServer.call(name, {:is_creator, user_username})
+    end
+
+    def end_room(room_id) do
+        name = room_session_name(room_id)
+        GenServer.stop(name)
     end
 
     # Callbacks
@@ -38,13 +57,7 @@ defmodule Clubhouse.RoomSession do
         Room.new(room_id, name, creator)
     end
 
-    def handle_call({:add_user, user}, _from, room) do
-        room = Room.add_user(room, user)
-        PubSub.broadcast_room(room.id, user)
-        {:reply, room, room}
-    end
-
-    def handle_call(:get, _from, room) do
+    defp room_to_map(room) do
         creator = room.creator |> Map.from_struct()
         speakers =
             for speaker <- room.speakers do
@@ -65,25 +78,69 @@ defmodule Clubhouse.RoomSession do
             creator: creator,
             users: users
         }
-        {:reply, result, room}
+        result
     end
 
-    def save_room(room) do
+    defp user_to_map(user) do
+        result = %{
+            id: user.id,
+            username: user.username,
+            profileImgUrl: user.profileImgUrl,
+            isMuted: user.isMuted,
+            isSpeaker: user.isSpeaker
+        }
+        result
+    end
+
+    def handle_call({:add_user, user}, _from, room) do
+        room = Room.add_user(room, user)
+        roomMap = room_to_map(room)
+        userMap = user_to_map(user)
+        PubSub.broadcast_room(room.id, userMap, :user_joined)
+        {:reply, roomMap, room}
+    end
+
+    def handle_call({:remove_user, user_username}, _form, room) do
+        room = Room.remove_user(room, user_username)
+        roomMap = room_to_map(room)
+        PubSub.broadcast_room(room.id, user_username, :user_left)
+        {:reply, roomMap, room}
+    end
+
+    def handle_call(:get, _from, room) do
+        roomMap = room_to_map(room)
+        {:reply, roomMap, room}
+    end
+
+    def handle_call({:is_creator, user_username}, _from, room) do
+        isCreator = room.creator.username == user_username
+        {:reply, isCreator, room}
+    end
+
+    def save_room(room, live_status) do
+        IO.puts("saving room with live status #{live_status}")
         room_data = Rooms.get_room!(room.id)
         preloaded_speakers = Enum.map(room.speakers, fn(speaker) -> Users.get_user!(speaker.id) end)
         preloaded_listeners = Enum.map(room.listeners, fn(listener) -> Users.get_user!(listener.id) end)
         total_users = [preloaded_speakers | preloaded_listeners]
-        Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers})
+        case live_status do
+            false -> 
+                res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false})
+                IO.puts("saving room with isLive false state")
+                IO.inspect(res)
+            true -> 
+                Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: true})
+        end
     end
 
     def schedule_save(), do: Process.send_after(self(), :save, @save_time)
 
     def handle_info(:save, room) do
-        save_room(room)
+        save_room(room, false)
 
         schedule_save()
         {:noreply, room}
     end
 
-    def terminate(_reason, room), do: save_room(room)
+    def terminate(_reason, room), do: save_room(room, false)
 end

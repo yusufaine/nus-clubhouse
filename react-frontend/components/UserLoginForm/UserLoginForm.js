@@ -17,7 +17,7 @@ function UserLoginForm({ handleSubmit }) {
     const loginSchema = Yup.object().shape({
         email: Yup.string()
                     .email('Invalid email')
-                    .matches(validNusEmailRegex, 'Your NUS email is required to join NUS Clubhouse')
+                    // .matches(validNusEmailRegex, 'Your NUS email is required to join NUS Clubhouse')
                     .required('Your NUS email is required'),
         password: Yup.string()
                     .password()

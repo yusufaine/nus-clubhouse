@@ -8,6 +8,9 @@ function ClubhouseInput({ ...props }) {
             {...props} 
             focusBorderColor='clubhouseorange.500' 
             backgroundColor='clubhousegrey.400' 
+            _hover={{
+                borderColor: 'clubhousegrey.600'
+            }}
             _placeholder={{ 
                 textColor: 'clubhousegrey.600' 
             }}
