@@ -16,6 +16,7 @@ defmodule ClubhousePhxWeb.RoomController do
 
   def index(conn, _) do
     rooms = Rooms.list_rooms()
+    IO.inspect(rooms)
     render(conn, "index.json", rooms: rooms)
   end
 
@@ -53,14 +54,9 @@ defmodule ClubhousePhxWeb.RoomController do
     user = Users.get_user!(user_id)
     room_params = %{name: room_name, numUsers: num_users, type: room_type}
     case RoomSessionSupervisor.start_room(room_name, user_id) do
-      {:ok, pid} -> 
-        IO.puts("created room...")
-        IO.inspect(pid)
+      {:ok, pid} ->
         state = :sys.get_state(pid)
-        IO.inspect(state)
         roomMap = room_to_map(state)
-        IO.puts("room map")
-        IO.inspect(roomMap)
         conn
         |> render("show.json", room: roomMap)
     end

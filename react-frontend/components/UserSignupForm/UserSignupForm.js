@@ -9,6 +9,7 @@ const Yup = require('yup')
 require('yup-password')(Yup)
 
 import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
+import NameInputGroup from '../NameInputGroup/NameInputGroup'
 import EmailInputGroup from '../EmailInputGroup/EmailInputGroup'
 import PasswordInputGroup from '../PasswordInputGroup/PasswordInputGroup'
 import UsernameInputGroup from '../UsernameInputGroup/UsernameInputGroup'
@@ -16,6 +17,8 @@ import UsernameInputGroup from '../UsernameInputGroup/UsernameInputGroup'
 function UserSignupForm({ handleSubmit }) {
     const validNusEmailRegex = /(@|u.)nus.edu/
     const signupSchema = Yup.object().shape({
+        signup_name: Yup.string()
+                    .required('Your name is required'),
         signup_username: Yup.string()
                     .required('Your username is required'),
         signup_email: Yup.string()
@@ -32,12 +35,23 @@ function UserSignupForm({ handleSubmit }) {
 
     return (
         <Formik
-            initialValues={{ signup_username: '', signup_email: '', signup_password: '' }}
+            initialValues={{ signup_name: '', signup_username: '', signup_email: '', signup_password: '' }}
             onSubmit={handleSubmit}
             validationSchema={signupSchema}
         >
             {(props) => (
                 <Form>
+                    <Box mb={4}>
+                        <Field name='signup_name' >
+                            {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.signup_name && form.touched.signup_name}>
+                                    <FormLabel>Name</FormLabel>
+                                    <NameInputGroup field={field} id='signup_name'/>
+                                    <FormErrorMessage>{form.errors.signup_name}</FormErrorMessage>
+                                </FormControl>
+                            )}
+                        </Field>
+                    </Box>
                     <Box mb={4}>
                         <Field name='signup_username' >
                             {({ field, form }) => (

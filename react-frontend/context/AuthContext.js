@@ -21,7 +21,7 @@ export const callAPI = async (path, method, body) => {
 
 export const AuthProvider = (props) => {
     const [user, setUser] = useState('')
-    const [roomData, setRoomData] = useState({})
+    const [roomData, setRoomData] = useState(null)
     const router = useRouter()
 
     const successToast = (text, subtext="", toast) => {
@@ -29,7 +29,7 @@ export const AuthProvider = (props) => {
             title: text,
             description: subtext,
             status: 'success',
-            duration: 3000,
+            duration: 5000,
             isClosable: true,
         })
     }
@@ -44,35 +44,95 @@ export const AuthProvider = (props) => {
         })
     }
 
-    const fetchRoom = async (roomId) => {
-        // const room = await joinRoom(roomId)
+    const fetchLiveRooms = async () => {
+        try {
+            const data = await callAPI('/rooms', 'GET')
+            if(!data.data) {
+                console.error("Failed to load rooms. Please try again. ", data)
+            } else {
+                return data.data
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const fetchRoom = async (roomId, toast) => {
+        const errorToast = (errorText, errorSubtext) => toast({
+            title: errorText,
+            description: errorSubtext,
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+        })
+
         console.log('joinin room channel...')
         const socket = new Socket(SOCKET_URL)
-
         socket.connect()
-        console.log(socket)
 
-        const channel = socket.channel(`room:${roomId}`)
+        const userDetails = {
+            id: user.id,
+            username: user.username,
+            profileImgUrl: user.profileImgUrl,
+        }
+
+        const channel = socket.channel(`room:${roomId}`, userDetails)
         console.log(channel)
+
         channel.join()
         .receive('ok', ({id, room, pid}) => {
             console.log('room id: ', id)
             console.log('room data: ', room)
             setRoomData(room)
             console.log('room pid: ', pid)
+            console.log('roomDatda data: ', roomData)
         })
         .receive('error', reason => {
             console.error(reason)
+            errorToast('Failed to join room', 
+            'The room you tried to join no longer exists. Email us at contact@nusclubhouse.games for help!')
         })
-
-        console.log(channel)
 
         channel.on('msg', ({msg}) => {
             console.log('msg', msg)
         })
 
-        channel.on('room_update', ({ new_user }) => {
-            console.log('room_update, new user: ',  new_user)
+        channel.on('user_joined', ({ new_user }) => {
+            console.log('user_joined, new user: ',  new_user)
+            console.log('existing room data: ', roomData)
+            if (roomData) {
+                const updatedUsers = []
+                if (roomData.users) {
+                    roomData.users.map(user => updatedUsers.push(user))
+                }
+                updatedUsers.push(new_user)
+                // const updatedUsers = [...roomData.users, new_user]
+                const newRoomData = {
+                    id: roomData.id,
+                    name: roomData.name,
+                    type: roomData.type,
+                    isLive: roomData.isLive,
+                    creator: roomData.creator,
+                    users: updatedUsers,
+                }
+                setRoomData(newRoomData)
+            }
+        })
+
+        channel.on('user_left', ({ user_username }) => {
+            console.log('user_left, left user: ',  user_username)
+            if (roomData) {
+                const updatedUsers = roomData.users.filter(user => user.username != user_username)
+                const newRoomData = {
+                    id: room.id,
+                    name: room.name,
+                    type: room.type,
+                    isLive: room.isLive,
+                    creator: room.creator,
+                    users: updatedUsers,
+                }
+                setRoomData(newRoomData)
+            }
         })
 
         return () => {
@@ -86,6 +146,7 @@ export const AuthProvider = (props) => {
             actions.setSubmitting(true)
             const body =  {
                 credentials: {
+                    name: values.signup_name,
                     username: values.signup_username,
                     email: values.signup_email,
                     password: values.signup_password,
@@ -97,11 +158,10 @@ export const AuthProvider = (props) => {
                 console.log("Registration failed. Please try again. ", data)
                 errorToast("Failed to register", "", toast)
             } else {
-                successToast("Successfully registerd account", "Check your NUS email & confirm your account before logging in!", toast)
-                setUser(data.data)
+                successToast("Successfully registered account", "Check your NUS email & confirm your account before logging in!", toast)
             }
             actions.setSubmitting(false)
-
+            actions.resetForm({})
         } catch (err) {
             console.error(err)
         }
@@ -157,6 +217,10 @@ export const AuthProvider = (props) => {
         checkUserLoggedIn()
     }, [])
 
+    useEffect(() => {
+        console.log('room data value change detected in authcontext: ', roomData)
+    }, [roomData])
+
     return (
         <AuthContext.Provider value={{ 
             user,
@@ -164,7 +228,8 @@ export const AuthProvider = (props) => {
             registerUser, 
             loginUser,
             logoutUser,
-            fetchRoom
+            fetchRoom,
+            fetchLiveRooms
         }}>
             {props.children}
         </AuthContext.Provider>

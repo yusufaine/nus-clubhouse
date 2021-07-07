@@ -7,15 +7,13 @@ import AuthContext from '../../context/AuthContext'
 import RoomUserList from '../RoomUserList/RoomUserList'
 
 function RoomUsersSection() {
-    // const speakers = ['user1','user1','user1','user1','user1','user1','user1']
-    // const listeners = ['user1','user1','user1','user1','user1','user1','user1','user1','user1','user1','user1','user1','user1']
-
     const { roomData } = useContext(AuthContext)
     const [speakers, setSpeakers] = useState([])
     const [listeners, setListeners] = useState([])
 
-    useEffect(() => {
-        if (roomData.users) {
+    useEffect(() => {   
+        console.log('room data changed: ', roomData)
+        if (roomData) {
             const speakers = []
             const listeners = []
             roomData.users.map(user => {
@@ -28,7 +26,7 @@ function RoomUsersSection() {
             setSpeakers(speakers)
             setListeners(listeners)
         }
-    }, [roomData.users])
+    }, [roomData])
 
     return (
         <Box>

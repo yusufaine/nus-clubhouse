@@ -34,8 +34,6 @@ defmodule ClubhouseData.Users do
         case Repo.get_by(User, email: email) do
             user -> 
                 user = Repo.preload(user, [:created_rooms, :rooms, :followers, :following])
-                IO.puts("preloading data of user")
-                IO.inspect(user)
                 user
             nil ->
                 nil

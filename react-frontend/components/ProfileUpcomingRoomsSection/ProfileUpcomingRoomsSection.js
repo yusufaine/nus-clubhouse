@@ -7,7 +7,13 @@ import UserProfileSection from '../UserProfileSection/UserProfileSection'
 
 function ProfileUpcomingRoomsSection({...props}) {
     return (
-        <Stack direction='column' spacing='30px' {...props}>
+        <Stack 
+            direction='column' 
+            spacing='30px'
+            mr={0}
+            w='525px'
+            {...props}
+        >
             <UserProfileSection />
             <UpcomingRoomsSection />
         </Stack>

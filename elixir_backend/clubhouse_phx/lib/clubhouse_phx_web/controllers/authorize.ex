@@ -19,13 +19,11 @@ defmodule ClubhousePhxWeb.Authorize do
   def user_check(conn, _opts) do
     # CHECK for JWT token in cookies 
     %{cookies: auth_cookie} = fetch_cookies(conn, encrypted: ~w(auth_cookie))
-    IO.puts("fetching auth_cookie")
-    IO.inspect(auth_cookie)
     case auth_cookie do
       %{"auth_cookie" => token} -> 
         case Token.verify(token) do
-          {:ok, %{"user_id" => user_id}} ->
-            assign(conn, :user_id, user_id)
+          {:ok, %{"user_email" => user_email}} ->
+            assign(conn, :user_email, user_email)
             conn
           {:error, _value} -> error(conn, :error, 400)
         end
