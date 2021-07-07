@@ -97,9 +97,11 @@ export const AuthProvider = (props) => {
             console.log('msg', msg)
         })
 
-        channel.on('user_joined', ({ new_user }) => {
+        channel.on('user_joined', ({ new_user, room }) => {
             console.log('user_joined, new user: ',  new_user)
             console.log('existing room data: ', roomData)
+            console.log('updated room: ', room)
+            setRoomData(room)
             if (roomData) {
                 const updatedUsers = []
                 if (roomData.users) {
@@ -119,8 +121,10 @@ export const AuthProvider = (props) => {
             }
         })
 
-        channel.on('user_left', ({ user_username }) => {
+        channel.on('user_left', ({ user_username, room }) => {
             console.log('user_left, left user: ',  user_username)
+            console.log('updated room: ', room)
+            setRoomData(room)
             if (roomData) {
                 const updatedUsers = roomData.users.filter(user => user.username != user_username)
                 const newRoomData = {
