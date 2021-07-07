@@ -54,8 +54,7 @@ defmodule ClubhousePhxWeb.RoomController do
     user = Users.get_user!(user_id)
     room_params = %{name: room_name, numUsers: num_users, type: room_type}
     case RoomSessionSupervisor.start_room(room_name, user_id) do
-      {:ok, pid} -> 
-        IO.puts("created room...")
+      {:ok, pid} ->
         state = :sys.get_state(pid)
         roomMap = room_to_map(state)
         conn

@@ -1,5 +1,5 @@
 defmodule Clubhouse.RoomSession do
-    use GenServer
+    use GenServer, restart: :transient
     alias Clubhouse.{PubSub}
     alias Clubhouse.{Room,User}
     alias ClubhouseData.{Rooms,Users}
@@ -19,14 +19,11 @@ defmodule Clubhouse.RoomSession do
     def add_user(room_id, %{"id" => user_id, "username" => user_username, "profileImgUrl" => user_profileImgUrl}) do
         name = room_session_name(room_id)
         user = User.new_listener(user_id, user_username, user_profileImgUrl)
-        IO.puts("created user with user params: ")
-        IO.inspect(user)
         GenServer.call(name, {:add_user, user})
     end
 
     def remove_user(room_id, user_username) do
         name = room_session_name(room_id)
-        IO.puts("removing user #{user_username} from room #{room_id}")
         GenServer.call(name, {:remove_user, user_username})
     end
 
@@ -42,7 +39,7 @@ defmodule Clubhouse.RoomSession do
 
     def end_room(room_id) do
         name = room_session_name(room_id)
-        GenServer.stop(name)
+        GenServer.stop(name, :normal)
     end
 
     # Callbacks
@@ -126,21 +123,30 @@ defmodule Clubhouse.RoomSession do
         case live_status do
             false -> 
                 res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false})
-                IO.puts("saving room with isLive false state")
-                IO.inspect(res)
+                case res do
+                    {:ok, room} ->
+                        IO.puts("SAVED room with isLive false state")
+                        room
+                    {:error, err} ->
+                        IO.puts("ERROR failed to update room with isLive false state") 
+                        IO.inspect(err)
+                end
             true -> 
-                Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: true})
+                IO.puts("SAVED room with isLive true state")
+                Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers})
         end
     end
 
     def schedule_save(), do: Process.send_after(self(), :save, @save_time)
 
     def handle_info(:save, room) do
-        save_room(room, false)
-
-        schedule_save()
+        save_room(room, true)
         {:noreply, room}
     end
 
-    def terminate(_reason, room), do: save_room(room, false)
+    def terminate(_reason, room) do
+        IO.puts("RoomSession GenServer terminated!")
+        save_room(room, false)
+        {:ok, room}
+    end
 end

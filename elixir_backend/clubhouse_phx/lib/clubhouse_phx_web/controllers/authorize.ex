@@ -19,8 +19,6 @@ defmodule ClubhousePhxWeb.Authorize do
   def user_check(conn, _opts) do
     # CHECK for JWT token in cookies 
     %{cookies: auth_cookie} = fetch_cookies(conn, encrypted: ~w(auth_cookie))
-    IO.puts("fetching auth_cookie")
-    IO.inspect(auth_cookie)
     case auth_cookie do
       %{"auth_cookie" => token} -> 
         case Token.verify(token) do

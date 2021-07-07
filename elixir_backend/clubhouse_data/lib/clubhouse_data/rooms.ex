@@ -64,6 +64,11 @@ defmodule ClubhouseData.Rooms do
         |> increment_user()
     end
 
+    def delete_room_by_id(room_id) do
+        room = get_room!(room_id)
+        delete_room(room)
+    end
+
     def delete_room_if_creator(%User{} = user, room_id) do 
         room = get_room!(room_id)
         room = Repo.preload(room, [:creator])
