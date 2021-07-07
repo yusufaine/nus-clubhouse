@@ -15,7 +15,6 @@ import AuthContext from '../../../context/AuthContext'
 
 function index() {
     const { user, fetchRoom } = useContext(AuthContext)
-    const [roomPageData, setRoomPageData] = useState(null)
     const router = useRouter()
     const toast = useToast()
     
@@ -23,7 +22,7 @@ function index() {
         if (router.query.id) {
             const roomId = router.query.id
             console.log('room id: ', roomId)
-            fetchRoom(roomId, toast, roomPageData, setRoomPageData)
+            fetchRoom(roomId, toast)
         }
     }, [router.query.id])
     
