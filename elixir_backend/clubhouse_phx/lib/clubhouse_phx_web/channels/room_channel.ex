@@ -21,13 +21,13 @@ defmodule ClubhousePhxWeb.RoomChannel do
         end
     end
 
-    def handle_info({:user_joined, user}, socket) do
-        push(socket, "user_joined", %{new_user: user})
+    def handle_info({:user_joined, user, room}, socket) do
+        push(socket, "user_joined", %{new_user: user, room: room})
         {:noreply, socket}
     end
 
-    def handle_info({:user_left, user_username}, socket) do
-        push(socket, "user_left", %{user_username: user_username})
+    def handle_info({:user_left, user_username, room}, socket) do
+        push(socket, "user_left", %{user_username: user_username, room: room})
         {:noreply, socket}
     end
 

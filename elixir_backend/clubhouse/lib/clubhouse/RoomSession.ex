@@ -93,14 +93,14 @@ defmodule Clubhouse.RoomSession do
         room = Room.add_user(room, user)
         roomMap = room_to_map(room)
         userMap = user_to_map(user)
-        PubSub.broadcast_room(room.id, userMap, :user_joined)
+        PubSub.broadcast_room(room.id, userMap, roomMap, :user_joined)
         {:reply, roomMap, room}
     end
 
     def handle_call({:remove_user, user_username}, _form, room) do
         room = Room.remove_user(room, user_username)
         roomMap = room_to_map(room)
-        PubSub.broadcast_room(room.id, user_username, :user_left)
+        PubSub.broadcast_room(room.id, user_username, roomMap, :user_left)
         {:reply, roomMap, room}
     end
 
