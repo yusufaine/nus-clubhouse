@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import { Socket } from 'phoenix'
 import { useRouter } from 'next/router'
+
 import { API_URL, SOCKET_URL } from '../utils/utils'
 
 const AuthContext = createContext()
