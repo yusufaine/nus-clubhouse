@@ -17,7 +17,7 @@ defmodule ClubhouseData.Rooms.Room do
 
     def changeset(user, attrs) do
         user
-        |> cast(attrs, [:name, :numUsers, :type, :isLive])
-        |> validate_required([:name, :numUsers, :type, :isLive])
+        |> cast(attrs, [:name, :numUsers, :type, :isLive, :isScheduled])
+        |> validate_required([:name, :numUsers, :type, :isLive, :isScheduled])
     end
 end
