@@ -8,7 +8,8 @@ defmodule ClubhouseData.Rooms.Room do
         field :numUsers, :integer
         field :type, :string
         field :isLive, :boolean
-        belongs_to :creator, ClubhouseData.Users.User 
+        field :isScheduled, :boolean
+        belongs_to :creator, ClubhouseData.Users.User
         many_to_many :users, ClubhouseData.Users.User, join_through: "rooms_users"
 
         timestamps()
