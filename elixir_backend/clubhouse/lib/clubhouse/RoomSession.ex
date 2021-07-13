@@ -9,7 +9,7 @@ defmodule Clubhouse.RoomSession do
     def start_link({room_name, creator_id}) do
         creator_data = Users.get_user!(creator_id)
         creator = User.new(creator_data.id, creator_data.username, creator_data.profileImgUrl, false, true)
-        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, isScheduled: nil, numUsers: 0, type: "public"})
+        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, isScheduled: false, numUsers: 0, type: "public"})
         name = room_session_name(room.id)
         GenServer.start_link(__MODULE__, {room.id, room_name, creator}, name: name)
     end
