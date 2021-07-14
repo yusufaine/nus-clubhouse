@@ -1,6 +1,8 @@
 const express = require('express')
 
+
 const app = express()
+const cors = require('cors')
 const https = require('httpolyglot')
 const fs = require('fs')
 const mediasoup = require('mediasoup')
@@ -15,9 +17,9 @@ const options = {
 }
 
 const httpsServer = https.createServer(options, app)
-const io = require('socket.io')(httpsServer)
+const io = require('socket.io')(httpsServer, )
 
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(cors({credentials: false, origin: 'https://nusclubhouse.games'}))
 
 httpsServer.listen(config.listenPort, () => {
     console.log('listening https ' + config.listenPort)
