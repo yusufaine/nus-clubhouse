@@ -1,6 +1,5 @@
 const express = require('express')
 
-
 const app = express()
 const cors = require('cors')
 const https = require('httpolyglot')
@@ -31,8 +30,6 @@ httpsServer.listen(config.listenPort, () => {
     console.log('listening https ' + config.listenPort)
 })
 
-
-
 // all mediasoup workers
 let workers = []
 let nextMediasoupWorkerIdx = 0
@@ -61,8 +58,6 @@ let roomList = new Map()
 (async () => {
     await createWorkers()
 })()
-
-
 
 async function createWorkers() {
     let {
@@ -108,11 +103,7 @@ io.on('connection', socket => {
         }
     })
 
-    socket.on('join', ({
-        room_id,
-        name
-    }, cb) => {
-
+    socket.on('join', ({ room_id, name }, cb) => {
         console.log('---user joined--- \"' + room_id + '\": ' + name)
         if (!roomList.has(room_id)) {
             return cb({
@@ -135,7 +126,8 @@ io.on('connection', socket => {
     })
 
     socket.on('getRouterRtpCapabilities', (_, callback) => {
-        console.log(`---get RouterRtpCapabilities--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
+        // console.log(`---get RouterRtpCapabilities--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
+        console.log('---get RouterRtpCapabilities---')
         try {
             callback(roomList.get(socket.room_id).getRtpCapabilities());
         } catch (e) {
@@ -143,7 +135,6 @@ io.on('connection', socket => {
                 error: e.message
             })
         }
-
     });
 
     socket.on('createWebRtcTransport', async (_, callback) => {
@@ -240,8 +231,6 @@ io.on('connection', socket => {
         }
 
         socket.room_id = null
-
-
         callback('successfully exited room')
     })
 })
