@@ -56,13 +56,16 @@ export const VoiceProvider = (props) => {
         })
     
         createRoom(room_id).then(async function () {
+            console.log('joining voice room...')
             await join(name, room_id)
+            console.log('initializing sockets...')
             initSockets()
             setIsOpen(true)
             // successCallback()
         })
 
-        produce(mediaType.audio, null)
+        console.log('producing audio data with mediaType: ', mediaType.audio)
+        produce(mediaType.audio)
     }
 
     const createRoom = async (room_id) => {
@@ -75,8 +78,9 @@ export const VoiceProvider = (props) => {
         socket.request('join', { name, room_id }).then(async function (e) {
             console.log(e)
             const data = await socket.request('getRouterRtpCapabilities');
-            let device = await loadDevice(data)
-            setDevice(device)
+            let deviceLoaded = await loadDevice(data)
+            setDevice(deviceLoaded)
+            console.log('device has been set to: ', device)
             await initTransports(device)
             socket.emit('getProducers')
         }).catch(e => {
