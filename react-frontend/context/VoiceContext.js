@@ -79,7 +79,7 @@ export const VoiceProvider = (props) => {
     }
 
     const join = async (name, room_id) => {
-        socket.emit('join', { name, room_id }, async (res) => {
+        socket.emit('join', { name, room_id }, async function (res) {
             console.log(res)
             socket.emit('getRouterRtpCapabilities', (data) => {
                 console.log('routerRtpCapabilities: ', data)
