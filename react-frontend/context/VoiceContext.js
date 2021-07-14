@@ -117,6 +117,8 @@ export const VoiceProvider = (props) => {
                     console.error(data.error);
                     return;
                 }
+                console.log('data returned from webRtcTransport socket call: ', data)
+                console.log('device used to create producerTransportData: ', device)
 
                 const producerTransportData = device.createSendTransport(data)
                 console.log('creating producerTransport with device.createSendTransport: ', producerTransportData)
