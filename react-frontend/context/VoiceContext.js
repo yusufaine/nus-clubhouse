@@ -65,10 +65,10 @@ export const VoiceProvider = (props) => {
             initSockets()
             setIsOpen(true)
             // successCallback()
+        }).then(() => {
+            console.log('producing audio data with mediaType: ', mediaType.audio)
+            produce(mediaType.audio)
         })
-
-        console.log('producing audio data with mediaType: ', mediaType.audio)
-        produce(mediaType.audio)
     }
 
     const createRoom = async (room_id) => {
