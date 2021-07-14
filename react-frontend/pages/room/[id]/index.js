@@ -31,7 +31,7 @@ function index() {
     }, [router.query.id])
     
     return (
-        <VoiceProvider>
+        <>
             <Head>
                 <title>NUS Clubhouse Room</title>
                 <meta name="description" content="NUS Clubhouse voice room" />
@@ -45,7 +45,7 @@ function index() {
                     <ProfileUpcomingRoomsSection user={user} />
                 </Stack>
             </Container>
-        </VoiceProvider> 
+        </> 
     )
 }
 

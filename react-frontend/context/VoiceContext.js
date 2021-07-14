@@ -16,7 +16,7 @@ export const VoiceProvider = (props) => {
     const producers = {}
     const producerLabel = new Map()
     const eventListeners = new Map()
-    const socket = io("https://api.nusclubhouse.games:3016")
+    const socket = io("https://api.nusclubhouse.games:3020")
 
     const mediaType = {
         audio: 'audioType',
