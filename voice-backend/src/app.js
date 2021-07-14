@@ -89,7 +89,6 @@ async function createWorkers() {
 
 
 io.on('connection', socket => {
-
     socket.on('createRoom', async ({
         room_id
     }, callback) => {
@@ -99,6 +98,7 @@ io.on('connection', socket => {
             console.log('---created room--- ', room_id)
             let worker = await getMediasoupWorker()
             roomList.set(room_id, new Room(room_id, worker, io))
+            console.log('---roomList value: ', roomList, ' ---')
             callback(room_id)
         }
     })
@@ -125,7 +125,7 @@ io.on('connection', socket => {
         socket.emit('newProducers', producerList)
     })
 
-    socket.on('getRouterRtpCapabilities', (_, callback) => {
+    socket.on('getRouterRtpCapabilities', (callback) => {
         // console.log(`---get RouterRtpCapabilities--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
         console.log('---get RouterRtpCapabilities---')
         try {
@@ -137,7 +137,7 @@ io.on('connection', socket => {
         }
     });
 
-    socket.on('createWebRtcTransport', async (_, callback) => {
+    socket.on('createWebRtcTransport', async (callback) => {
         console.log(`---create webrtc transport--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
         try {
             const {
