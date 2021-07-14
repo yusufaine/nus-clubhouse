@@ -22,6 +22,10 @@ defmodule ClubhousePhxWeb.AuthController do
     end
   end
 
+  def logout(conn) do
+
+  end
+
   def register(conn, %{"credentials" => user_params}) do
     case Users.create_user(user_params) do
         {:ok, user} -> 

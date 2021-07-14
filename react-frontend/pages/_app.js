@@ -4,14 +4,17 @@ import 'swiper/swiper.scss';
 
 import customTheme from '../styles/theme'
 import { AuthProvider } from '../context/AuthContext'
+import { VoiceProvider } from '../context/VoiceContext'
 
 function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
-      <ChakraProvider resetCSS theme={customTheme} >
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <VoiceProvider>
+        <ChakraProvider resetCSS theme={customTheme} >
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </VoiceProvider>
     </AuthProvider> 
   )
 }

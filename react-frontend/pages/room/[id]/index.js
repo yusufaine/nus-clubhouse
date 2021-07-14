@@ -12,9 +12,12 @@ import FriendsList from '../../../components/FriendsList/FriendsList'
 import RoomSection from '../../../components/RoomSection/RoomSection'
 import ProfileUpcomingRoomsSection from '../../../components/ProfileUpcomingRoomsSection/ProfileUpcomingRoomsSection'
 import AuthContext from '../../../context/AuthContext'
+import VoiceContext from '../../../context/VoiceContext'
+import { VoiceProvider } from '../../../context/VoiceContext'
 
 function index() {
     const { user, fetchRoom } = useContext(AuthContext)
+    const { joinRoomVoiceChannel } = useContext(VoiceContext)
     const router = useRouter()
     const toast = useToast()
     
@@ -23,6 +26,7 @@ function index() {
             const roomId = router.query.id
             console.log('room id: ', roomId)
             fetchRoom(roomId, toast)
+            joinRoomVoiceChannel(user.name, roomId)
         }
     }, [router.query.id])
     
