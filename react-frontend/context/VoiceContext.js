@@ -8,8 +8,10 @@ const VoiceContext = createContext()
 export const VoiceProvider = (props) => {
     // voice stuff
     const [device, setDevice] = useState(null)
-    const [producerTransport, setProducerTransport] = useState(null)
-    const [consumerTransport, setConsumerTransport] = useState(null)
+    // const [producerTransport, setProducerTransport] = useState(null)
+    // const [consumerTransport, setConsumerTransport] = useState(null)
+    var producerTransport
+    var consumerTransport
     const [isOpen, setIsOpen] = useState(false)
 
     const consumers = {}
@@ -170,7 +172,8 @@ export const VoiceProvider = (props) => {
                 }
             });
 
-            setProducerTransport(producerTransportData)
+            producerTransport = producerTransportData
+            // setProducerTransport(producerTransportData)
         })
 
         // init consumerTransport
@@ -210,7 +213,8 @@ export const VoiceProvider = (props) => {
                 }
             });
 
-            setConsumerTransport(consumerTransportData)
+            consumerTransport = consumerTransportData
+            // setConsumerTransport(consumerTransportData)
         });
     }
 
