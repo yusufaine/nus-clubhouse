@@ -181,8 +181,8 @@ export const VoiceProvider = (props) => {
             }
 
             // only one needed
-            setConsumerTransport(device.createRecvTransport(data))
-            consumerTransport.on('connect', function ({ dtlsParameters }, callback, errback) {
+            const consumerTransportData = device.createRecvTransport(data)
+            consumerTransportData.on('connect', function ({ dtlsParameters }, callback, errback) {
                 socket.emit('connectTransport', {
                     transport_id: consumerTransport.id,
                     dtlsParameters
@@ -191,7 +191,7 @@ export const VoiceProvider = (props) => {
                 })
             });
 
-            consumerTransport.on('connectionstatechange', async function (state) {
+            consumerTransportData.on('connectionstatechange', async function (state) {
                 switch (state) {
                     case 'connecting':
                         break;
@@ -209,6 +209,8 @@ export const VoiceProvider = (props) => {
                         break;
                 }
             });
+
+            setConsumerTransport(consumerTransportData)
         });
     }
 
