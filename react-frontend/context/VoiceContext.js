@@ -73,8 +73,8 @@ export const VoiceProvider = (props) => {
 
     const createRoom = async (room_id) => {
         console.log('creating room with id: ', room_id)
-        await socket.emit('createRoom', { room_id }).catch(err => {
-            console.log(err)
+        await socket.emit('createRoom', { room_id }, (res) => {
+            console.log('response from socket emit createRoom: ', res)
         })
     }
 
