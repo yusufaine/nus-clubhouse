@@ -79,17 +79,16 @@ export const VoiceProvider = (props) => {
     }
 
     const join = async (name, room_id) => {
-        socket.emit('join', { name, room_id }).then(async function (e) {
-            console.log(e)
-            const data = await socket.emit('getRouterRtpCapabilities');
-            console.log('routerRtpCapabilities: ', data)
-            let deviceLoaded = await loadDevice(data)
-            setDevice(deviceLoaded)
-            console.log('device has been set to: ', device)
-            await initTransports(device)
-            socket.emit('getProducers')
-        }).catch(e => {
-            console.log(e)
+        socket.emit('join', { name, room_id }, async function (res) {
+            console.log(res)
+            socket.emit('getRouterRtpCapabilities', async function (data) {
+                console.log('routerRtpCapabilities: ', data)
+                let deviceLoaded = await loadDevice(data)
+                setDevice(deviceLoaded)
+                console.log('device has been set to: ', device)
+                await initTransports(device)
+                socket.emit('getProducers')
+            });
         })
     }
 
@@ -110,104 +109,104 @@ export const VoiceProvider = (props) => {
     const initTransports = async (device) => {
         // init producerTransport
         {
-            const data = await socket.emit('createWebRtcTransport', {
+            socket.emit('createWebRtcTransport', {
                 forceTcp: false,
                 rtpCapabilities: device.rtpCapabilities,
-            })
-            if (data.error) {
-                console.error(data.error);
-                return;
-            }
-
-            setProducerTransport(device.createSendTransport(data))
-            console.log('creating producerTransport with device.createSendTransport: ', producerTransport)
-
-            producerTransport.on('connect', async function ({
-                dtlsParameters
-            }, callback, errback) {
-                socket.emit('connectTransport', {
-                        dtlsParameters,
-                        transport_id: data.id
-                    })
-                    .then(callback)
-                    .catch(errback)
-            });
-
-            producerTransport.on('produce', async function ({
-                kind,
-                rtpParameters
-            }, callback, errback) {
-                try {
-                    const { producer_id } = await socket.emit('produce', {
-                        producerTransportId: producerTransport.id,
-                        kind,
-                        rtpParameters,
-                    });
-                    callback({ id: producer_id });
-                } catch (err) {
-                    errback(err);
+            }, (data) => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
                 }
+
+                setProducerTransport(device.createSendTransport(data))
+                console.log('creating producerTransport with device.createSendTransport: ', producerTransport)
+
+                producerTransport.on('connect', async function ({
+                    dtlsParameters
+                }, callback, errback) {
+                    socket.emit('connectTransport', {
+                            dtlsParameters,
+                            transport_id: data.id
+                        }, (response) => {
+                            console.log('response status from connectTransport emit: ', response)
+                        })
+                });
+
+                producerTransport.on('produce', async function ({
+                    kind,
+                    rtpParameters
+                }, callback, errback) {
+                    try {
+                        socket.emit('produce', {
+                            producerTransportId: producerTransport.id,
+                            kind,
+                            rtpParameters,
+                        }, ({ producer_id }) => {
+                            callback({ id: producer_id });
+                        });
+                        
+                    } catch (err) {
+                        errback(err);
+                    }
+                })
+
+                producerTransport.on('connectionstatechange', function (state) {
+                    switch (state) {
+                        case 'connecting':
+                            break;
+
+                        case 'connected':
+                            //localVideo.srcObject = stream
+                            break;
+
+                        case 'failed':
+                            producerTransport.close();
+                            break;
+
+                        default:
+                            break;
+                    }
+                });
             })
-
-            producerTransport.on('connectionstatechange', function (state) {
-                switch (state) {
-                    case 'connecting':
-                        break;
-
-                    case 'connected':
-                        //localVideo.srcObject = stream
-                        break;
-
-                    case 'failed':
-                        producerTransport.close();
-                        break;
-
-                    default:
-                        break;
-                }
-            });
         }
 
         // init consumerTransport
         {
-            const data = await socket.emit('createWebRtcTransport', {
-                forceTcp: false,
-            });
-            if (data.error) {
-                console.error(data.error);
-                return;
-            }
+            socket.emit('createWebRtcTransport', { forceTcp: false }, (data) => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
 
-            // only one needed
-            setConsumerTransport(device.createRecvTransport(data))
-            consumerTransport.on('connect', function ({
-                dtlsParameters
-            }, callback, errback) {
-                socket.emit('connectTransport', {
+                // only one needed
+                setConsumerTransport(device.createRecvTransport(data))
+                consumerTransport.on('connect', function ({ dtlsParameters }, callback, errback) {
+                    socket.emit('connectTransport', { 
                         transport_id: consumerTransport.id,
                         dtlsParameters
+                    }, (response) => {
+                        console.log('connectTransport response status: ', response)
                     })
-                    .then(callback)
-                    .catch(errback);
-            });
+                });
 
-            consumerTransport.on('connectionstatechange', async function (state) {
-                switch (state) {
-                    case 'connecting':
-                        break;
+                consumerTransport.on('connectionstatechange', async function (state) {
+                    switch (state) {
+                        case 'connecting':
+                            break;
 
-                    case 'connected':
-                        //remoteVideo.srcObject = await stream;
-                        //await socket.request('resume');
-                        break;
+                        case 'connected':
+                            //remoteVideo.srcObject = await stream;
+                            //await socket.request('resume');
+                            break;
 
-                    case 'failed':
-                        consumerTransport.close();
-                        break;
+                        case 'failed':
+                            consumerTransport.close();
+                            break;
 
-                    default:
-                        break;
-                }
+                        default:
+                            break;
+                    }
+                });
             });
         }
     }
@@ -344,25 +343,25 @@ export const VoiceProvider = (props) => {
 
     const getConsumeStream = async (producerId) => {
         const { rtpCapabilities } = device
-        const data = await socket.emit('consume', {
+        socket.emit('consume', {
             rtpCapabilities,
             consumerTransportId: consumerTransport.id, // might be 
             producerId
+        }, async function (data) {
+            const { id, kind, rtpParameters } = data;
+            let codecOptions = {};
+
+            const consumer = await consumerTransport.consume({
+                id,
+                producerId,
+                kind,
+                rtpParameters,
+                codecOptions,
+            })
+            const stream = new MediaStream();
+            stream.addTrack(consumer.track);
+            return { consumer, stream, kind }
         });
-
-        const { id, kind, rtpParameters } = data;
-        let codecOptions = {};
-
-        const consumer = await consumerTransport.consume({
-            id,
-            producerId,
-            kind,
-            rtpParameters,
-            codecOptions,
-        })
-        const stream = new MediaStream();
-        stream.addTrack(consumer.track);
-        return { consumer, stream, kind }
     }
 
     const closeProducer = (type) => {
@@ -372,9 +371,7 @@ export const VoiceProvider = (props) => {
         }
         let producer_id = producerLabel.get(type)
         console.log(producer_id)
-        socket.emit('producerClosed', {
-            producer_id
-        })
+        socket.emit('producerClosed', { producer_id })
         producers.get(producer_id).close()
         producers.delete(producer_id)
         producerLabel.delete(type)
@@ -436,8 +433,8 @@ export const VoiceProvider = (props) => {
         }
 
         if (!offline) {
-            socket.emit('exitRoom').then(e => console.log(e)).catch(e => console.warn(e)).finally(function () {
-                clean()
+            socket.emit('exitRoom', (response) => {
+                console.log('response data from exitRoom call: ', response)
             })
         } else {
             clean()
@@ -449,8 +446,9 @@ export const VoiceProvider = (props) => {
     ///////  HELPERS //////////
 
     const roomInfo = async () => {
-        let info = await socket.emit('getMyRoomInfo')
-        return info
+        socket.emit('getMyRoomInfo', (info) => {
+            return info
+        })
     }
 
     const event = (evt) => {
