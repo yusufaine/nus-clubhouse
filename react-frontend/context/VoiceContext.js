@@ -79,9 +79,9 @@ export const VoiceProvider = (props) => {
     }
 
     const join = async (name, room_id) => {
-        socket.request('join', { name, room_id }).then(async function (e) {
+        socket.emit('join', { name, room_id }).then(async function (e) {
             console.log(e)
-            const data = await socket.request('getRouterRtpCapabilities');
+            const data = await socket.emit('getRouterRtpCapabilities');
             console.log('routerRtpCapabilities: ', data)
             let deviceLoaded = await loadDevice(data)
             setDevice(deviceLoaded)
@@ -110,7 +110,7 @@ export const VoiceProvider = (props) => {
     const initTransports = async (device) => {
         // init producerTransport
         {
-            const data = await socket.request('createWebRtcTransport', {
+            const data = await socket.emit('createWebRtcTransport', {
                 forceTcp: false,
                 rtpCapabilities: device.rtpCapabilities,
             })
@@ -125,7 +125,7 @@ export const VoiceProvider = (props) => {
             producerTransport.on('connect', async function ({
                 dtlsParameters
             }, callback, errback) {
-                socket.request('connectTransport', {
+                socket.emit('connectTransport', {
                         dtlsParameters,
                         transport_id: data.id
                     })
@@ -138,7 +138,7 @@ export const VoiceProvider = (props) => {
                 rtpParameters
             }, callback, errback) {
                 try {
-                    const { producer_id } = await socket.request('produce', {
+                    const { producer_id } = await socket.emit('produce', {
                         producerTransportId: producerTransport.id,
                         kind,
                         rtpParameters,
@@ -170,7 +170,7 @@ export const VoiceProvider = (props) => {
 
         // init consumerTransport
         {
-            const data = await socket.request('createWebRtcTransport', {
+            const data = await socket.emit('createWebRtcTransport', {
                 forceTcp: false,
             });
             if (data.error) {
@@ -183,7 +183,7 @@ export const VoiceProvider = (props) => {
             consumerTransport.on('connect', function ({
                 dtlsParameters
             }, callback, errback) {
-                socket.request('connectTransport', {
+                socket.emit('connectTransport', {
                         transport_id: consumerTransport.id,
                         dtlsParameters
                     })
@@ -344,7 +344,7 @@ export const VoiceProvider = (props) => {
 
     const getConsumeStream = async (producerId) => {
         const { rtpCapabilities } = device
-        const data = await socket.request('consume', {
+        const data = await socket.emit('consume', {
             rtpCapabilities,
             consumerTransportId: consumerTransport.id, // might be 
             producerId
@@ -436,7 +436,7 @@ export const VoiceProvider = (props) => {
         }
 
         if (!offline) {
-            socket.request('exitRoom').then(e => console.log(e)).catch(e => console.warn(e)).finally(function () {
+            socket.emit('exitRoom').then(e => console.log(e)).catch(e => console.warn(e)).finally(function () {
                 clean()
             })
         } else {
@@ -449,7 +449,7 @@ export const VoiceProvider = (props) => {
     ///////  HELPERS //////////
 
     const roomInfo = async () => {
-        let info = await socket.request('getMyRoomInfo')
+        let info = await socket.emit('getMyRoomInfo')
         return info
     }
 
