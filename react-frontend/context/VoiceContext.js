@@ -59,7 +59,7 @@ export const VoiceProvider = (props) => {
         console.log('socket value: ', socket)
     
         createRoom(room_id).then(async function () {
-            console.log('joining voice room...')
+            console.log(`created voice room of id: ${room_id}, joining voice room...`)
             await join(name, room_id)
             console.log('initializing sockets...')
             initSockets()
@@ -72,6 +72,7 @@ export const VoiceProvider = (props) => {
     }
 
     const createRoom = async (room_id) => {
+        console.log('creating room with id: ', room_id)
         await socket.request('createRoom', { room_id }).catch(err => {
             console.log(err)
         })
