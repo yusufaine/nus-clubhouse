@@ -54,6 +54,9 @@ export const VoiceProvider = (props) => {
         Object.keys(EVENTS).forEach(function (evt) {
             eventListeners.set(evt, [])
         })
+
+        console.log('eventListeners value: ', eventListeners)
+        console.log('socket value: ', socket)
     
         createRoom(room_id).then(async function () {
             console.log('joining voice room...')
@@ -78,6 +81,7 @@ export const VoiceProvider = (props) => {
         socket.request('join', { name, room_id }).then(async function (e) {
             console.log(e)
             const data = await socket.request('getRouterRtpCapabilities');
+            console.log('routerRtpCapabilities: ', data)
             let deviceLoaded = await loadDevice(data)
             setDevice(deviceLoaded)
             console.log('device has been set to: ', device)
