@@ -2,9 +2,9 @@ const os = require('os')
 
 module.exports = {
     listenIp: '0.0.0.0',
-    listenPort: 3016,
-    sslCrt: '../ssl/cert.pem',
-    sslKey: '../ssl/key.pem',
+    listenPort: 3020,
+    sslCrt: '../../../../../etc/letsencrypt/live/api.nusclubhouse.games/cert.pem',
+    sslKey: '../../../../../etc/letsencrypt/live/api.nusclubhouse.games/privkey.pem',
     
     mediasoup: {
       // Worker settings
