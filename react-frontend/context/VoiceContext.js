@@ -120,6 +120,7 @@ export const VoiceProvider = (props) => {
             }
 
             setProducerTransport(device.createSendTransport(data))
+            console.log('creating producerTransport with device.createSendTransport: ', producerTransport)
 
             producerTransport.on('connect', async function ({
                 dtlsParameters
@@ -262,11 +263,12 @@ export const VoiceProvider = (props) => {
         let stream;
         try {
             stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
-            console.log(navigator.mediaDevices.getSupportedConstraints())
+            console.log('mediaDevices constraints: ', navigator.mediaDevices.getSupportedConstraints())
 
             const track = stream.getAudioTracks()[0]
             const params = { track };
-        
+            
+            console.log('producer transport value: ', producerTransport)
             producer = await producerTransport.produce(params)
 
             console.log('producer', producer)
