@@ -118,10 +118,10 @@ export const VoiceProvider = (props) => {
                     return;
                 }
 
-                setProducerTransport(device.createSendTransport(data))
-                console.log('creating producerTransport with device.createSendTransport: ', producerTransport)
+                const producerTransportData = device.createSendTransport(data)
+                console.log('creating producerTransport with device.createSendTransport: ', producerTransportData)
 
-                producerTransport.on('connect', async function ({
+                producerTransportData.on('connect', async function ({
                     dtlsParameters
                 }, callback, errback) {
                     socket.emit('connectTransport', {
@@ -132,7 +132,7 @@ export const VoiceProvider = (props) => {
                         })
                 });
 
-                producerTransport.on('produce', async function ({
+                producerTransportData.on('produce', async function ({
                     kind,
                     rtpParameters
                 }, callback, errback) {
@@ -150,7 +150,7 @@ export const VoiceProvider = (props) => {
                     }
                 })
 
-                producerTransport.on('connectionstatechange', function (state) {
+                producerTransportData.on('connectionstatechange', function (state) {
                     switch (state) {
                         case 'connecting':
                             break;
@@ -167,6 +167,8 @@ export const VoiceProvider = (props) => {
                             break;
                     }
                 });
+
+                setProducerTransport(producerTransportData)
             })
         }
 
