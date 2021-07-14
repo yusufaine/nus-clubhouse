@@ -347,7 +347,7 @@ export const VoiceProvider = (props) => {
             rtpCapabilities,
             consumerTransportId: consumerTransport.id, // might be 
             producerId
-        }, (data) => {
+        }, async function (data) {
             const { id, kind, rtpParameters } = data;
             let codecOptions = {};
 
