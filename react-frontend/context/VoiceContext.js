@@ -326,14 +326,15 @@ export const VoiceProvider = (props) => {
             kind
         }) {
             consumers.set(consumer.id, consumer)
+            console.logo('new consumer created, updated list of consumer: ', consumers)
 
-            let elem;
-            elem = document.createElement('audio')
-            elem.srcObject = stream
-            elem.id = consumer.id
-            elem.playsinline = false
-            elem.autoplay = true
-            remoteAudioEl.appendChild(elem)
+            // let elem;
+            // elem = document.createElement('audio')
+            // elem.srcObject = stream
+            // elem.id = consumer.id
+            // elem.playsinline = false
+            // elem.autoplay = true
+            // remoteAudioEl.appendChild(elem)
             
             consumer.on('trackended', function () {
                 removeConsumer(consumer.id)
