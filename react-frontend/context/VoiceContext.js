@@ -85,8 +85,8 @@ export const VoiceProvider = (props) => {
                 console.log('routerRtpCapabilities: ', data)
                 let deviceLoaded = await loadDevice(data)
                 setDevice(deviceLoaded)
-                console.log('device has been set to: ', device)
-                await initTransports(device)
+                console.log('device has been set to: ', deviceLoaded)
+                await initTransports(deviceLoaded)
                 socket.emit('getProducers')
             });
         })

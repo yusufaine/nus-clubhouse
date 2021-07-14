@@ -1,6 +1,5 @@
 const express = require('express')
 
-
 const app = express()
 const cors = require('cors')
 const https = require('httpolyglot')
@@ -31,8 +30,6 @@ httpsServer.listen(config.listenPort, () => {
     console.log('listening https ' + config.listenPort)
 })
 
-
-
 // all mediasoup workers
 let workers = []
 let nextMediasoupWorkerIdx = 0
@@ -61,8 +58,6 @@ let roomList = new Map()
 (async () => {
     await createWorkers()
 })()
-
-
 
 async function createWorkers() {
     let {
@@ -94,7 +89,6 @@ async function createWorkers() {
 
 
 io.on('connection', socket => {
-
     socket.on('createRoom', async ({
         room_id
     }, callback) => {
@@ -104,15 +98,12 @@ io.on('connection', socket => {
             console.log('---created room--- ', room_id)
             let worker = await getMediasoupWorker()
             roomList.set(room_id, new Room(room_id, worker, io))
+            console.log('---roomList value: ', roomList, ' ---')
             callback(room_id)
         }
     })
 
-    socket.on('join', ({
-        room_id,
-        name
-    }, cb) => {
-
+    socket.on('join', ({ room_id, name }, cb) => {
         console.log('---user joined--- \"' + room_id + '\": ' + name)
         if (!roomList.has(room_id)) {
             return cb({
@@ -134,8 +125,9 @@ io.on('connection', socket => {
         socket.emit('newProducers', producerList)
     })
 
-    socket.on('getRouterRtpCapabilities', (_, callback) => {
-        console.log(`---get RouterRtpCapabilities--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
+    socket.on('getRouterRtpCapabilities', (callback) => {
+        // console.log(`---get RouterRtpCapabilities--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
+        console.log('---get RouterRtpCapabilities---')
         try {
             callback(roomList.get(socket.room_id).getRtpCapabilities());
         } catch (e) {
@@ -143,10 +135,9 @@ io.on('connection', socket => {
                 error: e.message
             })
         }
-
     });
 
-    socket.on('createWebRtcTransport', async (_, callback) => {
+    socket.on('createWebRtcTransport', async (callback) => {
         console.log(`---create webrtc transport--- name: ${roomList.get(socket.room_id).getPeers().get(socket.id).name}`)
         try {
             const {
@@ -240,8 +231,6 @@ io.on('connection', socket => {
         }
 
         socket.room_id = null
-
-
         callback('successfully exited room')
     })
 })
