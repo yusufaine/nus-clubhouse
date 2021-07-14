@@ -16,12 +16,16 @@ const options = {
     cert: fs.readFileSync(path.join(__dirname,config.sslCrt), 'utf-8')
 }
 
-const httpsServer = https.createServer(options, app)
-const io = require('socket.io')(httpsServer)
-io.set('origins', 'https://nusclubhouse.games:443')
-io.origins('https://nusclubhouse.games:443')
-
 app.use(cors({credentials: false, origin: 'https://nusclubhouse.games'}))
+
+const httpsServer = https.createServer(options, app)
+const io = require('socket.io')(httpsServer, {
+    cors: {
+        origin: 'https://nusclubhouse.games',
+        credentials: true
+    },
+    transports: ['websocket', 'polling', 'xhr-polling', 'flashsocket']
+});
 
 httpsServer.listen(config.listenPort, () => {
     console.log('listening https ' + config.listenPort)
