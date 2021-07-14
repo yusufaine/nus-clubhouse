@@ -17,7 +17,9 @@ const options = {
 }
 
 const httpsServer = https.createServer(options, app)
-const io = require('socket.io')(httpsServer, )
+const io = require('socket.io')(httpsServer)
+io.set('origins', 'https://nusclubhouse.games:443')
+io.origins('https://nusclubhouse.games:443')
 
 app.use(cors({credentials: false, origin: 'https://nusclubhouse.games'}))
 
