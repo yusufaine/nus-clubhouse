@@ -108,111 +108,108 @@ export const VoiceProvider = (props) => {
 
     const initTransports = async (device) => {
         // init producerTransport
-        {
-            socket.emit('createWebRtcTransport', {
-                forceTcp: false,
-                rtpCapabilities: device.rtpCapabilities,
-            }, (data) => {
-                if (data.error) {
-                    console.error(data.error);
-                    return;
-                }
-                console.log('data returned from webRtcTransport socket call: ', data)
-                console.log('device used to create producerTransportData: ', device)
+        socket.emit('createWebRtcTransport', {
+            forceTcp: false,
+            rtpCapabilities: device.rtpCapabilities,
+        }, (data) => {
+            console.log('createWebRtcTransport socket emit successful!!!')
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
+            console.log('data returned from webRtcTransport socket call: ', data)
+            console.log('device used to create producerTransportData: ', device)
 
-                const producerTransportData = device.createSendTransport(data)
-                console.log('creating producerTransport with device.createSendTransport: ', producerTransportData)
+            const producerTransportData = device.createSendTransport(data)
+            console.log('creating producerTransport with device.createSendTransport: ', producerTransportData)
 
-                producerTransportData.on('connect', async function ({
-                    dtlsParameters
-                }, callback, errback) {
-                    socket.emit('connectTransport', {
-                            dtlsParameters,
-                            transport_id: data.id
-                        }, (response) => {
-                            console.log('response status from connectTransport emit: ', response)
-                        })
-                });
-
-                producerTransportData.on('produce', async function ({
-                    kind,
-                    rtpParameters
-                }, callback, errback) {
-                    try {
-                        socket.emit('produce', {
-                            producerTransportId: producerTransport.id,
-                            kind,
-                            rtpParameters,
-                        }, ({ producer_id }) => {
-                            callback({ id: producer_id });
-                        });
-                        
-                    } catch (err) {
-                        errback(err);
-                    }
+            producerTransportData.on('connect', async function ({
+                dtlsParameters
+            }, callback, errback) {
+                socket.emit('connectTransport', {
+                    dtlsParameters,
+                    transport_id: data.id
+                }, (response) => {
+                    console.log('response status from connectTransport emit: ', response)
                 })
+            });
 
-                producerTransportData.on('connectionstatechange', function (state) {
-                    switch (state) {
-                        case 'connecting':
-                            break;
+            producerTransportData.on('produce', async function ({
+                kind,
+                rtpParameters
+            }, callback, errback) {
+                try {
+                    socket.emit('produce', {
+                        producerTransportId: producerTransport.id,
+                        kind,
+                        rtpParameters,
+                    }, ({ producer_id }) => {
+                        callback({ id: producer_id });
+                    });
 
-                        case 'connected':
-                            //localVideo.srcObject = stream
-                            break;
-
-                        case 'failed':
-                            producerTransport.close();
-                            break;
-
-                        default:
-                            break;
-                    }
-                });
-
-                setProducerTransport(producerTransportData)
+                } catch (err) {
+                    errback(err);
+                }
             })
-        }
+
+            producerTransportData.on('connectionstatechange', function (state) {
+                switch (state) {
+                    case 'connecting':
+                        break;
+
+                    case 'connected':
+                        //localVideo.srcObject = stream
+                        break;
+
+                    case 'failed':
+                        producerTransport.close();
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+
+            setProducerTransport(producerTransportData)
+        })
 
         // init consumerTransport
-        {
-            socket.emit('createWebRtcTransport', { forceTcp: false }, (data) => {
-                if (data.error) {
-                    console.error(data.error);
-                    return;
-                }
+        socket.emit('createWebRtcTransport', { forceTcp: false }, (data) => {
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
 
-                // only one needed
-                setConsumerTransport(device.createRecvTransport(data))
-                consumerTransport.on('connect', function ({ dtlsParameters }, callback, errback) {
-                    socket.emit('connectTransport', { 
-                        transport_id: consumerTransport.id,
-                        dtlsParameters
-                    }, (response) => {
-                        console.log('connectTransport response status: ', response)
-                    })
-                });
-
-                consumerTransport.on('connectionstatechange', async function (state) {
-                    switch (state) {
-                        case 'connecting':
-                            break;
-
-                        case 'connected':
-                            //remoteVideo.srcObject = await stream;
-                            //await socket.request('resume');
-                            break;
-
-                        case 'failed':
-                            consumerTransport.close();
-                            break;
-
-                        default:
-                            break;
-                    }
-                });
+            // only one needed
+            setConsumerTransport(device.createRecvTransport(data))
+            consumerTransport.on('connect', function ({ dtlsParameters }, callback, errback) {
+                socket.emit('connectTransport', {
+                    transport_id: consumerTransport.id,
+                    dtlsParameters
+                }, (response) => {
+                    console.log('connectTransport response status: ', response)
+                })
             });
-        }
+
+            consumerTransport.on('connectionstatechange', async function (state) {
+                switch (state) {
+                    case 'connecting':
+                        break;
+
+                    case 'connected':
+                        //remoteVideo.srcObject = await stream;
+                        //await socket.request('resume');
+                        break;
+
+                    case 'failed':
+                        consumerTransport.close();
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        });
     }
 
     const initSockets = () => {
