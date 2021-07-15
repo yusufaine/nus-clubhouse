@@ -265,48 +265,49 @@ export const VoiceProvider = (props) => {
             const params = { track };
             
             console.log('producer transport value when creating producer: ', producerTransport)
-            const producer = await producerTransport.produce(params)
 
-            console.log('PRODUCER CREATED: ', producer)
+            producerTransport.produce(params).then((producer) => {
+                console.log('PRODUCER CREATED: ', producer)
+                producers.set(producer.id, producer)
 
-            producers.set(producer.id, producer)
+                producer.on('trackended', () => {
+                    closeProducer(type)
+                })
 
-            producer.on('trackended', () => {
-                closeProducer(type)
-            })
+                producer.on('transportclose', () => {
+                    console.log('producer transport close')
+                    // if (!audio) {
+                    //     elem.srcObject.getTracks().forEach(function (track) {
+                    //         track.stop()
+                    //     })
+                    //     elem.parentNode.removeChild(elem)
+                    // }
+                    producers.delete(producer.id)
+                })
 
-            producer.on('transportclose', () => {
-                console.log('producer transport close')
-                // if (!audio) {
-                //     elem.srcObject.getTracks().forEach(function (track) {
-                //         track.stop()
-                //     })
-                //     elem.parentNode.removeChild(elem)
-                // }
-                producers.delete(producer.id)
-            })
+                producer.on('close', () => {
+                    console.log('closing producer')
+                    if (!audio) {
+                        elem.srcObject.getTracks().forEach(function (track) {
+                            track.stop()
+                        })
+                        elem.parentNode.removeChild(elem)
+                    }
+                    producers.delete(producer.id)
+                })
 
-            producer.on('close', () => {
-                console.log('closing producer')
-                if (!audio) {
-                    elem.srcObject.getTracks().forEach(function (track) {
-                        track.stop()
-                    })
-                    elem.parentNode.removeChild(elem)
+                producerLabel.set(type, producer.id)
+
+                switch (type) {
+                    case mediaType.audio:
+                        event(EVENTS.startAudio)
+                        break
+                    default:
+                        return
+                        break;
                 }
-                producers.delete(producer.id)
             })
 
-            producerLabel.set(type, producer.id)
-
-            switch (type) {
-                case mediaType.audio:
-                    event(EVENTS.startAudio)
-                    break
-                default:
-                    return
-                    break;
-            }
         } catch (err) {
             console.log(err)
         }
