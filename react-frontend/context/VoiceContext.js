@@ -79,13 +79,14 @@ export const VoiceProvider = (props) => {
             socket.emit('getRouterRtpCapabilities', async function (data) {
                 let deviceLoaded = await loadDevice(data)
                 setDevice(deviceLoaded)
-                await initTransports(deviceLoaded)
-                socket.emit('getProducers')
+                initTransports(deviceLoaded).then(() => {
+                    socket.emit('getProducers')
 
-                console.log('consumerTransport value: ', consumerTransport)
-                console.log('producerTransport value: ', producerTransport)
-                console.log('producing audio now...')
-                produce(mediaType.audio)
+                    console.log('consumerTransport value: ', consumerTransport)
+                    console.log('producerTransport value: ', producerTransport)
+                    console.log('producing audio now...')
+                    produce(mediaType.audio)
+                })
             });
         })
     }
