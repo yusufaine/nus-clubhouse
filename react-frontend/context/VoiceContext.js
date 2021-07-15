@@ -265,7 +265,7 @@ export const VoiceProvider = (props) => {
             const params = { track };
             
             console.log('producer transport value when creating producer: ', producerTransport)
-            producer = await producerTransport.produce(params)
+            const producer = await producerTransport.produce(params)
 
             console.log('PRODUCER CREATED: ', producer)
 
