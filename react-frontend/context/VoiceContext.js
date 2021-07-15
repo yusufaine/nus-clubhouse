@@ -204,9 +204,6 @@ export const VoiceProvider = (props) => {
             console.log('consumer transport created, value: ', consumerTransport)
         });
 
-
-        console.log('consumerTransport value: ', consumerTransport)
-        console.log('producerTransport value: ', producerTransport)
         console.log('producing audio now...')
         produce(mediaType.audio)
     }
@@ -267,10 +264,10 @@ export const VoiceProvider = (props) => {
             const track = stream.getAudioTracks()[0]
             const params = { track };
             
-            console.log('producer transport value: ', producerTransport)
+            console.log('producer transport value when creating producer: ', producerTransport)
             producer = await producerTransport.produce(params)
 
-            console.log('producer', producer)
+            console.log('PRODUCER CREATED: ', producer)
 
             producers.set(producer.id, producer)
 
