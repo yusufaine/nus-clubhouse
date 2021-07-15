@@ -35,7 +35,10 @@ export const VoiceProvider = (props) => {
         if (isOpen) {
             console.log('already connected to a room')
         } else {
-            startRoomClient(name, room_id, remoteAudioRef)
+            startRoomClient(name, room_id, remoteAudioRef).then(() => {
+                console.log('producerTransport should NOT be null by now: ', producerTransport)
+                produce(mediaType.audio)
+            })
             addListeners()
         }
     }
@@ -63,9 +66,6 @@ export const VoiceProvider = (props) => {
             initSockets(remoteAudioRef)
             setIsOpen(true)
             // successCallback()
-        }).then(() => {
-            console.log('producerTransport should NOT be null by now: ', producerTransport)
-            produce(mediaType.audio)
         })
     }
 
