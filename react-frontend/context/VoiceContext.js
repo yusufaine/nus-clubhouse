@@ -31,11 +31,11 @@ export const VoiceProvider = (props) => {
         stopAudio: 'stopAudio',
     }
 
-    const joinRoomVoiceChannel = (name, room_id) => {
+    const joinRoomVoiceChannel = (name, room_id, remoteAudioRef) => {
         if (isOpen) {
             console.log('already connected to a room')
         } else {
-            startRoomClient(name, room_id)
+            startRoomClient(name, room_id, remoteAudioRef)
             addListeners()
         }
     }
@@ -52,22 +52,17 @@ export const VoiceProvider = (props) => {
         })
     }
 
-    const startRoomClient = async (name, room_id) => {
+    const startRoomClient = async (name, room_id, remoteAudioRef) => {
         Object.keys(EVENTS).forEach(function (evt) {
             eventListeners.set(evt, [])
         })
-
-        console.log('eventListeners value: ', eventListeners)
-        console.log('socket value: ', socket)
     
         createRoom(room_id).then(async function () {
             console.log(`created voice room of id: ${room_id}, joining voice room...`)
             await join(name, room_id)
-            console.log('initializing sockets...')
-            initSockets()
+            initSockets(remoteAudioRef)
             setIsOpen(true)
             // successCallback()
-            console.log('producing audio data with mediaType: ', mediaType.audio)
             produce(mediaType.audio)
         })
     }
@@ -83,10 +78,8 @@ export const VoiceProvider = (props) => {
         socket.emit('join', { name, room_id }, async function (res) {
             console.log(res)
             socket.emit('getRouterRtpCapabilities', async function (data) {
-                console.log('routerRtpCapabilities: ', data)
                 let deviceLoaded = await loadDevice(data)
                 setDevice(deviceLoaded)
-                console.log('device has been set to: ', deviceLoaded)
                 await initTransports(deviceLoaded)
                 socket.emit('getProducers')
             });
@@ -118,12 +111,8 @@ export const VoiceProvider = (props) => {
                 console.error(data.error);
                 return;
             }
-            console.log('data returned from webRtcTransport socket call: ', data)
-            console.log('device used to create producerTransportData: ', device)
 
             const producerTransportData = device.createSendTransport(data)
-            console.log('creating producerTransport with device.createSendTransport: ', producerTransportData)
-
             producerTransportData.on('connect', async function ({
                 dtlsParameters
             }, callback, errback) {
@@ -217,7 +206,7 @@ export const VoiceProvider = (props) => {
         });
     }
 
-    const initSockets = () => {
+    const initSockets = (remoteAudioRef) => {
         socket.on('consumerClosed', function ({
             consumer_id
         }) {
@@ -234,7 +223,7 @@ export const VoiceProvider = (props) => {
         socket.on('newProducers', async function (data) {
             console.log('new producers', data)
             for (let { producer_id } of data) {
-                await consume(producer_id)
+                await consume(producer_id, remoteAudioRef)
             }
         })
 
@@ -321,7 +310,7 @@ export const VoiceProvider = (props) => {
         }
     }
 
-    const consume = async (producer_id) => {
+    const consume = async (producer_id, remoteAudioRef) => {
         //let info = await roomInfo()
         getConsumeStream(producer_id).then(function ({
             consumer,
@@ -331,13 +320,13 @@ export const VoiceProvider = (props) => {
             consumers.set(consumer.id, consumer)
             console.logo('new consumer created, updated list of consumer: ', consumers)
 
-            // let elem;
-            // elem = document.createElement('audio')
-            // elem.srcObject = stream
-            // elem.id = consumer.id
-            // elem.playsinline = false
-            // elem.autoplay = true
-            // remoteAudioEl.appendChild(elem)
+            let elem;
+            elem = document.createElement('audio')
+            elem.srcObject = stream
+            elem.id = consumer.id
+            elem.playsinline = false
+            elem.autoplay = true
+            remoteAudioRef.current.appendChild(elem)
             
             consumer.on('trackended', function () {
                 removeConsumer(consumer.id)
@@ -377,7 +366,6 @@ export const VoiceProvider = (props) => {
             return
         }
         let producer_id = producerLabel.get(type)
-        console.log(producer_id)
         socket.emit('producerClosed', { producer_id })
         producers.get(producer_id).close()
         producers.delete(producer_id)
