@@ -166,7 +166,7 @@ export const VoiceProvider = (props) => {
             });
 
             producerTransport = producerTransportData
-            // setProducerTransport(producerTransportData)
+            console.log('producer transport created, value: ', producerTransport)
         })
 
         // init consumerTransport
@@ -207,7 +207,7 @@ export const VoiceProvider = (props) => {
             });
 
             consumerTransport = consumerTransportData
-            // setConsumerTransport(consumerTransportData)
+            console.log('consumer transport created, value: ', consumerTransport)
         });
     }
 
