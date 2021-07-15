@@ -30,7 +30,7 @@ function RoomUsersSection() {
 
     return (
         <Box>
-            <RoomUserList text='Speakers' users={speakers}/>
+            <RoomUserList text='Speakers' users={speakers} />
             <RoomUserList text='Listeners' users={listeners} />
         </Box>
     )

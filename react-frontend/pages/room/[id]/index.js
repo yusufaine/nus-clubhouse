@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import Head from 'next/head'
 import { 
   Container, 
@@ -20,13 +20,14 @@ function index() {
     const { joinRoomVoiceChannel } = useContext(VoiceContext)
     const router = useRouter()
     const toast = useToast()
+    const audioRef = useRef()
     
     useEffect(() => {
         if (router.query.id) {
             const roomId = router.query.id
             console.log('room id: ', roomId)
             fetchRoom(roomId, toast)
-            joinRoomVoiceChannel(user.name, roomId)
+            joinRoomVoiceChannel(user.name, roomId, audioRef)
         }
     }, [router.query.id])
     
@@ -44,6 +45,7 @@ function index() {
                     <RoomSection />
                     <ProfileUpcomingRoomsSection user={user} />
                 </Stack>
+                <div ref={audioRef}></div>
             </Container>
         </> 
     )
