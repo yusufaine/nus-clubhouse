@@ -63,6 +63,8 @@ export const VoiceProvider = (props) => {
             initSockets(remoteAudioRef)
             setIsOpen(true)
             // successCallback()
+        }).then(() => {
+            console.log('producerTransport should NOT be null by now: ', producerTransport)
             produce(mediaType.audio)
         })
     }
@@ -327,6 +329,7 @@ export const VoiceProvider = (props) => {
             elem.playsinline = false
             elem.autoplay = true
             remoteAudioRef.current.appendChild(elem)
+            console.log('audio ref appended value: ', remoteAudioRef)
             
             consumer.on('trackended', function () {
                 removeConsumer(consumer.id)
