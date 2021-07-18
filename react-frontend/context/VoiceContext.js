@@ -234,7 +234,7 @@ export const VoiceProvider = (props) => {
         })
     }
 
-    const produce = async (type, deviceId = null) => {
+    const produce = async (type, deviceId = "default") => {
         let mediaConstraints = {}
         let audio = false
         switch (type) {
