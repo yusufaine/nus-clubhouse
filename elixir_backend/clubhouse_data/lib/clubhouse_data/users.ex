@@ -121,4 +121,12 @@ defmodule ClubhouseData.Users do
         |> Ecto.Changeset.put_assoc(:following, following)
         |> Repo.insert_or_update()
     end
+
+    @doc """
+    Set user online status to true when logged in.
+    """
+    @spec set_user_online(User.t()) :: {:ok, User.t()} | changeset_error
+    def set_user_online(%User{} = user) do
+        update_user(user, %{:isOnline: true})
+    end
 end

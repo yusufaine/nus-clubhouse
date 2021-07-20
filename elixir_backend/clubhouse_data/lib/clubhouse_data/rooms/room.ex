@@ -9,6 +9,7 @@ defmodule ClubhouseData.Rooms.Room do
         field :type, :string
         field :isLive, :boolean
         field :isScheduled, :boolean
+        field :isEnded, :boolean
         belongs_to :creator, ClubhouseData.Users.User
         many_to_many :users, ClubhouseData.Users.User, join_through: "rooms_users"
 
@@ -17,7 +18,7 @@ defmodule ClubhouseData.Rooms.Room do
 
     def changeset(user, attrs) do
         user
-        |> cast(attrs, [:name, :numUsers, :type, :isLive, :isScheduled])
-        |> validate_required([:name, :numUsers, :type, :isLive, :isScheduled])
+        |> cast(attrs, [:name, :numUsers, :type, :isLive, :isScheduled, :isEnded])
+        |> validate_required([:name, :numUsers, :type, :isLive, :isScheduled, :isEnded])
     end
 end

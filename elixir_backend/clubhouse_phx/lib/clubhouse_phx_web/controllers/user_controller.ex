@@ -43,4 +43,8 @@ defmodule ClubhousePhxWeb.UserController do
     {:ok, _user} = Users.delete_user(user)
     send_resp(conn, :no_content, "")
   end
+
+  def list_following(conn, %{"id" => user_id}) do
+    
+  end
 end

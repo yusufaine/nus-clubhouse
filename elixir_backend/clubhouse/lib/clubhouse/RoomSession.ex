@@ -123,7 +123,7 @@ defmodule Clubhouse.RoomSession do
         total_users = [preloaded_speakers | preloaded_listeners]
         case live_status do
             false ->
-                res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false})
+                res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false, isEnded: true})
                 case res do
                     {:ok, room} ->
                         IO.puts("SAVED room with isLive false state")
