@@ -12,6 +12,7 @@ defmodule ClubhousePhxWeb.AuthController do
   def login(conn, %{"credentials" => credentials}) do
     case Login.authenticate(credentials) do
       {:ok, user} ->
+        {:ok, user} = Users.set_user_online(user)
         token = Token.sign(%{"user_email" => user.email})
         conn = conn |> put_resp_cookie("auth_cookie", token, encrypt: true, http_only: true, secure: true)
         conn

@@ -28,6 +28,11 @@ defmodule ClubhouseData.Rooms do
         Repo.all(preload_query)
     end
 
+    def list_scheduled_rooms() do
+        preload_query = from rm in Room, where: rm.isScheduled == true and rm.isEnded == false, preload: [:creator, :users]
+        Repo.all(preload_query) 
+    end
+
     def get_room!(id) do 
         Repo.preload(Repo.get!(Room, id), [:creator, :users])
     end

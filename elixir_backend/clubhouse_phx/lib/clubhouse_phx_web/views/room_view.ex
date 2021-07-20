@@ -16,20 +16,21 @@ defmodule ClubhousePhxWeb.RoomView do
 
   def render("room.json", %{room: room}) do
     case room.isLive do
-      false -> 
+      false ->
           %{}
-      true -> 
+      true ->
         users = for user <- room.users do
           %{
-            id: user.id, 
-            username: user.username, 
+            id: user.id,
+            username: user.username,
             profileImgUrl: user.profileImgUrl
-          } 
+          }
         end
         %{
           id: room.id,
           name: room.name,
           isLive: room.isLive,
+          isScheduled: room.isScheduled,
           numUsers: room.numUsers,
           type: room.type,
           startTime: room.inserted_at,
@@ -41,6 +42,6 @@ defmodule ClubhousePhxWeb.RoomView do
           users: users
         }
     end
-    
+
   end
 end

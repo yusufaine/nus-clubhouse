@@ -12,6 +12,7 @@ defmodule ClubhouseData.Users.User do
         bio: String.t(),
         email: String.t(),
         profileImgUrl: String.t(),
+        isOnline: Boolean.t(),
         password_hash: String.t(),
         confirmed_at: DateTime.t() | nil,
         reset_sent_at: DateTime.t() | nil,
@@ -23,13 +24,14 @@ defmodule ClubhouseData.Users.User do
         updated_at: DateTime.t()
     }
 
-    @derive {Jason.Encoder, only: [:id, :name, :username, :email, :bio, :profileImgUrl, :rooms, :created_rooms, :following, :followers]}
+    @derive {Jason.Encoder, only: [:id, :name, :username, :email, :bio, :profileImgUrl, :isOnline, :rooms, :created_rooms, :following, :followers]}
     schema "users" do
         field :name, :string
         field :username, :string
         field :email, :string
         field :bio, :string 
         field :profileImgUrl, :string
+        field :isOnline, :boolean
         field :password, :string, virtual: true
         field :password_hash, :string
         field :confirmed_at, :utc_datetime
@@ -44,7 +46,7 @@ defmodule ClubhouseData.Users.User do
 
     def changeset(%__MODULE__{} = user, attrs) do
         user
-        |> cast(attrs, [:name, :username, :email, :bio, :profileImgUrl])
+        |> cast(attrs, [:name, :username, :email, :bio, :profileImgUrl, :isOnline])
         |> validate_required([:email, :username])
         |> unique_email
         |> unique_username
@@ -52,7 +54,7 @@ defmodule ClubhouseData.Users.User do
 
     def create_changeset(%__MODULE__{} = user, attrs) do
         user
-        |> cast(attrs, [:name, :email, :password, :username, :bio, :profileImgUrl])
+        |> cast(attrs, [:name, :email, :password, :username, :bio, :profileImgUrl, :isOnline])
         |> validate_required([:username, :email, :password])
         |> unique_email
         |> unique_username
@@ -78,14 +80,14 @@ defmodule ClubhouseData.Users.User do
     end
 
     defp unique_email(changeset) do
-        # |> validate_format(
-        #     :email,
-        #     ~r/(@|u.)nus.edu/
-        # )
         changeset
         |> validate_format(
         :email,
         ~r/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,}$/
+        )
+        |> validate_format(
+            :email,
+            ~r/(@|u.)nus.edu/
         )
         |> validate_length(:email, max: 255)
         |> unique_constraint(:email)

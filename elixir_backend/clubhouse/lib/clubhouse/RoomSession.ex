@@ -9,7 +9,7 @@ defmodule Clubhouse.RoomSession do
     def start_link({room_name, creator_id}) do
         creator_data = Users.get_user!(creator_id)
         creator = User.new(creator_data.id, creator_data.username, creator_data.profileImgUrl, false, true)
-        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, numUsers: 0, type: "public"})
+        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, isScheduled: false, numUsers: 0, type: "public"})
         name = room_session_name(room.id)
         GenServer.start_link(__MODULE__, {room.id, room_name, creator}, name: name)
     end
@@ -71,6 +71,7 @@ defmodule Clubhouse.RoomSession do
             id: room.id,
             name: room.name,
             isLive: room.isLive,
+            isScheduled: room.isScheduled,
             type: room.type,
             creator: creator,
             users: users
@@ -121,17 +122,17 @@ defmodule Clubhouse.RoomSession do
         preloaded_listeners = Enum.map(room.listeners, fn(listener) -> Users.get_user!(listener.id) end)
         total_users = [preloaded_speakers | preloaded_listeners]
         case live_status do
-            false -> 
-                res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false})
+            false ->
+                res = Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers, isLive: false, isEnded: true})
                 case res do
                     {:ok, room} ->
                         IO.puts("SAVED room with isLive false state")
                         room
                     {:error, err} ->
-                        IO.puts("ERROR failed to update room with isLive false state") 
+                        IO.puts("ERROR failed to update room with isLive false state")
                         IO.inspect(err)
                 end
-            true -> 
+            true ->
                 IO.puts("SAVED room with isLive true state")
                 Rooms.update_room(room_data, %{users: total_users, numUsers: room.numUsers})
         end
