@@ -12,16 +12,15 @@ import {
     useDisclosure 
 } from '@chakra-ui/react'
 
-// import AuthContext from '../../context/AuthContext'
-import NavbarUserModalBtn from '../NavbarUserModalBtn/NavbarUserModalBtn'
+import AuthContext from '../../context/AuthContext'
 
 
 function NavbarUserIcon() {
     // const { logoutUser } = useContext(AuthContext)
     const router = useRouter()
 
-    const handlePastOrders = () => {
-        router.push('/orders')
+    const handleProfile = () => {
+        router.push('/profile')
     }
 
     return (
@@ -35,8 +34,7 @@ function NavbarUserIcon() {
                     boxSize={{ base: '2.25em' }}
                 />
                 <MenuList zIndex='popover'>
-                    <NavbarUserModalBtn />
-                    <MenuItem onClick={handlePastOrders}>Past orders</MenuItem>
+                    <MenuItem onClick={handleProfile}>Profile</MenuItem>
                     <MenuDivider />
                     <MenuItem 
                         // onClick={logoutUser}

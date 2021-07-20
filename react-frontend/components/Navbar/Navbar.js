@@ -5,6 +5,8 @@ import {
 import NextLink from 'next/link'
 import NextImage from 'next/image'
 
+import NavbarUserIcon from '../NavbarUserIcon/NavbarUserIcon'
+
 function Navbar() {
     return (
         <>
@@ -19,6 +21,7 @@ function Navbar() {
                             <NextImage src='/logo-full.svg' width='192' height='32'/>
                         </a>
                     </NextLink>
+                    <NavbarUserIcon />
                     {/* <Flex alignItems={'center'}> */}
                         {/* if logged in, show past orders, cart + user icon */}
                         {/* user ? ( 
