@@ -7,7 +7,8 @@ defmodule ClubhouseData.Repo.Migrations.CreateUsers do
       add :username, :string
       add :email, :string
       add :bio, :string 
-      add :profileImgUrl, :string 
+      add :profileImgUrl, :string
+      add :isOnline, :boolean
       add :password_hash, :string
       add :confirmed_at, :utc_datetime
       add :reset_sent_at, :utc_datetime

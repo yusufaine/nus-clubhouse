@@ -6,6 +6,7 @@ defmodule Clubhouse.Room do
         name: nil,
         type: "public",
         isLive: nil,
+        isScheduled: false,
         numUsers: 0,
         speakers: [],
         listeners: [],
@@ -19,6 +20,7 @@ defmodule Clubhouse.Room do
             name: name,
             type: "public",
             isLive: true,
+            isScheduled: false,
             numUsers: 0,
             creator: creator,
             speakers: [],
@@ -63,7 +65,7 @@ defmodule Clubhouse.Room do
         speakers = Enum.reject(room.speakers, fn speaker -> speaker.username == user_username end)
         case speakers == room.speakers do
             false ->
-                room 
+                room
                 |> Map.put(:speakers, speakers)
                 |> decrement_user()
             true -> room
@@ -80,8 +82,8 @@ defmodule Clubhouse.Room do
     defp remove_listener(room, user_username) do
         listeners = Enum.reject(room.listeners, fn listener -> listener.username == user_username end)
         case listeners == room.listeners do
-            false -> 
-                room 
+            false ->
+                room
                 |> Map.put(:listeners, listeners)
                 |> decrement_user()
             true -> room

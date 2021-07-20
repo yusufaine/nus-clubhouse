@@ -186,7 +186,7 @@ export const AuthProvider = (props) => {
             
             if(data.data) {
                 const username = data.data.username
-                console.log('Successfully logged in ', username)
+                console.log('Successfully logged in: ', data.data)
                 successToast("Successfully logged in", "", toast)
                 setUser(data.data)
             } else {

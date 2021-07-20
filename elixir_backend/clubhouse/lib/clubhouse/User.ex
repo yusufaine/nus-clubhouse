@@ -6,16 +6,18 @@ defmodule Clubhouse.User do
         username: nil,
         profileImgUrl: nil,
         isMuted: nil,
-        isSpeaker: nil
+        isSpeaker: nil,
+        isOnline: false
     )
 
-    def new(id, username, profileImgUrl, isMuted, isSpeaker) do
+    def new(id, username, profileImgUrl, isMuted, isSpeaker, isOnline) do
         %User{
             id: id,
             username: username,
             profileImgUrl: profileImgUrl,
             isMuted: isMuted,
-            isSpeaker: isSpeaker
+            isSpeaker: isSpeaker,
+            isOnline: isOnline
         }
     end
 
@@ -24,8 +26,9 @@ defmodule Clubhouse.User do
             id: id,
             username: username,
             profileImgUrl: profileImgUrl,
-            isMuted: False,
-            isSpeaker: True
+            isMuted: false,
+            isSpeaker: true,
+            isOnline: true
         }
     end
 
@@ -34,8 +37,9 @@ defmodule Clubhouse.User do
             id: id,
             username: username,
             profileImgUrl: profileImgUrl,
-            isMuted: False,
-            isSpeaker: False
+            isMuted: false,
+            isSpeaker: false,
+            isOnline: true
         }
     end
 
