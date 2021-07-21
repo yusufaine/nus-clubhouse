@@ -24,7 +24,7 @@ function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
         return (
             <Button 
                 variant='solid'
-                colorScheme='clubhouseorange'
+                colorScheme='clubhousegrey'
                 size='md'
                 fontSize='sm'
                 px='40px'
