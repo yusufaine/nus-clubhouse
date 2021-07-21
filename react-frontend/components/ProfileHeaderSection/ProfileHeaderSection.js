@@ -5,6 +5,9 @@ import {
 import { EditIcon } from '@chakra-ui/icons'
 
 import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
+import UserNameText from '../UserNameText/UserNameText'
+import UserUsernameText from '../UserUsernameText/UserUsernameText'
+import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
 
 function ProfileHeaderSection() {
     return (
