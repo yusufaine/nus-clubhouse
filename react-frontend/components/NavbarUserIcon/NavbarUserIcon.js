@@ -35,7 +35,7 @@ function NavbarUserIcon() {
                 />
                 <MenuList 
                     zIndex='popover' 
-                    bg='clubhousegrey.400'
+                    bg='clubhousegrey.200'
                     color='clubhousegrey.800'
                 >
                     <MenuItem onClick={handleProfile}>
