@@ -25,7 +25,7 @@ function NavbarUserIcon() {
 
     return (
         <Box display={{base: 'none', lg: 'block'}}>
-            <Menu placement='bottom-start'>
+            <Menu placement='left'>
                 <MenuButton
                     as={Avatar}
                     rounded={'full'}
@@ -41,7 +41,7 @@ function NavbarUserIcon() {
                     <MenuItem onClick={handleProfile}>
                         Profile
                     </MenuItem>
-                    <MenuDivider />
+                    <MenuDivider bg='clubhousegrey.400'/>
                     <MenuItem 
                         // onClick={logoutUser}
                     >
