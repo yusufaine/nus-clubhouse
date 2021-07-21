@@ -12,19 +12,29 @@ import ProfileScheduledSection from '../ProfileScheduledSection/ProfileScheduled
 function ProfileTabs({ numFollowers, numFollowing }) {
     return (
         <Tabs colorScheme='clubhousegrey' mt='16px' variant='unstyled'>
-            <TabList justifyContent='center' fontWeight='bold'>
-                <Tab _selected={{
-                    borderBottomWidth: "1px", 
-                    borderBottomColor: "clubhouseorange.400",
-                    textColor: "clubhouseorange.400"
-                }}>
+            <TabList justifyContent='center'>
+                <Tab 
+                    _selected={{ 
+                        borderBottomColor: "clubhouseorange.400",
+                        textColor: "clubhouseorange.400"
+                    }}
+                    borderBottomWidth="2px"
+                    borderBottomColor='clubhousegrey.200'
+                    fontWeight='black'
+                    fontSize='sm'
+                >
                     About
                 </Tab>
-                <Tab _selected={{
-                    borderBottomWidth: "1px", 
-                    borderBottomColor: "clubhouseorange.400",
-                    textColor: "clubhouseorange.400"
-                }}>
+                <Tab 
+                    _selected={{ 
+                        borderBottomColor: "clubhouseorange.400",
+                        textColor: "clubhouseorange.400"
+                    }}
+                    borderBottomWidth="2px"
+                    borderBottomColor='clubhousegrey.200'
+                    fontWeight='black'
+                    fontSize='sm'
+                >
                     Scheduled
                 </Tab>
             </TabList>
