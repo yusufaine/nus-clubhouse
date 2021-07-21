@@ -25,7 +25,7 @@ function NavbarUserIcon() {
 
     return (
         <Box display={{base: 'none', lg: 'block'}}>
-            <Menu placement='bottom'>
+            <Menu placement='bottom-start'>
                 <MenuButton
                     as={Avatar}
                     rounded={'full'}
