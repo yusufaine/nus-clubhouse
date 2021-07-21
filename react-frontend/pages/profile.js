@@ -15,6 +15,19 @@ import AuthContext from '../context/AuthContext'
 
 function profile() {
     const { user } = useContext(AuthContext)
+    const [userName, setUserName] = useState('')
+    const [userUsername, setUserUsername] = useState('')
+    const [numFollowers, setNumFollowers] = useState('')
+    const [numFollowing, setNumFollowing] = useState('')
+
+    useEffect(() => {
+        if (user) {
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
+        }
+    }, [user])
     return (
         <>
             <Head>
@@ -26,7 +39,12 @@ function profile() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
-                    <ProfileSection user={user}/>
+                    <ProfileSection 
+                        name={userName} 
+                        username={userUsername} 
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                     <ProfileUpcomingRoomsSection />
                 </Stack>
             </Container>

@@ -9,7 +9,7 @@ import {
 import ProfileAboutSection from '../ProfileAboutSection/ProfileAboutSection'
 import ProfileScheduledSection from '../ProfileScheduledSection/ProfileScheduledSection'
 
-function ProfileTabs({ user }) {
+function ProfileTabs({ numFollowers, numFollowing }) {
     return (
         <Tabs isFitted colorScheme='clubhouseorange'>
             <TabList>
@@ -18,7 +18,7 @@ function ProfileTabs({ user }) {
             </TabList>
             <TabPanels>
                 <TabPanel>
-                    <ProfileAboutSection user={user} />
+                    <ProfileAboutSection numFollowers={numFollowers} numFollowing={numFollowing} />
                 </TabPanel>
                 <TabPanel>
                     <ProfileScheduledSection />

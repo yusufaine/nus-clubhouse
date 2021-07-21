@@ -4,12 +4,12 @@ import {
 
 import UserFollowerFollowingText from '../UserFollowerFollowingText/UserFollowerFollowingText'
 
-function ProfileAboutSection({ user }) {
+function ProfileAboutSection({ numFollowers, numFollowing }) {
     return (
         <Box rounded='8px' p='20px' bg='clubhousegrey.200'>
             <UserFollowerFollowingText 
-                numFollowers={user.followers.length}
-                numFollowing={user.following.length} 
+                numFollowers={numFollowers}
+                numFollowing={numFollowing} 
             />
             <Text mt='20px'>
                 User bio text
