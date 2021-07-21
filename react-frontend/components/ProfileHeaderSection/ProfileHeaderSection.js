@@ -11,7 +11,14 @@ import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
 
 function ProfileHeaderSection({ name, username }) {
     return (
-        <Stack direction='row' justify='space-between' p='20px' bg='clubhousegrey.200'>
+        <Stack 
+            rounded='8px' 
+            direction='row' 
+            justify='space-between' 
+            p='20px' 
+            bg='clubhousegrey.200'
+        >
+            <Box w='red.100' h='100px'></Box>
             <Stack direction='row' spacing={4} mb={4}>
                 <UserProfileAvatar />
                 <Box>
@@ -19,7 +26,7 @@ function ProfileHeaderSection({ name, username }) {
                     <UserUsernameText text={username}/>
                 </Box>
             </Stack>
-            <ClubhouseBtn text='Edit Profile' leftIcon={<EditIcon boxSize='12px' />} />
+            <ClubhouseBtn text='Edit Profile' variant='secondary' leftIcon={<EditIcon boxSize='12px' />} />
         </Stack>
     )
 }
