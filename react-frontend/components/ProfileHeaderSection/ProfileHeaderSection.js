@@ -9,7 +9,7 @@ import UserNameText from '../UserNameText/UserNameText'
 import UserUsernameText from '../UserUsernameText/UserUsernameText'
 import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
 
-function ProfileHeaderSection() {
+function ProfileHeaderSection({ name, username }) {
     return (
         <Stack direction='row' justify='space-between' p='20px' bg='clubhousegrey.200'>
             <Stack direction='row' spacing={4} mb={4}>
