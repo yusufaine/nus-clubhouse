@@ -7,7 +7,7 @@ import ProfileTabs from '../ProfileTabs/ProfileTabs'
 
 function ProfileSection({ name, username, numFollowers, numFollowing }) {
     return (
-        <Box>
+        <Box w='100%'>
             <ProfileHeaderSection name={name} username={username}/>
             <ProfileTabs numFollowers={numFollowers} numFollowing={numFollowing}/>
         </Box>
