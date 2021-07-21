@@ -19,9 +19,10 @@ function ProfileTabs({ numFollowers, numFollowing }) {
                         textColor: "clubhouseorange.400"
                     }}
                     borderBottomWidth="2px"
-                    borderBottomColor='clubhousegrey.200'
-                    fontWeight='black'
+                    borderBottomColor='clubhousegrey.50'
+                    fontWeight='bold'
                     fontSize='sm'
+                    mr='12px'
                 >
                     About
                 </Tab>
@@ -31,8 +32,8 @@ function ProfileTabs({ numFollowers, numFollowing }) {
                         textColor: "clubhouseorange.400"
                     }}
                     borderBottomWidth="2px"
-                    borderBottomColor='clubhousegrey.200'
-                    fontWeight='black'
+                    borderBottomColor='clubhousegrey.50'
+                    fontWeight='bold'
                     fontSize='sm'
                 >
                     Scheduled
