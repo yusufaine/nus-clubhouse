@@ -11,10 +11,22 @@ import ProfileScheduledSection from '../ProfileScheduledSection/ProfileScheduled
 
 function ProfileTabs({ numFollowers, numFollowing }) {
     return (
-        <Tabs colorScheme='clubhousegrey' mt='16px' variant='soft-rounded'>
+        <Tabs colorScheme='clubhousegrey' mt='16px' variant='unstyled'>
             <TabList justifyContent='center' fontWeight='bold'>
-                <Tab>About</Tab>
-                <Tab>Scheduled</Tab>
+                <Tab _selected={{
+                    borderBottomWidth: "1px", 
+                    borderBottomColor: "clubhouseorange.400",
+                    textColor: "clubhouseorange.400"
+                }}>
+                    About
+                </Tab>
+                <Tab _selected={{
+                    borderBottomWidth: "1px", 
+                    borderBottomColor: "clubhouseorange.400",
+                    textColor: "clubhouseorange.400"
+                }}>
+                    Scheduled
+                </Tab>
             </TabList>
             <TabPanels>
                 <TabPanel px={0}>

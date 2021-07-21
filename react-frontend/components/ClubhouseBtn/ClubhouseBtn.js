@@ -44,7 +44,6 @@ function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
                 textColor='clubhousegrey.900'
                 size='sm'
                 fontSize='sm'
-                rounded='4px'
                 type={type}
                 onClick={onClick}
                 {...props}
