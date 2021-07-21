@@ -36,6 +36,21 @@ function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
                 {text}
             </Button>
         )
+    } else if (variant == 'secondary-small') {
+        return (
+            <Button 
+                variant='solid'
+                colorScheme='clubhousegrey'
+                textColor='clubhousegrey.900'
+                size='md'
+                fontSize='sm'
+                type={type}
+                onClick={onClick}
+                {...props}
+            >
+                {text}
+            </Button>
+        )
     } else {
         return (
             <Button 

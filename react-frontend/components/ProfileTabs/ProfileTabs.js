@@ -11,8 +11,8 @@ import ProfileScheduledSection from '../ProfileScheduledSection/ProfileScheduled
 
 function ProfileTabs({ numFollowers, numFollowing }) {
     return (
-        <Tabs colorScheme='clubhouseorange'>
-            <TabList justifyContent='center'>
+        <Tabs colorScheme='clubhouseorange' mt='24px'>
+            <TabList justifyContent='center' fontWeight='bold'>
                 <Tab>About</Tab>
                 <Tab>Scheduled</Tab>
             </TabList>
