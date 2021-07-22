@@ -19,8 +19,6 @@ import EditProfileForm from '../EditProfileForm/EditProfileForm'
 
 function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const router = useRouter()
-    const { user } = useContext(AuthContext)
     const initialValues = {
         name: name,
         username: username,
@@ -29,20 +27,20 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
     }
     
     const handleUpdateProfile = async (values, actions) => {
-        delete values.bio
-        const body = {
-            user_id: user.id,
-            room: {
-                name: values.name,
-                numUsers: 0,
-                type: values.type,
-            }
-        }
-        console.log('creating room with body: ', body)
-        const data = await callAPI('/rooms/create', 'POST', body)
-        const room = data.data
-        console.log('data after creating room: ', data)
-        router.push(`/room/${room.id}`)
+        console.log('updating profile!')
+        // const body = {
+        //     user_id: user.id,
+        //     room: {
+        //         name: values.name,
+        //         numUsers: 0,
+        //         type: values.type,
+        //     }
+        // }
+        // console.log('creating room with body: ', body)
+        // const data = await callAPI('/rooms/create', 'POST', body)
+        // const room = data.data
+        // console.log('data after creating room: ', data)
+        // router.push(`/room/${room.id}`)
     }
 
     return (

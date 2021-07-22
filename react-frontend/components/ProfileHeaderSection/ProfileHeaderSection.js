@@ -2,14 +2,13 @@ import {
     Box, 
     Stack
 } from '@chakra-ui/react'
-import { EditIcon } from '@chakra-ui/icons'
 
-import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 import UserNameText from '../UserNameText/UserNameText'
 import UserUsernameText from '../UserUsernameText/UserUsernameText'
 import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
+import EditProfileModalBtn from '../EditProfileModalBtn/EditProfileModalBtn'
 
-function ProfileHeaderSection({ name, username }) {
+function ProfileHeaderSection({ name, username, bio, profileImgUrl }) {
     return (
         <Box
             rounded='8px'
@@ -28,7 +27,7 @@ function ProfileHeaderSection({ name, username }) {
                         <UserUsernameText text={username}/>
                     </Box>
                 </Stack>
-                <ClubhouseBtn text='Edit Profile' variant='secondary-small' leftIcon={<EditIcon boxSize='12px' />} />
+                <EditProfileModalBtn name={name} username={username} bio={bio} profileImgUrl={profileImgUrl}/>
             </Stack>
         </Box>
     )

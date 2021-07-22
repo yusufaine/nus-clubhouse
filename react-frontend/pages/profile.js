@@ -17,6 +17,8 @@ function profile() {
     const { user } = useContext(AuthContext)
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
+    const [userBio, setUserBio] = useState('')
+    const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
     const [numFollowers, setNumFollowers] = useState('')
     const [numFollowing, setNumFollowing] = useState('')
 
@@ -24,6 +26,8 @@ function profile() {
         if (user) {
             setUserUsername(user.username)
             setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
             setNumFollowers(user.followers.length)
             setNumFollowing(user.following.length)
         }
@@ -41,7 +45,9 @@ function profile() {
                     <FriendsList />
                     <ProfileSection 
                         name={userName} 
-                        username={userUsername} 
+                        username={userUsername}
+                        bio={userBio}
+                        profileImgUrl={userProfileImgUrl}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
                     />
