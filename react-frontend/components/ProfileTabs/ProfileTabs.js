@@ -12,7 +12,7 @@ import ProfileScheduledSection from '../ProfileScheduledSection/ProfileScheduled
 function ProfileTabs({ numFollowers, numFollowing }) {
     return (
         <Tabs colorScheme='clubhousegrey' mt='16px' variant='unstyled'>
-            <TabList justifyContent='center'>
+            <TabList justifyContent='space-evenly'>
                 <Tab 
                     _selected={{ 
                         borderBottomColor: "clubhouseorange.400",
