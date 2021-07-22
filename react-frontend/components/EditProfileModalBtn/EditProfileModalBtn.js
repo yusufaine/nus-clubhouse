@@ -54,7 +54,7 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
                     <ModalBody>
                         <EditProfileForm 
                             initialValues={initialValues} 
-                            handleSubmit={handleCreateNewRoom}
+                            handleSubmit={handleUpdateProfile}
                             handleClose={onClose}
                         />
                     </ModalBody>

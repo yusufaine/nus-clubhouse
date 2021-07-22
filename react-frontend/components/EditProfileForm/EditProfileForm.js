@@ -14,8 +14,8 @@ const Yup = require('yup')
 
 import ProfileNameInput from '../ProfileNameInput/ProfileNameInput'
 import ProfileUsernameInput from '../ProfileUsernameInput/ProfileUsernameInput'
-import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 import ProfileBioInput from '../ProfileBioInput/ProfileBioInput'
+import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 
 const profileSchema = Yup.object().shape({
     name: Yup.string().required('Room name is required'),
