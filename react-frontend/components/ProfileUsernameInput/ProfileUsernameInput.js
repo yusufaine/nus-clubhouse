@@ -12,4 +12,4 @@ function ProfileUsernameInput({ field, valid, ...props }) {
     )
 }
 
-export default ProfileNameInput
+export default ProfileUsernameInput
