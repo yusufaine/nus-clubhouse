@@ -22,7 +22,6 @@ function ProfileTabs({ numFollowers, numFollowing }) {
                     borderBottomColor='clubhousegrey.50'
                     fontWeight='bold'
                     fontSize='sm'
-                    mr='12px'
                 >
                     About
                 </Tab>
