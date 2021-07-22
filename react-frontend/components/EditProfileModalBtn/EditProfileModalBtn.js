@@ -46,7 +46,7 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
 
     return (
         <> 
-            <ClubhouseBtn text='Edit Profile' variant='secondary-small' leftIcon={<EditIcon boxSize='12px' />} />
+            <ClubhouseBtn text='Edit Profile' variant='secondary-small' leftIcon={<EditIcon boxSize='12px' />} onClick={onOpen} />
             <Modal isOpen={isOpen} onClose={onClose} isCentered size='lg'>
                 <ModalOverlay />
                 <ModalContent bg='clubhousegrey.200' p='20px' rounded='lg'>
