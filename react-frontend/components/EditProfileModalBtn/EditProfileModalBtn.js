@@ -9,6 +9,7 @@ import {
     ModalCloseButton,
     useDisclosure
 } from "@chakra-ui/react"
+import { EditIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
 
 import { callAPI } from '../../context/AuthContext'
