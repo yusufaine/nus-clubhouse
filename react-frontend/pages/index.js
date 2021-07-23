@@ -7,7 +7,6 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
-import LoginBox from '../components/LoginBox/LoginBox'
 import Navbar from '../components/Navbar/Navbar'
 import FriendsList from '../components/FriendsList/FriendsList'
 import RoomListFeed from '../components/RoomListFeed/RoomListFeed'

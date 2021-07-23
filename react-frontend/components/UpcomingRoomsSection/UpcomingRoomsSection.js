@@ -1,14 +1,15 @@
 import {
     Box
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 import UpcomingRoomsList from '../UpcomingRoomsList/UpcomingRoomsList'
 import BoldText from '../BoldText/BoldText'
 
 function UpcomingRoomsSection() {
-
+    const router = useRouter()
     const handleLoadUpcomingRooms = () => {
-        console.log('load list of upcoming rooms!')
+        router.push('/scheduled')
     }
 
     return (
