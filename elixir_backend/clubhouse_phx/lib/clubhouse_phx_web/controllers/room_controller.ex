@@ -8,7 +8,7 @@ defmodule ClubhousePhxWeb.RoomController do
   alias ClubhouseData.{Rooms, Users}
   alias ClubhousePhxWeb.{Auth.Token, Email}
 
-  action_fallback ClubhousePhxWeb.FallbackController
+  # action_fallback ClubhousePhxWeb.FallbackController
 
   # the following plugs are defined in the controllers/authorize.ex file
   plug :user_check when action in [:index, :show]
@@ -16,7 +16,10 @@ defmodule ClubhousePhxWeb.RoomController do
 
   def index(conn, _) do
     case conn.query_params do
-      %{} -> render(conn, "index.json", rooms: Rooms.list_rooms(true))
+      %{} -> 
+        render(conn, "index.json", rooms: Rooms.list_rooms(true))
+      %{"isScheduled" => true} ->
+        render(conn, "index.json", rooms: Rooms.list_scheduled_rooms())
       %{"live" => live_status} -> 
         render(conn, "index.json", rooms: Rooms.list_rooms(live_status))
     end
