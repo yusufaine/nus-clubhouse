@@ -57,18 +57,17 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <Box w='100%' h='88px'>
+                    <Box w='100%' h='88px' mb='40px'>
                         <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Bio</Text>
                         <Field name='bio' >
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.bio && form.touched.bio}>
                                     <ProfileBioInput field={field} valid={!form.errors.bio && form.touched.bio} w='100%' h='100%'/>
-                                    <FormErrorMessage>{form.errors.bio}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
                     </Box>
-                    <ButtonGroup spacing='30px' mt='32px'>
+                    <ButtonGroup spacing='30px'>
                         <ClubhouseBtn 
                             variant='primary' 
                             text='Save' 
