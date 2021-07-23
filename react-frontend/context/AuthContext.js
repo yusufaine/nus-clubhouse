@@ -58,6 +58,19 @@ export const AuthProvider = (props) => {
         }
     }
 
+    const fetchScheduledRooms = async () => {
+        try {
+            const data = await callAPI('/rooms?isScheduled=true', 'GET')
+            if(!data.data) {
+                console.error("Failed to load scheduled rooms. Please try again. ", data)
+            } else {
+                return data.data
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     const fetchRoom = async (roomId, toast) => {
         const errorToast = (errorText, errorSubtext) => toast({
             title: errorText,
@@ -234,7 +247,8 @@ export const AuthProvider = (props) => {
             loginUser,
             logoutUser,
             fetchRoom,
-            fetchLiveRooms
+            fetchLiveRooms,
+            fetchScheduledRooms
         }}>
             {props.children}
         </AuthContext.Provider>

@@ -9,12 +9,12 @@ import RoomCard from '../RoomCard/RoomCard'
 import NewRoomModalBtn from '../NewRoomModalBtn/NewRoomModalBtn'
 import BoldText from '../BoldText/BoldText'
 
-function RoomListFeed({ rooms=['room1', 'room1', 'room1', 'room1', 'room1'] }) {
+function RoomListFeed({ title, rooms=['room1', 'room1', 'room1', 'room1', 'room1'] }) {
     console.log(rooms)
     return (
         <VStack w='100%'>
             <Stack direction='row' mb='30px' w='100%'>
-                <BoldText text='Your feed' />
+                <BoldText text={title} />
                 <Spacer />
                 <NewRoomModalBtn />
             </Stack>

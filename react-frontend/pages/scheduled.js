@@ -14,7 +14,7 @@ import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSecti
 import AuthContext from '../context/AuthContext'
 
 export default function Scheduled() {
-    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const { user, fetchScheduledRooms } = useContext(AuthContext)
     const [rooms, setRooms] = useState([])
     const router = useRouter()
     
@@ -23,10 +23,9 @@ export default function Scheduled() {
             console.log('user not logged in')
             router.push('/login')
         } else {
-            fetchLiveRooms().then(rooms => {
-                console.log('rooms value: ', rooms)
-                const liveRooms = rooms.filter(room => { return room.isLive })
-                setRooms(liveRooms)
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setRooms(rooms)
             })
         }
     }, [user])
@@ -42,7 +41,7 @@ export default function Scheduled() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
-                    <RoomListFeed rooms={rooms}/>
+                    <RoomListFeed title='Scheduled Rooms' rooms={rooms}/>
                     <ProfileUpcomingRoomsSection />
                 </Stack>
             </Container>
