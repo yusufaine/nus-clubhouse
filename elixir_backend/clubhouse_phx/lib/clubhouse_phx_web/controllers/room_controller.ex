@@ -15,9 +15,12 @@ defmodule ClubhousePhxWeb.RoomController do
   plug :id_check when action in [:update, :delete]
 
   def index(conn, _) do
-    rooms = Rooms.list_rooms()
-    IO.inspect(rooms)
-    render(conn, "index.json", rooms: rooms)
+    case conn.query_params do
+      %{} -> render(conn, "index.json", rooms: Rooms.list_rooms(true))
+      %{"live" => live_status} -> 
+        render(conn, "index.json", rooms: Rooms.list_rooms(live_status))
+    end
+    IO.inspect(conn.query_params)
   end
 
   def join(conn, %{"room_id" => room_id, "user_id" => user_id}) do
