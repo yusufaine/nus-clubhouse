@@ -35,8 +35,8 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
         >
             {(props) => (
                 <Form>
-                    <Box w='100%' mb='30px'>
-                        <Text>Display name</Text>
+                    <Box w='100%' mb='20px'>
+                        <Text color='clubhousegrey.900' mt='12px' fontSize='md'>Display name</Text>
                         <Field name='name'>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.name && form.touched.name}>
@@ -46,8 +46,8 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <Box w='100%' mb='30px'>
-                        <Text>Username</Text>
+                    <Box w='100%' mb='20px'>
+                        <Text color='clubhousegrey.900' mt='12px' fontSize='md'>Username</Text>
                         <Field name='username' >
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.username && form.touched.username}>
@@ -57,8 +57,8 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <Box w='100%' h='88px' mb='30px'>
-                        <Text>Bio</Text>
+                    <Box w='100%' h='88px' mb='20px'>
+                        <Text color='clubhousegrey.900' mt='12px' fontSize='md'>Bio</Text>
                         <Field name='bio' >
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.bio && form.touched.bio}>
