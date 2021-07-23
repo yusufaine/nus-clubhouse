@@ -36,7 +36,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
             {(props) => (
                 <Form>
                     <Box w='100%' mb='20px'>
-                        <Text color='clubhousegrey.900' mb='12px' fontSize='sm'>Display name</Text>
+                        <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Display name</Text>
                         <Field name='name'>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.name && form.touched.name}>
@@ -47,7 +47,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                         </Field>
                     </Box>
                     <Box w='100%' mb='20px'>
-                        <Text color='clubhousegrey.900' mb='12px' fontSize='sm'>Username</Text>
+                        <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Username</Text>
                         <Field name='username' >
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.username && form.touched.username}>
@@ -58,7 +58,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                         </Field>
                     </Box>
                     <Box w='100%' h='88px'>
-                        <Text color='clubhousegrey.900' mb='12px' fontSize='sm'>Bio</Text>
+                        <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Bio</Text>
                         <Field name='bio' >
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.bio && form.touched.bio}>
@@ -68,7 +68,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <ButtonGroup spacing='30px' mb='32px'>
+                    <ButtonGroup spacing='30px' mt='32px'>
                         <ClubhouseBtn 
                             variant='primary' 
                             text='Save' 
