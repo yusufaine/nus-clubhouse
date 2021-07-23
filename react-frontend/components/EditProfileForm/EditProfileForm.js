@@ -35,7 +35,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
         >
             {(props) => (
                 <Form>
-                    <Box w='100%' mb='20px'>
+                    <Box w='100%' mb='16px'>
                         <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Display name</Text>
                         <Field name='name'>
                             {({ field, form }) => (
@@ -46,7 +46,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <Box w='100%' mb='20px'>
+                    <Box w='100%' mb='16px'>
                         <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Username</Text>
                         <Field name='username' >
                             {({ field, form }) => (
@@ -57,7 +57,7 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             )}
                         </Field>
                     </Box>
-                    <Box w='100%' h='88px' mb='40px'>
+                    <Box w='100%' h='88px' mb='60px'>
                         <Text color='clubhousegrey.900' mb='8px' fontSize='sm'>Bio</Text>
                         <Field name='bio' >
                             {({ field, form }) => (
