@@ -1,15 +1,15 @@
 import ClubhouseInput from '../ClubhouseInput/ClubhouseInput'
 
-function RoomNameInput({ field, valid, ...props }) {
+function ProfileNameInput({ field, valid, ...props }) {
     return (
         <ClubhouseInput 
             {...field}
             id='name'
-            placeholder='Room name' 
+            placeholder='Name'
             rounded='lg'
             {...props}
         />
     )
 }
 
-export default RoomNameInput
+export default ProfileNameInput

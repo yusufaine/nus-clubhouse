@@ -23,9 +23,15 @@ defmodule ClubhouseData.Rooms do
         |> Repo.update()
     end
 
-    def list_rooms() do
-        preload_query = from rm in Room, where: rm.isLive == true, preload: [:creator, :users]
-        Repo.all(preload_query)
+    def list_rooms(live_status) do
+        case live_status do
+            false ->
+                preload_query = from rm in Room, where: rm.isLive == false, preload: [:creator, :users]
+                Repo.all(preload_query)
+            true -> 
+                preload_query = from rm in Room, where: rm.isLive == true, preload: [:creator, :users]
+                Repo.all(preload_query)
+        end
     end
 
     def list_scheduled_rooms() do

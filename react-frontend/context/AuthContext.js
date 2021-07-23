@@ -47,7 +47,7 @@ export const AuthProvider = (props) => {
 
     const fetchLiveRooms = async () => {
         try {
-            const data = await callAPI('/rooms', 'GET')
+            const data = await callAPI('/rooms?live=true', 'GET')
             if(!data.data) {
                 console.error("Failed to load rooms. Please try again. ", data)
             } else {

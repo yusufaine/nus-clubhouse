@@ -1,20 +1,8 @@
-import {
-    Textarea
-} from '@chakra-ui/react'
+import BioInput from '../BioInput/BioInput'
 
 function RoomBioInput({ field, valid, ...props }) {
     return (
-        <Textarea 
-            {...field}
-            id='bio'
-            placeholder='Room bio'
-            _placeholder={{ color: 'clubhousegrey.600' }}
-            colorScheme='clubhousegrey'
-            bg='clubhousegrey.400'
-            focusBorderColor='clubhouseorange.500'
-            rounded='lg'
-            {...props}
-        />
+        <BioInput field={field} valid={valid} placeholder='Room bio' {...props}/>
     )
 }
 

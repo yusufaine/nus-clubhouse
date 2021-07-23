@@ -24,11 +24,26 @@ function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
         return (
             <Button 
                 variant='solid'
-                colorScheme='clubhouseorange'
+                colorScheme='clubhousegrey'
                 size='md'
                 fontSize='sm'
                 px='40px'
                 py='16px'
+                type={type}
+                onClick={onClick}
+                {...props}
+            >
+                {text}
+            </Button>
+        )
+    } else if (variant == 'secondary-small') {
+        return (
+            <Button 
+                variant='solid'
+                colorScheme='clubhousegrey'
+                textColor='clubhousegrey.900'
+                size='sm'
+                fontSize='sm'
                 type={type}
                 onClick={onClick}
                 {...props}
