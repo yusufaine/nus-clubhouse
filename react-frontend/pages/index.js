@@ -43,7 +43,7 @@ export default function Home() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
-                    <RoomListFeed rooms={rooms}/>
+                    <RoomListFeed text='Your feed' rooms={rooms}/>
                     <ProfileUpcomingRoomsSection />
                 </Stack>
             </Container>
