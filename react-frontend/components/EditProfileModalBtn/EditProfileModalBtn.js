@@ -29,7 +29,7 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
         profileImgUrl: profileImgUrl
     }
     
-    const handleUpdateProfile = async (values, actions) => {
+    const handleUpdateProfile = (values, actions) => {
         try {
             console.log('updating profile!')
             updateUser(values, toast, actions)
