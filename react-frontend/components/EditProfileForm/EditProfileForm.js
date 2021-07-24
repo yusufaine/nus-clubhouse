@@ -27,7 +27,8 @@ const profileSchema = Yup.object().shape({
 
 function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
     return (
-        <Formik 
+        <Formik
+            enableReinitialize  
             initialValues={initialValues}
             onSubmit={handleSubmit}
             validationSchema={profileSchema}

@@ -51,7 +51,12 @@ function profile() {
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
                     />
-                    <ProfileUpcomingRoomsSection />
+                    <ProfileUpcomingRoomsSection
+                        name={userName} 
+                        username={userUsername}
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                 </Stack>
             </Container>
         </>

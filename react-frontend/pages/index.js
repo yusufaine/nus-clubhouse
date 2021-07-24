@@ -15,9 +15,16 @@ import AuthContext from '../context/AuthContext'
 
 export default function Home() {
     const { user, fetchLiveRooms, fetchScheduledRooms } = useContext(AuthContext)
+    const router = useRouter()
+
     const [rooms, setRooms] = useState([])
     const [scheduledRooms, setScheduledRooms] = useState([])
-    const router = useRouter()
+    const [userName, setUserName] = useState('')
+    const [userUsername, setUserUsername] = useState('')
+    const [userBio, setUserBio] = useState('')
+    const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
+    const [numFollowers, setNumFollowers] = useState('')
+    const [numFollowing, setNumFollowing] = useState('')
     
     useEffect(() => {
         if (!user) {
@@ -33,7 +40,12 @@ export default function Home() {
                 console.log('scheduled rooms value: ', rooms)
                 setScheduledRooms(rooms)
             })
-
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
         }
     }, [user])
 
@@ -49,7 +61,12 @@ export default function Home() {
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
                     <RoomListFeed title='Your feed' rooms={rooms}/>
-                    <ProfileUpcomingRoomsSection scheduled_rooms={scheduledRooms}/>
+                    <ProfileUpcomingRoomsSection 
+                        name={userName} 
+                        username={userUsername}
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                 </Stack>
             </Container>
         </>
