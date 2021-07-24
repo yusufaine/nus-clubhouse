@@ -72,13 +72,11 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             variant='primary' 
                             text='Save' 
                             type='submit' 
-                            isLoading={props.isSubmitting} 
-                            onClick={handleSubmit}
+                            isLoading={props.isSubmitting}
                         />
                         <ClubhouseBtn 
                             variant='link' 
-                            text='Cancel' 
-                            onClick={handleClose}
+                            text='Cancel'
                         />
                     </ButtonGroup>
                 </Form>
