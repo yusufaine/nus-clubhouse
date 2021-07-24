@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import UpcomingRoomsList from '../UpcomingRoomsList/UpcomingRoomsList'
 import BoldText from '../BoldText/BoldText'
 
-function UpcomingRoomsSection() {
+function UpcomingRoomsSection({ scheduled_rooms }) {
     const router = useRouter()
     const handleLoadUpcomingRooms = () => {
         router.push('/scheduled')
@@ -25,7 +25,7 @@ function UpcomingRoomsSection() {
             >
                 <BoldText text='Upcoming rooms' />
             </Box>
-            <UpcomingRoomsList />
+            <UpcomingRoomsList rooms={scheduled_rooms}/>
             <Box 
                 roundedBottom='lg' 
                 borderBottomWidth='1px' 

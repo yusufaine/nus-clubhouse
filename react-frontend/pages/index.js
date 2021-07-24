@@ -14,8 +14,9 @@ import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSecti
 import AuthContext from '../context/AuthContext'
 
 export default function Home() {
-    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const { user, fetchLiveRooms, fetchScheduledRooms } = useContext(AuthContext)
     const [rooms, setRooms] = useState([])
+    const [scheduledRooms, setScheduledRooms] = useState([])
     const router = useRouter()
     
     useEffect(() => {
@@ -28,6 +29,11 @@ export default function Home() {
                 const liveRooms = rooms.filter(room => { return room.isLive })
                 setRooms(liveRooms)
             })
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setScheduledRooms(rooms)
+            })
+
         }
     }, [user])
 
@@ -43,7 +49,7 @@ export default function Home() {
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
                     <RoomListFeed title='Your feed' rooms={rooms}/>
-                    <ProfileUpcomingRoomsSection />
+                    <ProfileUpcomingRoomsSection scheduled_rooms={scheduledRooms}/>
                 </Stack>
             </Container>
         </>
