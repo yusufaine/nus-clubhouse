@@ -26,7 +26,7 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
         name: name,
         username: username,
         bio: bio,
-        profileImgUrl: profileImgUrl
+        // profileImgUrl: profileImgUrl
     }
     
     const handleUpdateProfile = (values, actions) => {

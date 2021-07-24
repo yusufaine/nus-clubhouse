@@ -22,7 +22,7 @@ const profileSchema = Yup.object().shape({
     name: Yup.string().required('Room name is required'),
     username: Yup.string().required('Room type is required'),
     bio: Yup.string(),
-    profileImgUrl: Yup.string()
+    // profileImgUrl: Yup.string()
 })
 
 function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
