@@ -33,15 +33,15 @@ function profile() {
         }
     }, [])
 
-    useEffect(() => {
-        if (user) {
-            console.log('user value changed: ', user)
-            setUserUsername(user.username)
-            setUserName(user.name)
-            setUserBio(user.bio)
-            setUserProfileImgUrl(user.profileImgUrl)
-        }
-    }, [user])
+    // useEffect(() => {
+    //     if (user) {
+    //         console.log('user value changed: ', user)
+    //         setUserUsername(user.username)
+    //         setUserName(user.name)
+    //         setUserBio(user.bio)
+    //         setUserProfileImgUrl(user.profileImgUrl)
+    //     }
+    // }, [user])
 
     return (
         <>
