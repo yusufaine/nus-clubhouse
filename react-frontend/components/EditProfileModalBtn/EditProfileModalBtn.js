@@ -32,6 +32,8 @@ function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
     const handleUpdateProfile = (values, actions) => {
         try {
             console.log('updating profile!')
+            console.log('values: ', values)
+            console.log('actions: ', actions)
             updateUser(values, toast, actions)
         } catch (err) {
             console.error(err)
