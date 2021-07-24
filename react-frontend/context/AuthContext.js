@@ -241,7 +241,7 @@ export const AuthProvider = (props) => {
             const body =  {
                 user: updatedValues
             }
-            console.log('update user body: ', body)
+            console.log('update user body: ', values)
             const data = await callAPI('/users/update', 'PUT', body)
             
             if(data.data) {
