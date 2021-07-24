@@ -234,8 +234,12 @@ export const AuthProvider = (props) => {
     const updateUser = async (values, toast, actions) => {
         try {
             actions.setSubmitting(true)
+            const updatedValues = {
+                ...values, 
+                id: user.id
+            }
             const body =  {
-                user: values
+                user: updatedValues
             }
             const data = await callAPI('/users/update', 'PUT', body)
             
