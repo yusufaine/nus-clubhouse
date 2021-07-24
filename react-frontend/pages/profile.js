@@ -24,16 +24,6 @@ function profile() {
 
     useEffect(() => {
         if (user) {
-            console.log('user value changed: ', user)
-            setUserUsername(user.username)
-            setUserName(user.name)
-            setUserBio(user.bio)
-            setUserProfileImgUrl(user.profileImgUrl)
-        }
-    }, [user])
-
-    useEffect(() => {
-        if (user) {
             setUserUsername(user.username)
             setUserName(user.name)
             setUserBio(user.bio)
@@ -42,6 +32,16 @@ function profile() {
             setNumFollowing(user.following.length)
         }
     }, [])
+
+    useEffect(() => {
+        if (user) {
+            console.log('user value changed: ', user)
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+        }
+    }, [user])
 
     return (
         <>
