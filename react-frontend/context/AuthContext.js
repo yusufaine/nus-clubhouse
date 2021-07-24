@@ -233,7 +233,7 @@ export const AuthProvider = (props) => {
 
     const updateUser = async (values, toast, actions) => {
         try {
-            // actions.setSubmitting(true)
+            actions.setSubmitting(true)
             const updatedValues = {
                 ...values, 
                 id: user.id
@@ -252,7 +252,7 @@ export const AuthProvider = (props) => {
                 console.log("Failed to update user info", data)
                 errorToast("Failed update your info", "Try reloading the web page or contact admin!", toast)
             }
-            // actions.setSubmitting(false)
+            actions.setSubmitting(false)
 
         } catch (err) {
             console.error(err)
