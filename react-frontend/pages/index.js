@@ -23,6 +23,7 @@ export default function Home() {
     const [userUsername, setUserUsername] = useState('')
     const [userBio, setUserBio] = useState('')
     const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
+    const [usersFollowing, setUsersFollowing] = useState([])
     const [numFollowers, setNumFollowers] = useState('')
     const [numFollowing, setNumFollowing] = useState('')
     
@@ -44,6 +45,7 @@ export default function Home() {
             setUserName(user.name)
             setUserBio(user.bio)
             setUserProfileImgUrl(user.profileImgUrl)
+            setUsersFollowing(user.following)
             setNumFollowers(user.followers.length)
             setNumFollowing(user.following.length)
         }
@@ -59,7 +61,7 @@ export default function Home() {
             <Navbar />
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
-                    <FriendsList />
+                    <FriendsList users={usersFollowing}/>
                     <RoomListFeed title='Your feed' rooms={rooms}/>
                     <ProfileUpcomingRoomsSection 
                         name={userName} 
