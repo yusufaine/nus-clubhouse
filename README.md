@@ -8,8 +8,58 @@ Click [here](https://nusclubhouse.games/) for the latest version of the site, an
 **Level of Achievement**: Gemini
 ###### README has been updated for Milestone 3.
 
+# Table of contents
 
-# Lift-off!
+- [Lift-off](#lift-off)
+  - [Motivation](#motivation)
+  - [Poster](#poster)
+  - [Aim](#aim)
+  - [Ideal Users](#ideal-users)
+  - [Existing Ways](#existing-ways)
+  - [Scope of Project](#scope-of-project)
+  - [How we're different](#how-were-different)
+- [Milestone 1](#milestone-1)
+  - [UI Mockup and feedback](#ui-mockup-and-feedback)
+    - [Feedback prior to mockup](#feedback-prior-to-mockup)
+    - [Design choices](#design-choices)
+      - [Logo generation:](#logo-generation)
+      - [Font choice and colour scheme:](#font-choice-and-colour-scheme)
+    - [Mockups](#mockups)
+      - [Login:](#login)
+      - [Homepage:](#homepage)
+      - [Room page:](#room-page)
+      - [Scheduled room page:](#scheduled-room-page)
+      - [Another user's profile:](#another-users-profile)
+      - [Feedback post mockup](#feedback-post-mockup)
+  - [Method of Deployment](#method-of-deployment)
+  - [Features implemented](#features-implemented)
+    - [User Authentication (For review teams)](#user-authentication-for-review-teams)
+    - [User Authentication (For actual users)](#user-authentication-for-actual-users)
+  - [Problems encountered](#problems-encountered)
+    - [Getting a unanimous agreement on what the UI should look like](#getting-a-unanimous-agreement-on-what-the-ui-should-look-like)
+    - [Learning a new language and implementing it to our website](#learning-a-new-language-and-implementing-it-to-our-website)
+- [Milestone 2](#milestone-2)
+  - [Program flow](#program-flow)
+    - [General flow of events for user](#general-flow-of-events-for-user)
+    - [Room-Voice program flow](#room-voice-program-flow)
+  - [Features implemented](#features-implemented)
+    - [NUS Email Login and Verification](#nus-email-login-and-verification)
+    - [Rooms for users to join](#rooms-for-users-to-join)
+    - [Demo of the voice features in the backend](#demo-of-the-voice-features-in-the-backend)
+  - [Problems encountered](#problems-encountered)
+    - [Growing Pains with Elixir](#growing-pains-with-elixir)
+    - [Voice server issues](#voice-server-issues)
+- [Milestone 3](#milestone-3)
+  - [Features implemented](#features-implemented)
+    - [Updated Feed](#updated-feed)
+    - [Upcoming Rooms](#upcoming-rooms)
+  - [Problems encountered](#problems-encountered)
+    - [Reason for dropping to Gemini](#reason-for-dropping-to-gemini)
+- [Project Log](#project-log)
+
+# Lift-off
+Here begins our mission --
+
 ## Motivation
 Having gone through the first-year of university during the COVID-19 pandemic, we realised that there was one thing that was fundamentally missing in our lives as students--social interaction. We missed complaining about lectures, talking to friends and classmates, providing or requesting help for anything school-related, or just the simple small talk.
 
