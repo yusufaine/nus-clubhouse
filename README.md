@@ -1,12 +1,11 @@
 ![Banner](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/Banner.png)
 > __The NUS-only voice chat web-app for anything and everything NUS.__
 
+**Level of Achievement**: Gemini
+
 Click [here](https://nusclubhouse.games/) for the latest version of the site, and [here](https://api.nusclubhouse.games:3016/) a very basic voice server we have yet to integrate with our front-end. 
 
 *DISCLAIMER: The voice demo may take a while to load if you're accessing the page for the first time.*
-
-**Level of Achievement**: Gemini
-README has been updated for Milestone 3.
 
 # Table of contents
 
@@ -128,7 +127,7 @@ Overview:
 
 ## UI Mockup and feedback
 
-The UI mockups shared here are only the main pages of the web app and does not include prompts such as "room creation" as they would appear as another layer on top of the page that is currently being viewed, but blurred out so that the prompt is in focus.
+The UI mockups shared here are only the main pages of the web app and do not include prompts such as "room creation" as they would appear as another layer on top of the page that is currently being viewed, but blurred out so that the prompt is in focus.
 
 ### Feedback prior to mockup
 - Target audience demographic: NUS Students 
@@ -136,7 +135,7 @@ The UI mockups shared here are only the main pages of the web app and does not i
 	1. Easy to log-in
 		- Participants don't want to create/remember another password
 	2. Looks good and easy to use
-		- It is worth nothing that participants are not unanimous in whether we should make the website in dark mode or not. Discussion on this is found in [Font choice and colour scheme](#font-choice-and-colour-scheme).
+		- It is worth noting that participants are not unanimous in whether we should make the website in dark mode or not. Discussion on this is found in [Font choice and colour scheme](#font-choice-and-colour-scheme).
 	3. Ability to see what rooms are ongoing (similar to ongoing lessons in LTs)
 	4. Ability to see upcoming lessons (rooms)
 
@@ -145,10 +144,10 @@ The UI mockups shared here are only the main pages of the web app and does not i
 We wanted a logo that would that would make this stand out as an NUS app and came up with using the lion emoji (🦁) and filling it with the NUS-orange (#EF7B00).
 
 ![Logo creation](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-00-logo-generation.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-00-logo-generation.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-00-logo-generation.png) for a clearer version.
 
 #### Font choice and colour scheme:
-With reference to the colours used in existing NUS products (as seen above) we went to test and pick a few colours that would serve as the main colours that we for the app. Initially we had intended for the website to be in a dark theme by default, however, we realised that while it may be easy on the eyes, the feedback we have gotten on whether we should use dark mode is that readability in bright conditions may be an issue, and having a pure-white (#000000) may be a bit too bright and harsh on the eyes. Initially the choice was to go for something closer to the sepia tone as, anecdotally, it is easier on the eyes. However, it did not go well with the NUS colour theme that we were going for as it takes away from the NUS-orange. We then finally came to the conclusion of using a brighter off-white which we felt struck a balance between aesthetics and function (#FEFEFA).
+With reference to the colours used in existing NUS products (as seen above) we went to test and pick a few colours that would serve as the main colours for the app. Initially we had intended for the website to be in a dark theme by default, however, we realised that while it may be easy on the eyes, the feedback we have gotten on whether we should use dark mode is that readability in bright conditions may be an issue, and having a pure-white (#000000) may be a bit too bright and harsh on the eyes. Initially the choice was to go for something closer to the sepia tone as, anecdotally, it is easier on the eyes. However, it did not go well with the NUS colour theme that we were going for as it takes away from the NUS-orange. We then finally came to the conclusion of using a brighter off-white which we felt struck a balance between aesthetics and function (#FEFEFA).
 
 We then conducted another round of discussion to choose the font, with a smaller group size as it was a voluntary basis. We had 7 fonts in mind and after the survey, we concluded that using "IBM Plex Sans" for the font of the logo and "Inter" as the Header, Subheader, and Body fonts. We also opted for the main text to be a lighter shade of black (#2D3748) as the contrast of pure-black (#FFFFFF) was too drastic.
 
@@ -157,33 +156,33 @@ A summary of that discussion was that serif-fonts were too formal-looking and we
 The decision-making process is also recorded as follows:
 
 ![Decision-making Whiteboard](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-01-decision-making.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-01-decision-making.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/00-01-decision-making.png) for a clearer version.
 
 ### Mockups
 #### Login:
 
 ![Login page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/01-Login.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/01-Login.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/01-Login.png) for a clearer version.
 
 #### Homepage:
 
 ![Homepage](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/02-Home.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/02-Home.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/02-Home.png) for a clearer version.
 
 #### Room page:
 
 ![Room page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/03-Room.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/03-Room.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/03-Room.png) for a clearer version.
 
 #### Scheduled room page:
 
 ![Scheduled room page](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/04-Scheduled-Rooms.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/04-Scheduled-Rooms.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/04-Scheduled-Rooms.png) for a clearer version.
 
 #### Another user's profile:
 
 ![Other user's profile](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/05-User-Profile-Page.png)
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/05-User-Profile-Page.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/mockup-ui/05-User-Profile-Page.png) for a clearer version.
 
 #### Feedback post mockup 
 - Target audience demographic: NUS Students 
@@ -194,7 +193,7 @@ Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubho
 	- Profile page allows users to share their social links
 
 ## Method of Deployment
-The goal was to use whatever resources we already have to deploy the application for internal testing and feedback from potential users and other review teams/advisor. Hence the option of deploying on a local machine/network would not be feasible. At that moment one of us had a Raspberry Pi that already had a static public IP and a free DNS service that we could use to make it easy for external testing but after some research, the Raspberry Pi might not have enough resources to support what we may need. Additionally, we did not want to worry about properly securing the web server as failure to do so on my home network may end up badly. We then utilised one of our GitHub education packs to redeem some Digital Ocean credits and got the cheapest droplet and managed database service.
+The goal was to use whatever resources we already have to deploy the application for internal testing and feedback from potential users and other review teams and our advisor. Hence the option of deploying on a local machine/network would not be feasible. At that moment one of us had a Raspberry Pi that already had a static public IP and a free DNS service that we could use to make it easy for external testing but after some research, the Raspberry Pi might not have enough resources to support what we may need. Additionally, we did not want to worry about properly securing the web server as failure to do so on my home network may end up badly. We then utilised one of our GitHub education packs to redeem some Digital Ocean credits and got the cheapest droplet and managed database service.
 
 ## Features implemented
 Our focus for Milestone 1 of the project is on user-experience and had spent the majority of the time on ensuring that the target audience (NUS students) enjoy using the website, or at the very least, not have any big complaints on it. 
@@ -212,7 +211,7 @@ When the guide for using the NUS API finally came out, we realised that having N
 While us as a team could agree on what we consider to be a good choice, the participants of the survey were not as unanimous. Hence we had to do follow up discussions/interviews to ask them why they chose the choices that they did and found a compromise. One of those was the decision to use the off-white instead of the dark mode that we had originally intended to use.
 
 ### Learning a new language and implementing it to our website
-For this project, we took on the challenge of learning a new programming language which seemed interesting and can work with web development -- Elixir. The problems faced here were nothing out of the ordinary, syntax issues, getting used to how to test Elixir code, and the likes. The real challenge here was how Elixir uses the Functional Programming (FP) paradigm that we had an encounter back in CS2030. Thankfully it was not too hard to get a grasp of it with help from online resources such as tutorial videos and documentation.
+For this project, we took on the challenge of learning a new programming language which seemed interesting and can work with web development -- Elixir. The problems faced here were nothing out of the ordinary, syntax issues, getting used to how to test Elixir code, and the likes. The real challenge here was how Elixir uses the Functional Programming (FP) paradigm that we had an encounter with back in CS2030. Thankfully it was not too hard to get a grasp of it with help from online resources such as tutorial videos and documentation.
 
 
 # Milestone 2
@@ -226,11 +225,11 @@ Overview:
 ## Program flow
 ### General flow of events for user
 ![Program Flow](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png "Program Flow")
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/nusch-prog-flow.png) for a clearer version.
 
 ### Room-Voice program flow
 ![Voice backend flow](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/voice-backend.png "Voice backend flow")
-Open [image in new a tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/voice-backend.png) for a clearer version.
+Open [image in new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/voice-backend.png) for a clearer version.
 
 ## Features implemented
 After getting a clear picture of how the web application would interact with each other, we implemented the following:
@@ -242,7 +241,7 @@ As mentioned in Milestone 1, while we initially intended to use NUS' API to allo
 Part of the core feature of our web application is to allow the creation of rooms for users to join for their classes or to socialise with other NUS students. While the feature sounds easy to implement, there were a lot of frontend-backend hurdles that we kept facing and was too time-consuming. Thankfully all of them were manageable and we would not consider them a large issue and chalked it up to our inexperience with Elixir.
 
 ### Demo of the voice features in the backend
-While working on the rooms, we also went to research and setup a demo of the voice feature. In it, we also enabled screenshare and video streams in order to future-proof our application for two reasons:
+While working on the rooms, we also went to research and set up a demo of the voice feature. In it, we also enabled screen share and video streams in order to future-proof our application for two reasons:
 1. To give us the option of transitioning our voice application to something more by allowing screen-sharing and video streams, and 
 2. Better way to test if the code for Mediasoup/WebRTC works well.
 
@@ -250,14 +249,14 @@ During the duration of Milestone 2, we managed to get it up and running in our b
 
 ## Problems encountered
 ### Growing Pains with Elixir
-While we had gone through a crash course in using Elixir back in Milestone 1, we realised that it barely sufficed to get a web application running and had to find other resources that focusses more on using Elixir and Phoenix to run and host web applications and how they interact with current web frameworks, which in our case is React.
+While we had gone through a crash course in using Elixir back in Milestone 1, we realised that it barely sufficed to get a web application running and had to find other resources that focuses more on using Elixir and Phoenix to run and host web applications and how they interact with current web frameworks, which in our case is React.
 
 Thankfully, we had gone through a crash course on Elixir during MS1 and the we gathered later on was built on top of that. Having some background in React, this allowed us to design and deploy our front-end, but we have yet to connect it to our voice server so there are limitations to our MS2 submissions such as being unable to create and join rooms.
 
 ### Voice server issues
 When we entered Orbital, we had a certain technology stack in mind especially when it came to the voice server. The goal was to use [Mediasoup](https://github.com/versatica/mediasoup-client/), which is built on top of WebRTC as we believed that it would be simpler to implement for our use-case of creating and maintaining different voice rooms instead of just one sole instance, and [RabbitMQ](https://www.rabbitmq.com/) to help signal changes in the voice rooms such as who leaves, who joins, who are the speakers and listeners. 
 
-However, 2 weeks into working into the MS2 submission, we had encountered a large issue that is common when it comes to new technologies -- lack of available resources. While there are documentations, we had difficulty trying to implement the core feature of our web application, mainly in using RabbitMQ alongside Mediasoup. This is when we brought our issue up to our advisor (Neil) and had a discussion on how to move forward as we understood that we had to have at least some semblance of a functional core feature for MS2. We were given 3 situations which we may choose to pursue at our own discretion but was informed that we may be penalised.
+However, 2 weeks into working into the MS2 submission, we had encountered a large issue that is common when it comes to new technologies -- lack of available resources. While there are documentations, we had difficulty trying to implement the core feature of our web application, mainly in using RabbitMQ alongside Mediasoup. This is when we brought our issue up to our advisor (Neil) and had a discussion on how to move forward as we understood that we had to have at least some semblance of a functional core feature for MS2. We were given 3 situations which we may choose to pursue at our own discretion but were informed that we may be penalised.
 
 1. Changing the voice technology to WebRTC and consider changing RabbitMQ to something like web-sockets,
 2. Deliver the core feature late for MS2, but get heavily penalised for being unable to meet the deadline.
@@ -274,8 +273,8 @@ Overview:
 
 ## Features implemented
 During this milestone, we had to focus on the features that were easy to implement and asked some of the participants of our discussion group back from Milestone 1 and they mentioned:
-1. Issues with the homepage not properly reflecting rooms (when leaving a room, its still displayed on the feed),
-2. Upcoming rooms is a feature that they would love to see functioning.
+1. Issues with the homepage not properly reflecting rooms (when leaving a room, it's still displayed on the feed),
+2. Upcoming rooms are a feature that they would love to see functioning.
 
 ### Updated Feed
 The issue with the feed in the homepage was quickly fixed as some of the properties of our rooms were not being updated properly. Additionally when leaving a room where a user is the last one, it requires the page to be hard-refreshed (Ctrl/Command-Shift-R)
@@ -289,3 +288,5 @@ With a heavy heart, we informed our advisor, Neil, that we faced a problem with 
 
 # Project Log
 Click [here](https://docs.google.com/spreadsheets/d/1Em_Xho0Dyh5RRMdYm2mk6zK3dx69IU9AmThPVOdoCqk/edit?usp=sharing) to view the breakdown of our team's progress.
+
+
