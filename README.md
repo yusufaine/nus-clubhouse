@@ -6,7 +6,7 @@ Click [here](https://nusclubhouse.games/) for the latest version of the site, an
 *DISCLAIMER: The voice demo may take a while to load if you're accessing the page for the first time.*
 
 **Level of Achievement**: Gemini
-###### README has been updated for Milestone 3.
+README has been updated for Milestone 3.
 
 # Table of contents
 
