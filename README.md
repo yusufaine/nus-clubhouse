@@ -69,9 +69,9 @@ _Sounds familiar?_
 
 
 ## Poster
-![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/2810-3.png)
+![Open image in new tab for a clearer version](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/poster-ms3.png)
 
-Open [image in a new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/2810-3.png) for a clearer version.
+Open [image in a new tab](https://raw.githubusercontent.com/aidanaden/nus-clubhouse/main/submissions/poster-ms3.png) for a clearer version.
 
 
 ## Aim
