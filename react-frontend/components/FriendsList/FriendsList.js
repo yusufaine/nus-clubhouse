@@ -6,7 +6,7 @@ import BoldText from '../BoldText/BoldText'
 import HighlightText from '../HighlightText/HighlightText'
 import FriendProfileList from '../FriendProfileList/FriendProfileList'
 
-function FriendsList({ users=['user1','user1','user1','user1','user1'] }) {
+function FriendsList({ users }) {
     return (
         <Stack direction='column' minW='235px'>
             <BoldText text='Friends' mb={4}/>
