@@ -15,7 +15,6 @@ import AuthContext from '../context/AuthContext'
 
 export default function Scheduled() {
     const { user, fetchScheduledRooms } = useContext(AuthContext)
-    const [rooms, setRooms] = useState([])
     const router = useRouter()
 
     const [rooms, setRooms] = useState([])
