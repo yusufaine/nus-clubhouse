@@ -14,7 +14,9 @@ import ProfileSection from '../components/ProfileSection/ProfileSection'
 import AuthContext from '../context/AuthContext'
 
 function profile() {
-    const { user } = useContext(AuthContext)
+    const { user, fetchScheduledRooms } = useContext(AuthContext)
+
+    const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
     const [userBio, setUserBio] = useState('')
@@ -25,6 +27,10 @@ function profile() {
 
     useEffect(() => {
         if (user) {
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setScheduledRooms(rooms)
+            })
             setUserUsername(user.username)
             setUserName(user.name)
             setUserBio(user.bio)
@@ -69,6 +75,7 @@ function profile() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
+                        scheduledRooms={}
                     />
                 </Stack>
             </Container>
