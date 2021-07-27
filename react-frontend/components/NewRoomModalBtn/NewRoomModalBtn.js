@@ -52,6 +52,22 @@ function NewRoomModalBtn({ isScheduled }) {
         router.push(`/room/${room.id}`)
     }
 
+    const handleCreateNewScheduledRoom = async (values, actions) => {
+        const body = {
+            user_id: user.id,
+            room: {
+                name: values.name,
+                type: values.type,
+                bio: values.bio,
+                isScheduled: true,
+                scheduledStart:  values.scheduleDate
+            }
+        }
+        console.log('creating scheduled room with body: ', body)
+        const data = await callAPI('/rooms/create', 'POST', body)
+        console.log('data after creating scheduled room: ', data)
+    }
+
     return (
         <> 
             <ClubhouseBtn variant='primary' text='New room' onClick={onOpen}/>
@@ -67,7 +83,7 @@ function NewRoomModalBtn({ isScheduled }) {
                         {isScheduled ? 
                         <NewScheduledRoomForm
                             initialValues={initialValues} 
-                            handleSubmit={handleCreateNewRoom}
+                            handleSubmit={handleCreateNewScheduledRoom}
                             handleClose={onClose}
                         /> :
                         <NewRoomForm 
