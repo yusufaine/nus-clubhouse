@@ -11,7 +11,7 @@ defmodule ClubhousePhxWeb.UserController do
 
   # the following plugs are defined in the controllers/authorize.ex file
   plug :user_check when action in [:index, :show]
-  plug :id_check when action in [:update, :delete]
+  plug :user_check when action in [:update, :delete]
 
   def index(conn, _) do
     users = Users.list_users()
@@ -33,8 +33,12 @@ defmodule ClubhousePhxWeb.UserController do
     render(conn, "show.json", user: user)
   end
 
-  def update(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"user" => user_params}) do
-    with {:ok, user} <- Users.update_user(user, user_params) do
+  def update(conn, %{"user" => user_params}) do
+    %{"id" => id, "name" => name, "username" => username, "bio" => bio} = user_params
+    update_user_params = %{name: name, username: username, bio: bio}
+    user = Users.get_user!(id)
+    with {:ok, user} <- Users.update_user(user, update_user_params) do
+      IO.puts('successfully updated')
       render(conn, "show.json", user: user)
     end
   end
@@ -42,9 +46,5 @@ defmodule ClubhousePhxWeb.UserController do
   def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _) do
     {:ok, _user} = Users.delete_user(user)
     send_resp(conn, :no_content, "")
-  end
-
-  def list_following(conn, %{"id" => user_id}) do
-    
   end
 end

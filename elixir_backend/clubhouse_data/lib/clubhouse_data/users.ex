@@ -127,6 +127,6 @@ defmodule ClubhouseData.Users do
     """
     @spec set_user_online(User.t()) :: {:ok, User.t()} | changeset_error
     def set_user_online(%User{} = user) do
-        update_user(user, %{:isOnline: true})
+        update_user(user, %{isOnline: true})
     end
 end

@@ -23,7 +23,6 @@ defmodule ClubhousePhxWeb.RoomController do
       %{"live" => live_status} -> 
         render(conn, "index.json", rooms: Rooms.list_rooms(live_status))
     end
-    IO.inspect(conn.query_params)
   end
 
   def join(conn, %{"room_id" => room_id, "user_id" => user_id}) do
@@ -56,13 +55,22 @@ defmodule ClubhousePhxWeb.RoomController do
     roomMap
   end
 
-  def create(conn, %{"user_id" => user_id, "room" => %{"name" => room_name, "numUsers" => num_users, "type" => room_type}}) do
-    user = Users.get_user!(user_id)
-    room_params = %{name: room_name, numUsers: num_users, type: room_type}
-    case RoomSessionSupervisor.start_room(room_name, user_id) do
-      {:ok, pid} ->
-        state = :sys.get_state(pid)
-        roomMap = room_to_map(state)
+  def create(conn, %{"user_id" => user_id, "room" => %{"name" => room_name, "type" => room_type, "bio" => room_bio, "isScheduled" => is_scheduled, "scheduledStart" => scheduled_start}}) do
+    case is_scheduled do
+      false -> 
+        room_params = %{name: room_name, type: room_type, isScheduled: false}
+        case RoomSessionSupervisor.start_room(room_name, user_id) do
+          {:ok, pid} ->
+            state = :sys.get_state(pid)
+            roomMap = room_to_map(state)
+            conn
+            |> render("show.json", room: roomMap)
+        end
+      true -> 
+        room_params = %{name: room_name, isLive: false, isScheduled: true, scheduledStart: scheduled_start, isEnded: false, numUsers: 0, type: room_type}
+        user = Users.get_user!(user_id)
+        room = Rooms.create_room_with_user(user, room_params)
+        roomMap = room_to_map(room)
         conn
         |> render("show.json", room: roomMap)
     end

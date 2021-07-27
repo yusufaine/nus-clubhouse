@@ -6,10 +6,11 @@ defmodule Clubhouse.RoomSession do
 
     @save_time 10 * 60 * 1000
 
-    def start_link({room_name, creator_id}) do
+    def start_link({room_params, creator_id}) do
+        %{name: room_name, type: room_type, isScheduled: is_scheduled} = room_params
         creator_data = Users.get_user!(creator_id)
         creator = User.new(creator_data.id, creator_data.username, creator_data.profileImgUrl, false, true)
-        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, isScheduled: false, numUsers: 0, type: "public"})
+        room = Rooms.create_room_with_user(creator_data, %{name: room_name, isLive: true, isEnded: false, isScheduled: is_scheduled, numUsers: 0, type: room_type})
         name = room_session_name(room.id)
         GenServer.start_link(__MODULE__, {room.id, room_name, creator}, name: name)
     end
