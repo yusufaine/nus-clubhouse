@@ -64,6 +64,7 @@ export const AuthProvider = (props) => {
             if(!data.data) {
                 console.error("Failed to load scheduled rooms. Please try again. ", data)
             } else {
+                console.log('fetched scheduled rooms data: ', data)
                 return data.data
             }
         } catch (err) {
