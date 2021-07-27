@@ -19,6 +19,7 @@ function profile() {
     const [userUsername, setUserUsername] = useState('')
     const [userBio, setUserBio] = useState('')
     const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
+    const [usersFollowing, setUsersFollowing] = useState([])
     const [numFollowers, setNumFollowers] = useState('')
     const [numFollowing, setNumFollowing] = useState('')
 
@@ -30,8 +31,20 @@ function profile() {
             setUserProfileImgUrl(user.profileImgUrl)
             setNumFollowers(user.followers.length)
             setNumFollowing(user.following.length)
+            setUsersFollowing(user.following)
         }
-    }, [user])
+    }, [])
+
+    // useEffect(() => {
+    //     if (user) {
+    //         console.log('user value changed: ', user)
+    //         setUserUsername(user.username)
+    //         setUserName(user.name)
+    //         setUserBio(user.bio)
+    //         setUserProfileImgUrl(user.profileImgUrl)
+    //     }
+    // }, [user])
+
     return (
         <>
             <Head>
@@ -42,7 +55,7 @@ function profile() {
             <Navbar />
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
-                    <FriendsList />
+                    <FriendsList users={usersFollowing}/>
                     <ProfileSection 
                         name={userName} 
                         username={userUsername}
@@ -51,7 +64,12 @@ function profile() {
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
                     />
-                    <ProfileUpcomingRoomsSection />
+                    <ProfileUpcomingRoomsSection
+                        name={userName} 
+                        username={userUsername}
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                 </Stack>
             </Container>
         </>

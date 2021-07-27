@@ -9,7 +9,7 @@ import RoomCard from '../RoomCard/RoomCard'
 import NewRoomModalBtn from '../NewRoomModalBtn/NewRoomModalBtn'
 import BoldText from '../BoldText/BoldText'
 
-function RoomListFeed({ title, rooms=['room1', 'room1', 'room1', 'room1', 'room1'] }) {
+function RoomListFeed({ title, rooms }) {
     console.log(rooms)
     return (
         <VStack w='100%'>

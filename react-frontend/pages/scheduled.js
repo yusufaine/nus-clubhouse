@@ -42,7 +42,7 @@ export default function Scheduled() {
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList />
                     <RoomListFeed title='Scheduled Rooms' rooms={rooms}/>
-                    <ProfileUpcomingRoomsSection />
+                    <ProfileUpcomingRoomsSection scheduled_rooms={rooms}/>
                 </Stack>
             </Container>
         </>

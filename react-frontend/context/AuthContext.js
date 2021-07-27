@@ -231,6 +231,34 @@ export const AuthProvider = (props) => {
         }
     }
 
+    const updateUser = async (values, toast, actions) => {
+        try {
+            actions.setSubmitting(true)
+            const updatedValues = {
+                ...values, 
+                id: user.id
+            }
+            const body =  {
+                user: updatedValues
+            }
+            console.log('update user body: ', values)
+            const data = await callAPI('/users/update', 'PUT', body)
+            
+            if(data.data) {
+                console.log('Successfully updated user: ', data.data)
+                successToast("Successfully updated your info", "", toast)
+                setUser(data.data)
+            } else {
+                console.log("Failed to update user info", data)
+                errorToast("Failed update your info", "Try reloading the web page or contact admin!", toast)
+            }
+            actions.setSubmitting(false)
+
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
         checkUserLoggedIn()
     }, [])
@@ -246,6 +274,7 @@ export const AuthProvider = (props) => {
             registerUser, 
             loginUser,
             logoutUser,
+            updateUser,
             fetchRoom,
             fetchLiveRooms,
             fetchScheduledRooms

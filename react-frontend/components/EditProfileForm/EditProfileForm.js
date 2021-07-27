@@ -22,7 +22,7 @@ const profileSchema = Yup.object().shape({
     name: Yup.string().required('Room name is required'),
     username: Yup.string().required('Room type is required'),
     bio: Yup.string(),
-    profileImgUrl: Yup.string()
+    // profileImgUrl: Yup.string()
 })
 
 function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
@@ -72,13 +72,11 @@ function NewRoomForm({ initialValues, handleSubmit, handleClose }) {
                             variant='primary' 
                             text='Save' 
                             type='submit' 
-                            isLoading={props.isSubmitting} 
-                            onClick={handleSubmit}
+                            isLoading={props.isSubmitting}
                         />
                         <ClubhouseBtn 
                             variant='link' 
-                            text='Cancel' 
-                            onClick={handleClose}
+                            text='Cancel'
                         />
                     </ButtonGroup>
                 </Form>

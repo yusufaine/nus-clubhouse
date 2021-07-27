@@ -12,8 +12,8 @@ function FriendProfile({ user }) {
         <HStack direction='row' spacing={4}>
             <FriendProfileAvatar />
             <Box>
-                <UserNameText text='HoloPanio'/>
-                <UserUsernameText text='HoloPanio'/>
+                <UserNameText text={user.name}/>
+                <UserUsernameText text={user.username}/>
             </Box>
         </HStack>
     )

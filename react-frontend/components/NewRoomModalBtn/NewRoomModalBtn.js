@@ -17,24 +17,31 @@ import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 import BoldText from "../BoldText/BoldText"
 import NewRoomForm from '../NewRoomForm/NewRoomForm'
 
-function NewRoomModalBtn() {
+function NewRoomModalBtn({ isScheduled }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const router = useRouter()
     const { user } = useContext(AuthContext)
-    const initialValues = {
+
+    const initialValues = isScheduled ? {
+        name: '',
+        type: 'public',
+        bio: '',
+        scheduleDate: ''
+    } : {
         name: '',
         type: 'public',
         bio: ''
     }
     
     const handleCreateNewRoom = async (values, actions) => {
-        delete values.bio
         const body = {
             user_id: user.id,
             room: {
                 name: values.name,
-                numUsers: 0,
                 type: values.type,
+                bio: values.bio,
+                isScheduled: values.scheduleDate && values.scheduleDate != '' ? true : false,
+                scheduledStart:  values.scheduleDate ? values.scheduleDate : null
             }
         }
         console.log('creating room with body: ', body)
@@ -46,19 +53,27 @@ function NewRoomModalBtn() {
 
     return (
         <> 
-            <ClubhouseBtn variant='primary' text='New room' onClick={onOpen}/>
+            <ClubhouseBtn variant='primary' text={isScheduled ? 'New scheduled room' : 'New room'} onClick={onOpen}/>
             <Modal isOpen={isOpen} onClose={onClose} isCentered size='lg'>
                 <ModalOverlay />
                 <ModalContent bg='clubhousegrey.200' p='20px' rounded='lg'>
-                    <ModalHeader><BoldText text='New room'/></ModalHeader>
+                    <ModalHeader>
+                        <BoldText text={isScheduled ? 'New scheduled room' : 'New room'}/>
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Text mb='20px'>Fill the following fields to start a new room</Text>
+                        <Text mb='20px'>Fill the following fields to start a room</Text>
+                        {isScheduled ? 
+                        <NewScheduledRoomForm
+                            initialValues={initialValues} 
+                            handleSubmit={handleCreateNewRoom}
+                            handleClose={onClose}
+                        /> :
                         <NewRoomForm 
                             initialValues={initialValues} 
                             handleSubmit={handleCreateNewRoom}
                             handleClose={onClose}
-                        />
+                        />}
                     </ModalBody>
                 </ModalContent>
             </Modal>

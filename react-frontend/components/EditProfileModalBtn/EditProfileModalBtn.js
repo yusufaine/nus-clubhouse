@@ -6,12 +6,12 @@ import {
     ModalHeader,
     ModalBody,
     ModalCloseButton,
-    useDisclosure
+    useDisclosure,
+    useToast
 } from "@chakra-ui/react"
 import { EditIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
 
-import { callAPI } from '../../context/AuthContext'
 import AuthContext from '../../context/AuthContext'
 import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 import BoldText from "../BoldText/BoldText"
@@ -19,28 +19,25 @@ import EditProfileForm from '../EditProfileForm/EditProfileForm'
 
 function EditProfileModalBtn({ name, username, bio, profileImgUrl }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { updateUser } = useContext(AuthContext)
+    const toast = useToast()
+
     const initialValues = {
         name: name,
         username: username,
         bio: bio,
-        profileImgUrl: profileImgUrl
+        // profileImgUrl: profileImgUrl
     }
     
-    const handleUpdateProfile = async (values, actions) => {
-        console.log('updating profile!')
-        // const body = {
-        //     user_id: user.id,
-        //     room: {
-        //         name: values.name,
-        //         numUsers: 0,
-        //         type: values.type,
-        //     }
-        // }
-        // console.log('creating room with body: ', body)
-        // const data = await callAPI('/rooms/create', 'POST', body)
-        // const room = data.data
-        // console.log('data after creating room: ', data)
-        // router.push(`/room/${room.id}`)
+    const handleUpdateProfile = (values, actions) => {
+        try {
+            console.log('updating profile!')
+            console.log('values: ', values)
+            console.log('actions: ', actions)
+            updateUser(values, toast, actions)
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (

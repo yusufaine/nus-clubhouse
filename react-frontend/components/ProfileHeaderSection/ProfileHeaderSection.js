@@ -15,7 +15,7 @@ function ProfileHeaderSection({ name, username, bio, profileImgUrl }) {
             p='20px' 
             bg='clubhousegrey.200'
         >
-            <Box w='red.100' h='100px'></Box>
+            <Box h='100px'></Box>
             <Stack  
                 direction='row' 
                 justify='space-between'
