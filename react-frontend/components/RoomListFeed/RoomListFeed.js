@@ -9,14 +9,14 @@ import RoomCard from '../RoomCard/RoomCard'
 import NewRoomModalBtn from '../NewRoomModalBtn/NewRoomModalBtn'
 import BoldText from '../BoldText/BoldText'
 
-function RoomListFeed({ title, rooms }) {
+function RoomListFeed({ title, rooms, isScheduled }) {
     console.log(rooms)
     return (
         <VStack w='100%'>
             <Stack direction='row' mb='30px' w='100%'>
                 <BoldText text={title} />
                 <Spacer />
-                <NewRoomModalBtn />
+                <NewRoomModalBtn isScheduled={isScheduled}/>
             </Stack>
             <VStack spacing='20px' w='100%'>
                 {rooms.map((room, i) => (

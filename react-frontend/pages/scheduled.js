@@ -56,7 +56,7 @@ export default function Scheduled() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList users={usersFollowing}/>
-                    <RoomListFeed title='Scheduled Rooms' rooms={rooms}/>
+                    <RoomListFeed title='Scheduled Rooms' rooms={rooms} isScheduled={true}/>
                     <ProfileUpcomingRoomsSection
                         name={userName} 
                         username={userUsername}
