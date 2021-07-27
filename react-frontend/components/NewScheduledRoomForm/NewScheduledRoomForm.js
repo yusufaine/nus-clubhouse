@@ -68,11 +68,11 @@ function NewScheduledRoomForm({ initialValues, handleSubmit, handleClose }) {
                         </Field>
                     </Box>
                     <Box w='100%' h='88px' mb='30px'>
-                        <Field name='scheduleDate' >
+                        <Field name='bio' >
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.scheduleDate && form.touched.scheduleDate}>
-                                    <RoomBioInput field={field} valid={!form.errors.scheduleDate && form.touched.scheduleDate} w='100%' h='100%'/>
-                                    <FormErrorMessage>{form.errors.scheduleDate}</FormErrorMessage>
+                                <FormControl isInvalid={form.errors.bio && form.touched.bio}>
+                                    <RoomBioInput field={field} valid={!form.errors.bio && form.touched.bio} w='100%' h='100%'/>
+                                    <FormErrorMessage>{form.errors.bio}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
