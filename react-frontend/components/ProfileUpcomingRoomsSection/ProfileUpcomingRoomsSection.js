@@ -5,7 +5,7 @@ import {
 import UpcomingRoomsSection from '../UpcomingRoomsSection/UpcomingRoomsSection'
 import UserProfileSection from '../UserProfileSection/UserProfileSection'
 
-function ProfileUpcomingRoomsSection({ name, username, numFollowers, numFollowing, scheduled_rooms, ...props}) {
+function ProfileUpcomingRoomsSection({ name, username, numFollowers, numFollowing, scheduledRooms, ...props}) {
     return (
         <Stack 
             direction='column' 
@@ -20,7 +20,7 @@ function ProfileUpcomingRoomsSection({ name, username, numFollowers, numFollowin
                 numFollowers={numFollowers} 
                 numFollowing={numFollowing}
             />
-            <UpcomingRoomsSection scheduled_rooms={scheduled_rooms}/>
+            <UpcomingRoomsSection scheduledRooms={scheduledRooms}/>
         </Stack>
     )
 }
