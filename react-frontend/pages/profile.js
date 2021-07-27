@@ -75,7 +75,7 @@ function profile() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
-                        scheduledRooms={scheduledRooms}
+                        scheduledRooms={scheduledRooms.slice(0, 3)}
                     />
                 </Stack>
             </Container>
