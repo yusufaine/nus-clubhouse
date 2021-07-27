@@ -16,6 +16,7 @@ import AuthContext from '../../context/AuthContext'
 import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 import BoldText from "../BoldText/BoldText"
 import NewRoomForm from '../NewRoomForm/NewRoomForm'
+import NewScheduledRoomForm from '../NewScheduledRoomForm/NewScheduledRoomForm'
 
 function NewRoomModalBtn({ isScheduled }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
