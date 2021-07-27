@@ -68,6 +68,7 @@ export default function Home() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
+                        scheduledRooms={scheduledRooms}
                     />
                 </Stack>
             </Container>

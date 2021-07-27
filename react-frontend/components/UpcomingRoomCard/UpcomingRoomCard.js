@@ -14,7 +14,7 @@ function UpcomingRoomCard({ room }) {
             px='20px' 
             py='15px'
         >
-            <HighlightText text='2:55 AM' mb={2}/>
+            <HighlightText text={room.scheduledStart} mb={2}/>
             <RoomNameText text={room.name} mb={2}/>
             <RoomUsersAvatarGroup />
         </Box>

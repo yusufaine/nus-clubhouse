@@ -62,6 +62,7 @@ export default function Scheduled() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
+                        scheduledRooms={rooms}
                     />
                 </Stack>
             </Container>
