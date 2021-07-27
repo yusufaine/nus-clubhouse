@@ -21,6 +21,26 @@ function index() {
     const router = useRouter()
     const toast = useToast()
     const audioRef = useRef()
+
+    const [userName, setUserName] = useState('')
+    const [userUsername, setUserUsername] = useState('')
+    const [userBio, setUserBio] = useState('')
+    const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
+    const [usersFollowing, setUsersFollowing] = useState([])
+    const [numFollowers, setNumFollowers] = useState('')
+    const [numFollowing, setNumFollowing] = useState('')
+
+    useEffect(() => {
+        if (user) {
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
+            setUsersFollowing(user.following)
+        }
+    }, [])
     
     useEffect(() => {
         if (router.query.id) {
@@ -41,9 +61,14 @@ function index() {
             <Navbar />
             <Container maxW='1320px' w='100%' centerContent p={0} mb={6}>
                 <Stack direction='row' w='100%' spacing='60px'>
-                    <FriendsList friends={user.friends}/>
+                    <FriendsList users={usersFollowing}/>
                     <RoomSection />
-                    <ProfileUpcomingRoomsSection user={user} />
+                    <ProfileUpcomingRoomsSection
+                        name={userName} 
+                        username={userUsername}
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                 </Stack>
                 <div ref={audioRef}></div>
             </Container>
