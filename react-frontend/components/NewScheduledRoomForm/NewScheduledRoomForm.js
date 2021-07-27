@@ -57,7 +57,7 @@ function NewScheduledRoomForm({ initialValues, handleSubmit, handleClose }) {
                             </Field>
                         </Box>
                     </Stack>
-                    <Box w='100%'>
+                    <Box w='100%' mb='20px'>
                         <Field name='scheduleDate'>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.scheduleDate && form.touched.scheduleDate}>
