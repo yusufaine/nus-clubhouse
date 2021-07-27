@@ -62,7 +62,7 @@ export default function Scheduled() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
-                        scheduledRooms={rooms}
+                        scheduledRooms={rooms.slice(0, 3)}
                     />
                 </Stack>
             </Container>

@@ -4,7 +4,7 @@ import {
 
 import UpcomingRoomCard from '../UpcomingRoomCard/UpcomingRoomCard'
 
-function UpcomingRoomsList({ rooms=['room1','room1','room1','room1','room1'] }) {
+function UpcomingRoomsList({ rooms }) {
     return (
         <Stack 
             direction='column'
