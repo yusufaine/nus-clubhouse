@@ -15,8 +15,16 @@ import AuthContext from '../context/AuthContext'
 
 export default function Scheduled() {
     const { user, fetchScheduledRooms } = useContext(AuthContext)
-    const [rooms, setRooms] = useState([])
     const router = useRouter()
+
+    const [rooms, setRooms] = useState([])
+    const [userName, setUserName] = useState('')
+    const [userUsername, setUserUsername] = useState('')
+    const [userBio, setUserBio] = useState('')
+    const [userProfileImgUrl, setUserProfileImgUrl] = useState('')
+    const [usersFollowing, setUsersFollowing] = useState([])
+    const [numFollowers, setNumFollowers] = useState('')
+    const [numFollowing, setNumFollowing] = useState('')
     
     useEffect(() => {
         if (!user) {
@@ -27,6 +35,13 @@ export default function Scheduled() {
                 console.log('scheduled rooms value: ', rooms)
                 setRooms(rooms)
             })
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+            setUsersFollowing(user.following)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
         }
     }, [user])
 
@@ -40,9 +55,14 @@ export default function Scheduled() {
             <Navbar />
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
-                    <FriendsList />
+                    <FriendsList users={usersFollowing}/>
                     <RoomListFeed title='Scheduled Rooms' rooms={rooms}/>
-                    <ProfileUpcomingRoomsSection scheduled_rooms={rooms}/>
+                    <ProfileUpcomingRoomsSection
+                        name={userName} 
+                        username={userUsername}
+                        numFollowers={numFollowers} 
+                        numFollowing={numFollowing}
+                    />
                 </Stack>
             </Container>
         </>
