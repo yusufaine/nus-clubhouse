@@ -16,12 +16,13 @@ import VoiceContext from '../../../context/VoiceContext'
 import { VoiceProvider } from '../../../context/VoiceContext'
 
 function index() {
-    const { user, fetchRoom } = useContext(AuthContext)
+    const { user, fetchRoom, fetchScheduledRooms } = useContext(AuthContext)
     const { joinRoomVoiceChannel } = useContext(VoiceContext)
     const router = useRouter()
     const toast = useToast()
     const audioRef = useRef()
 
+    const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
     const [userBio, setUserBio] = useState('')
@@ -32,6 +33,10 @@ function index() {
 
     useEffect(() => {
         if (user) {
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setScheduledRooms(rooms)
+            })
             setUserUsername(user.username)
             setUserName(user.name)
             setUserBio(user.bio)
@@ -68,6 +73,7 @@ function index() {
                         username={userUsername}
                         numFollowers={numFollowers} 
                         numFollowing={numFollowing}
+                        scheduledRooms={scheduledRooms}
                     />
                 </Stack>
                 <div ref={audioRef}></div>
