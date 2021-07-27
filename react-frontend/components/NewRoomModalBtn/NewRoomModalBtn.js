@@ -54,7 +54,7 @@ function NewRoomModalBtn({ isScheduled }) {
 
     return (
         <> 
-            <ClubhouseBtn variant='primary' text={isScheduled ? 'New scheduled room' : 'New room'} onClick={onOpen}/>
+            <ClubhouseBtn variant='primary' text='New room' onClick={onOpen}/>
             <Modal isOpen={isOpen} onClose={onClose} isCentered size='lg'>
                 <ModalOverlay />
                 <ModalContent bg='clubhousegrey.200' p='20px' rounded='lg'>
