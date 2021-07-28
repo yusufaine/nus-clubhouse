@@ -81,7 +81,7 @@ export async function getServerSideProps({ params: { id } }) {
     // Return as props
     return {
         props: {
-            user: userData
+            userPageData: userData
         }
     }
 }
