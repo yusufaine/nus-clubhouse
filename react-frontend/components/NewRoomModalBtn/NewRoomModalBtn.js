@@ -40,9 +40,7 @@ function NewRoomModalBtn({ isScheduled }) {
             room: {
                 name: values.name,
                 type: values.type,
-                bio: values.bio,
-                isScheduled: values.scheduleDate && values.scheduleDate != '' ? true : false,
-                scheduledStart:  values.scheduleDate ? values.scheduleDate : null
+                bio: values.bio
             }
         }
         console.log('creating room with body: ', body)
