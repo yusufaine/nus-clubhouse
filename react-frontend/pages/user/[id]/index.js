@@ -14,7 +14,7 @@ import ProfileSection from '../../../components/ProfileSection/ProfileSection'
 import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
-function userPage({ userPageData }) {
+function index({ userPageData }) {
     const { user, fetchScheduledRooms } = useContext(AuthContext)
 
     const [scheduledRooms, setScheduledRooms] = useState([])
@@ -74,7 +74,7 @@ function userPage({ userPageData }) {
     )
 }
 
-export default userPage
+export default index
 
 export async function getServerSideProps({ params: { id } }) {
     const { fetchUser } = useContext(AuthContext)
