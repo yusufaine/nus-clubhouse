@@ -74,8 +74,6 @@ function index({ userPageData }) {
     )
 }
 
-export default index
-
 export async function getServerSideProps({ params: { id } }) {
     const { fetchUser } = useContext(AuthContext)
     const userData = await fetchUser(id)
@@ -87,3 +85,5 @@ export async function getServerSideProps({ params: { id } }) {
         }
     }
 }
+
+export default index
