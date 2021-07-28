@@ -12,6 +12,7 @@ import FriendsList from '../components/FriendsList/FriendsList'
 import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSection/ProfileUpcomingRoomsSection'
 import ProfileSection from '../components/ProfileSection/ProfileSection'
 import AuthContext from '../context/AuthContext'
+import { API_URL } from '../utils/utils'
 
 function userPage({ userPageData }) {
     const { user, fetchScheduledRooms } = useContext(AuthContext)
@@ -76,8 +77,14 @@ function userPage({ userPageData }) {
 export default userPage
 
 export async function getServerSideProps({ params: { id } }) {
-    const { fetchUser } = useContext(AuthContext)
-    const userData = await fetchUser(id)
+    const response = await fetch(`${API_URL}/users/${id}`, {
+        headers: {
+            "content-type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(body)
+    })
+    const userData = await response.json()
 
     // Return as props
     return {
