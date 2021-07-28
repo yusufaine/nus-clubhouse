@@ -60,11 +60,11 @@ export const AuthProvider = (props) => {
 
     const fetchScheduledRooms = async () => {
         try {
-            const data = await callAPI('/scheduled', 'GET')
+            const data = await callAPI('/rooms?isScheduled=true', 'GET')
             if(!data.data) {
                 console.error("Failed to load scheduled rooms. Please try again. ", data)
             } else {
-                console.log('fetched scheduled rooms data: ', data)
+                console.log('fetched scheduled rooms data: ', data.data)
                 return data.data
             }
         } catch (err) {
@@ -157,6 +157,20 @@ export const AuthProvider = (props) => {
         return () => {
             channel.leave()
             socket.disconnect()
+        }
+    }
+
+    const fetchUser = async (user_id) => {
+        try {
+            const data = await callAPI(`/users/${user_id}`, 'GET')
+            if(!data) {
+                console.error("Failed to load user. Please try again. ", data)
+            } else {
+                console.log('fetched user data: ', data)
+                return data
+            }
+        } catch (err) {
+            console.error(err)
         }
     }
 
@@ -272,6 +286,7 @@ export const AuthProvider = (props) => {
         <AuthContext.Provider value={{ 
             user,
             roomData,
+            fetchUser,
             registerUser, 
             loginUser,
             logoutUser,
