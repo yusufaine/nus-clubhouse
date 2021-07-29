@@ -17,6 +17,7 @@ import AuthContext from '.././../../context/AuthContext'
 function index() {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
 
+    const [userPageData, setUserPageData] = useState({})
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
@@ -31,6 +32,7 @@ function index() {
             const userId = router.query.id
             fetchUser(userId).then((userData) => {
                 console.log('server side props called! data: ', userData)
+                setUserPageData(userData)
             })  
         }
 
