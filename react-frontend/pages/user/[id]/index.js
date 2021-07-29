@@ -18,7 +18,7 @@ function index({ userPageData }) {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
     const router = useRouter()
 
-    const [userPageData, setUserPageData] = useState(null)
+    // const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
