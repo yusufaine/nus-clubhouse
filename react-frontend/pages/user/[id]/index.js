@@ -14,11 +14,11 @@ import ProfileSection from '../../../components/ProfileSection/ProfileSection'
 import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
-function index({ userPageData }) {
+function index() {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
     const router = useRouter()
 
-    // const [userPageData, setUserPageData] = useState(null)
+    const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
@@ -29,6 +29,15 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
+        if (router.query.id) {
+            const userId = router.query.id
+            console.log('router query data: ', router.query)
+            fetchUser(userId).then((userData) => {
+                console.log('server side props called! data: ', userData.data)
+                setUserPageData(userData.data)
+            })  
+        }
+        
         if (user) {
             fetchScheduledRooms().then(rooms => {
                 console.log('scheduled rooms value: ', rooms)
@@ -44,14 +53,28 @@ function index({ userPageData }) {
         }
     }, [])
 
-    // useEffect(() => {
-    //     const userId = router.query.id
-    //     console.log('router query data: ', router.query)
-    //     fetchUser(userId).then((userData) => {
-    //         console.log('server side props called! data: ', userData.data)
-    //         setUserPageData(userData.data)
-    //     })  
-    // }, [router.query])
+    useEffect(() => {
+        if (router.query.id) {
+            const userId = router.query.id
+            console.log('router query data: ', router.query)
+            fetchUser(userId).then((userData) => {
+                console.log('server side props called! data: ', userData.data)
+                setUserPageData(userData.data)
+            })  
+        }
+    }, [router.query])
+
+    useEffect(() => {
+        if (user) {
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
+            setUsersFollowing(user.following)
+        }
+    }, [user])
 
     return (
         <>
@@ -85,17 +108,18 @@ function index({ userPageData }) {
     )
 }
 
-export async function getServerSideProps({ params: { id } }) {
-    const { fetchUser } = useContext(AuthContext)
-    fetchUser(id).then((userData) => {
-        console.log('server side props called! data: ', userData.data)
-        // Return as props
-        return {
-            props: {
-                userPageData: userData.data
-            }
-        }
-    })
-}
+// export async function getServerSideProps({ params: { id } }) {
+//     console.log('get server side props id: ', id)
+//     const { fetchUser } = useContext(AuthContext)
+//     fetchUser(id).then((userData) => {
+//         console.log('server side props called! data: ', userData.data)
+//         // Return as props
+//         return {
+//             props: {
+//                 userPageData: userData.data
+//             }
+//         }
+//     })
+// }
 
 export default index
