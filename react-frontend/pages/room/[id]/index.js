@@ -16,7 +16,7 @@ import VoiceContext from '../../../context/VoiceContext'
 import { VoiceProvider } from '../../../context/VoiceContext'
 
 function index() {
-    const { user, fetchRoom, fetchScheduledRooms } = useContext(AuthContext)
+    const { user, fetchRoom, fetchLiveRooms } = useContext(AuthContext)
     const { joinRoomVoiceChannel } = useContext(VoiceContext)
     const router = useRouter()
     const toast = useToast()
@@ -33,9 +33,10 @@ function index() {
 
     useEffect(() => {
         if (user) {
-            fetchScheduledRooms().then(rooms => {
-                console.log('scheduled rooms value: ', rooms)
-                setScheduledRooms(rooms)
+            fetchLiveRooms().then(rooms => {
+                const scheduledRooms = rooms.filter(room => { return room.isScheduled })
+                console.log('scheduled rooms value: ', scheduledRooms)
+                setScheduledRooms(scheduledRooms)
             })
             setUserUsername(user.username)
             setUserName(user.name)
