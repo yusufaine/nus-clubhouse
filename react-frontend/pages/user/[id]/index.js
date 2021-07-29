@@ -15,7 +15,7 @@ import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
 function index({ userPageData }) {
-    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const { user, fetchScheduledRooms } = useContext(AuthContext)
 
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
@@ -28,10 +28,9 @@ function index({ userPageData }) {
 
     useEffect(() => {
         if (user) {
-            fetchLiveRooms().then(rooms => {
-                const scheduledRooms = rooms.filter(room => { return room.isScheduled })
-                console.log('scheduled rooms value: ', scheduledRooms)
-                setScheduledRooms(scheduledRooms)
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setScheduledRooms(rooms)
             })
             setUserUsername(user.username)
             setUserName(user.name)

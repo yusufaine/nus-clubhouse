@@ -14,7 +14,7 @@ import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSecti
 import AuthContext from '../context/AuthContext'
 
 export default function Scheduled() {
-    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const { user, fetchScheduledRooms } = useContext(AuthContext)
     const router = useRouter()
 
     const [rooms, setRooms] = useState([])
@@ -31,10 +31,9 @@ export default function Scheduled() {
             console.log('user not logged in')
             router.push('/login')
         } else {
-            fetchLiveRooms().then(rooms => {
-                const scheduledRooms = rooms.filter(room => { return room.isScheduled })
-                console.log('scheduled rooms value: ', scheduledRooms)
-                setRooms(scheduledRooms)
+            fetchScheduledRooms().then(rooms => {
+                console.log('scheduled rooms value: ', rooms)
+                setRooms(rooms)
             })
             setUserUsername(user.username)
             setUserName(user.name)
