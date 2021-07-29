@@ -47,7 +47,7 @@ function index({ userPageData }) {
     }, [])
 
     useEffect(() => {
-        const userId = router.query
+        const userId = router.query.id
         console.log('router query data: ', router.query)
         fetchUser(userId).then((userData) => {
             console.log('server side props called! data: ', userData)
