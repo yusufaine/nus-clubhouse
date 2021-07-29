@@ -29,8 +29,6 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        const userId = router.query
-        console.log('router query data: ', router.query)
         // fetchUser(userId).then((userData) => {
         //     console.log('server side props called! data: ', userData)
         //     setUserPageData(userData)
@@ -50,6 +48,11 @@ function index({ userPageData }) {
             setUsersFollowing(user.following)
         }
     }, [])
+
+    useEffect(() => {
+        const userId = router.query
+        console.log('router query data: ', router.query)
+    }, [router.query])
 
     return (
         <>
