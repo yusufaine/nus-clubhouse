@@ -16,6 +16,7 @@ import AuthContext from '.././../../context/AuthContext'
 
 function index() {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
+    const router = useRouter()
 
     const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
