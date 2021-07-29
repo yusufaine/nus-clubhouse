@@ -82,16 +82,16 @@ function index({ userPageData }) {
     )
 }
 
-export async function getServerSideProps({ params: { id } }) {
-    const { fetchUser } = useContext(AuthContext)
-    const userData = await fetchUser(id)
-    console.log('server side props called! data: ', userData)
-    // Return as props
-    return {
-        props: {
-            userPageData: userData
-        }
-    }
-}
+// export async function getServerSideProps({ params: { id } }) {
+//     const { fetchUser } = useContext(AuthContext)
+//     const userData = await fetchUser(id)
+//     console.log('server side props called! data: ', userData)
+//     // Return as props
+//     return {
+//         props: {
+//             userPageData: userData
+//         }
+//     }
+// }
 
 export default index
