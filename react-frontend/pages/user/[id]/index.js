@@ -15,8 +15,7 @@ import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
 function index({ userPageData }) {
-    const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
-    const router = useRouter()
+    const { user, fetchScheduledRooms } = useContext(AuthContext)
 
     // const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
@@ -29,8 +28,6 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        
-
         if (user) {
             fetchScheduledRooms().then(rooms => {
                 console.log('scheduled rooms value: ', rooms)
@@ -45,15 +42,6 @@ function index({ userPageData }) {
             setUsersFollowing(user.following)
         }
     }, [])
-
-    useEffect(() => {
-        const userId = router.query.id
-        console.log('router query data: ', router.query)
-        fetchUser(userId).then((userData) => {
-            console.log('server side props called! data: ', userData)
-            setUserPageData(userData)
-        })  
-    }, [router.query])
 
     return (
         <>
@@ -87,16 +75,16 @@ function index({ userPageData }) {
     )
 }
 
-// export async function getServerSideProps({ params: { id } }) {
-//     const { fetchUser } = useContext(AuthContext)
-//     const userData = await fetchUser(id)
-//     console.log('server side props called! data: ', userData)
-//     // Return as props
-//     return {
-//         props: {
-//             userPageData: userData
-//         }
-//     }
-// }
+export async function getServerSideProps({ params: { id } }) {
+    const { fetchUser } = useContext(AuthContext)
+    const userData = await fetchUser(id)
+    console.log('server side props called! data: ', userData.data)
+    // Return as props
+    return {
+        props: {
+            userPageData: userData.data
+        }
+    }
+}
 
 export default index
