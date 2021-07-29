@@ -27,8 +27,9 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        const userData = await fetchUser(id)
-        console.log('server side props called! data: ', userData)
+        fetchUser(id).then((userData) => {
+            console.log('server side props called! data: ', userData)
+        })  
 
         if (user) {
             fetchScheduledRooms().then(rooms => {
