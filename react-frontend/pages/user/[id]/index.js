@@ -29,7 +29,7 @@ function index() {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        if (router.query) {
+        if (router.query.id) {
             const userId = router.query.id
             console.log('router query data: ', router.query)
             fetchUser(userId).then((userData) => {
@@ -54,7 +54,7 @@ function index() {
     }, [])
 
     useEffect(() => {
-        if (router.query) {
+        if (router.query.id) {
             const userId = router.query.id
             console.log('router query data: ', router.query)
             fetchUser(userId).then((userData) => {
