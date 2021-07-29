@@ -66,7 +66,7 @@ function index() {
                         name={userPageData && userPageData.name} 
                         username={userPageData && userPageData.username}
                         bio={userPageData && userPageData.bio}
-                        profileImgUrl={userPageData.profileImgUrl}
+                        profileImgUrl={userPageData && userPageData.profileImgUrl}
                         numFollowers={userPageData && userPageData.followers.length} 
                         numFollowing={userPageData && userPageData.following.length}
                     />
