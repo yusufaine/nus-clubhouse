@@ -14,7 +14,7 @@ import ProfileUpcomingRoomsSection from '../components/ProfileUpcomingRoomsSecti
 import AuthContext from '../context/AuthContext'
 
 export default function Home() {
-    const { user, fetchLiveRooms } = useContext(AuthContext)
+    const { user, fetchLiveRooms, fetchScheduledRooms } = useContext(AuthContext)
     const router = useRouter()
 
     const [rooms, setRooms] = useState([])
