@@ -14,11 +14,11 @@ import ProfileSection from '../../../components/ProfileSection/ProfileSection'
 import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
-function index() {
+function index({ userPageData }) {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
     const router = useRouter()
 
-    const [userPageData, setUserPageData] = useState(null)
+    // const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
@@ -29,13 +29,13 @@ function index() {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        if (router.query.id) {
-            const userId = router.query.id
-            fetchUser(userId).then((userData) => {
-                console.log('server side props called! data: ', userData)
-                setUserPageData(userData)
-            })  
-        }
+        // if (router.query.id) {
+        //     const userId = router.query.id
+        //     fetchUser(userId).then((userData) => {
+        //         console.log('server side props called! data: ', userData)
+        //         setUserPageData(userData)
+        //     })  
+        // }
 
         if (user) {
             fetchScheduledRooms().then(rooms => {
@@ -84,16 +84,16 @@ function index() {
     )
 }
 
-// export async function getServerSideProps({ params: { id } }) {
-//     const { fetchUser } = useContext(AuthContext)
-//     const userData = await fetchUser(id)
-//     console.log('server side props called! data: ', userData)
-//     // Return as props
-//     return {
-//         props: {
-//             userPageData: userData
-//         }
-//     }
-// }
+export async function getServerSideProps({ params: { id } }) {
+    const { fetchUser } = useContext(AuthContext)
+    const userData = await fetchUser(id)
+    console.log('server side props called! data: ', userData)
+    // Return as props
+    return {
+        props: {
+            userPageData: userData
+        }
+    }
+}
 
 export default index
