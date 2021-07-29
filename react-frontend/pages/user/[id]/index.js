@@ -17,7 +17,7 @@ import AuthContext from '.././../../context/AuthContext'
 function index() {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
 
-    const [userPageData, setUserPageData] = useState({})
+    const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
@@ -63,12 +63,12 @@ function index() {
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList users={usersFollowing}/>
                     <ProfileSection 
-                        name={userPageData.name} 
-                        username={userPageData.username}
-                        bio={userPageData.bio}
+                        name={userPageData && userPageData.name} 
+                        username={userPageData && userPageData.username}
+                        bio={userPageData && userPageData.bio}
                         profileImgUrl={userPageData.profileImgUrl}
-                        numFollowers={userPageData.followers.length} 
-                        numFollowing={userPageData.following.length}
+                        numFollowers={userPageData && userPageData.followers.length} 
+                        numFollowing={userPageData && userPageData.following.length}
                     />
                     <ProfileUpcomingRoomsSection
                         name={userName} 
