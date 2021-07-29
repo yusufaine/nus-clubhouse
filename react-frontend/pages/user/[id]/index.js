@@ -14,7 +14,7 @@ import ProfileSection from '../../../components/ProfileSection/ProfileSection'
 import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
-function index({ userPageData }) {
+function index() {
     const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
 
     const [scheduledRooms, setScheduledRooms] = useState([])
@@ -27,9 +27,12 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        fetchUser(id).then((userData) => {
-            console.log('server side props called! data: ', userData)
-        })  
+        if (router.query.id) {
+            const userId = router.query.id
+            fetchUser(userId).then((userData) => {
+                console.log('server side props called! data: ', userData)
+            })  
+        }
 
         if (user) {
             fetchScheduledRooms().then(rooms => {
