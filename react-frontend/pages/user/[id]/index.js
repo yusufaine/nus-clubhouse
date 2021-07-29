@@ -29,11 +29,12 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
-        const userId = router.query.id
-        fetchUser(userId).then((userData) => {
-            console.log('server side props called! data: ', userData)
-            setUserPageData(userData)
-        })  
+        const userId = router.query
+        console.log('router query data: ', router.query)
+        // fetchUser(userId).then((userData) => {
+        //     console.log('server side props called! data: ', userData)
+        //     setUserPageData(userData)
+        // })  
 
         if (user) {
             fetchScheduledRooms().then(rooms => {
