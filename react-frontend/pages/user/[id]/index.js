@@ -14,9 +14,10 @@ import ProfileSection from '../../../components/ProfileSection/ProfileSection'
 import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
-function index({ userPageData }) {
-    const { user, fetchScheduledRooms } = useContext(AuthContext)
+function index() {
+    const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
 
+    const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
@@ -27,6 +28,14 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
+        if (router.query.id) {
+            const userId = router.query.id
+            fetchUser(userId).then((userData) => {
+                console.log('server side props called! data: ', userData)
+                setUserPageData(userData)
+            })  
+        }
+
         if (user) {
             fetchScheduledRooms().then(rooms => {
                 console.log('scheduled rooms value: ', rooms)
@@ -54,12 +63,12 @@ function index({ userPageData }) {
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList users={usersFollowing}/>
                     <ProfileSection 
-                        name={userPageData.name} 
-                        username={userPageData.username}
-                        bio={userPageData.bio}
-                        profileImgUrl={userPageData.profileImgUrl}
-                        numFollowers={userPageData.followers.length} 
-                        numFollowing={userPageData.following.length}
+                        name={userPageData && userPageData.name} 
+                        username={userPageData && userPageData.username}
+                        bio={userPageData && userPageData.bio}
+                        profileImgUrl={userPageData && userPageData.profileImgUrl}
+                        numFollowers={userPageData && userPageData.followers.length} 
+                        numFollowing={userPageData && userPageData.following.length}
                     />
                     <ProfileUpcomingRoomsSection
                         name={userName} 
@@ -74,16 +83,16 @@ function index({ userPageData }) {
     )
 }
 
-export async function getServerSideProps({ params: { id } }) {
-    const { fetchUser } = useContext(AuthContext)
-    const userData = await fetchUser(id)
-    console.log('server side props called! data: ', userData)
-    // Return as props
-    return {
-        props: {
-            userPageData: userData
-        }
-    }
-}
+// export async function getServerSideProps({ params: { id } }) {
+//     const { fetchUser } = useContext(AuthContext)
+//     const userData = await fetchUser(id)
+//     console.log('server side props called! data: ', userData)
+//     // Return as props
+//     return {
+//         props: {
+//             userPageData: userData
+//         }
+//     }
+// }
 
 export default index
