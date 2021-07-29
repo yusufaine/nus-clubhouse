@@ -61,11 +61,10 @@ export const AuthProvider = (props) => {
     const fetchScheduledRooms = async () => {
         try {
             const data = await callAPI('/scheduled', 'GET')
-            if(!data) {
+            if(!data.data) {
                 console.error("Failed to load scheduled rooms. Please try again. ", data)
             } else {
-                console.log('fetched scheduled rooms data: ', data)
-                return data
+                return data.data
             }
         } catch (err) {
             console.error(err)
