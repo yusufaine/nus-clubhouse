@@ -86,6 +86,7 @@ function index({ userPageData }) {
 }
 
 export async function getServerSideProps({ params: { id } }) {
+    console.log('get server side props id: ', id)
     const { fetchUser } = useContext(AuthContext)
     fetchUser(id).then((userData) => {
         console.log('server side props called! data: ', userData.data)
