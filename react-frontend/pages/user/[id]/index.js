@@ -54,12 +54,14 @@ function index() {
     }, [])
 
     useEffect(() => {
-        const userId = router.query.id
-        console.log('router query data: ', router.query)
-        fetchUser(userId).then((userData) => {
-            console.log('server side props called! data: ', userData.data)
-            setUserPageData(userData.data)
-        })  
+        if (router.query) {
+            const userId = router.query.id
+            console.log('router query data: ', router.query)
+            fetchUser(userId).then((userData) => {
+                console.log('server side props called! data: ', userData.data)
+                setUserPageData(userData.data)
+            })  
+        }
     }, [router.query])
 
     return (
