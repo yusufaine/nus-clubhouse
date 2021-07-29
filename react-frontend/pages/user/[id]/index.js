@@ -15,7 +15,7 @@ import AuthContext from '.././../../context/AuthContext'
 // import { API_URL } from '../
 
 function index({ userPageData }) {
-    const { user, fetchScheduledRooms } = useContext(AuthContext)
+    const { user, fetchScheduledRooms, fetchUser } = useContext(AuthContext)
 
     const [scheduledRooms, setScheduledRooms] = useState([])
     const [userName, setUserName] = useState('')
@@ -27,6 +27,9 @@ function index({ userPageData }) {
     const [numFollowing, setNumFollowing] = useState('')
 
     useEffect(() => {
+        const userData = await fetchUser(id)
+        console.log('server side props called! data: ', userData)
+
         if (user) {
             fetchScheduledRooms().then(rooms => {
                 console.log('scheduled rooms value: ', rooms)
@@ -74,16 +77,16 @@ function index({ userPageData }) {
     )
 }
 
-export async function getServerSideProps({ params: { id } }) {
-    const { fetchUser } = useContext(AuthContext)
-    const userData = await fetchUser(id)
-    console.log('server side props called! data: ', userData)
-    // Return as props
-    return {
-        props: {
-            userPageData: userData
-        }
-    }
-}
+// export async function getServerSideProps({ params: { id } }) {
+//     const { fetchUser } = useContext(AuthContext)
+//     const userData = await fetchUser(id)
+//     console.log('server side props called! data: ', userData)
+//     // Return as props
+//     return {
+//         props: {
+//             userPageData: userData
+//         }
+//     }
+// }
 
 export default index
