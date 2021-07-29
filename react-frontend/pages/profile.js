@@ -41,6 +41,18 @@ function profile() {
         }
     }, [])
 
+    useEffect(() => {
+        if (user) {
+            setUserUsername(user.username)
+            setUserName(user.name)
+            setUserBio(user.bio)
+            setUserProfileImgUrl(user.profileImgUrl)
+            setNumFollowers(user.followers.length)
+            setNumFollowing(user.following.length)
+            setUsersFollowing(user.following)
+        }
+    }, [user])
+
     // useEffect(() => {
     //     if (user) {
     //         console.log('user value changed: ', user)
