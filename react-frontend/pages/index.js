@@ -38,7 +38,7 @@ export default function Home() {
                 setRooms(liveRooms)
             })
             fetchScheduledRooms().then(rooms => {
-                console.log('scheduled rooms value: ', rooms)
+                console.log('scheduled rooms value: ', )
                 setScheduledRooms(rooms)
             })
             setUserUsername(user.username)
