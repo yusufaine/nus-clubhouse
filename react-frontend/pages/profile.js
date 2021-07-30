@@ -53,16 +53,6 @@ function profile() {
         }
     }, [user])
 
-    // useEffect(() => {
-    //     if (user) {
-    //         console.log('user value changed: ', user)
-    //         setUserUsername(user.username)
-    //         setUserName(user.name)
-    //         setUserBio(user.bio)
-    //         setUserProfileImgUrl(user.profileImgUrl)
-    //     }
-    // }, [user])
-
     return (
         <>
             <Head>

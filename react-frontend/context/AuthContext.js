@@ -173,6 +173,26 @@ export const AuthProvider = (props) => {
         }
     }
 
+    const followUser = async (user_id) => {
+        try {
+            const body = {
+                id: user.id,
+                user_to_follow_id: user_id
+            }
+            console.log(`user of id: ${user.id} following user of id: ${user_id}`)
+            const data = await callAPI('/users/follow', 'POST', body)
+            
+            if(data.id) {
+                console.log(`Successfully followed user, current updated user: ${data}`)
+                setUser(data)
+            } else {
+                console.log(`Failed to follow user of id: ${user_id}`)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     const registerUser = async (values, toast, actions) => {
         try {
             actions.setSubmitting(true)
