@@ -15,6 +15,7 @@ defmodule ClubhouseData.Rooms do
     def create_room_with_user(%User{} = user, attrs) do
         room = Ecto.build_assoc(user, :created_rooms, attrs)
         Repo.insert!(room)
+        get_room!(room.id)
     end
 
     def update_room(%Room{} = room, attrs) do
@@ -35,7 +36,7 @@ defmodule ClubhouseData.Rooms do
     end
 
     def list_scheduled_rooms() do
-        preload_query = from rm in Room, where: rm.isScheduled == true and rm.isEnded == false, preload: [:creator, :users]
+        preload_query = from rm in Room, where: rm.isScheduled == true, preload: [:creator, :users]
         Repo.all(preload_query) 
     end
 

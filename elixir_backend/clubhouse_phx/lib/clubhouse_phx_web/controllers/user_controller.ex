@@ -10,7 +10,6 @@ defmodule ClubhousePhxWeb.UserController do
   action_fallback ClubhousePhxWeb.FallbackController
 
   # the following plugs are defined in the controllers/authorize.ex file
-  plug :user_check when action in [:index, :show]
   plug :user_check when action in [:update, :delete]
 
   def index(conn, _) do
@@ -29,8 +28,8 @@ defmodule ClubhousePhxWeb.UserController do
   end
 
   def show(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"id" => id}) do
-    user = if id == to_string(user.id), do: user, else: Users.get_user!(id)
-    render(conn, "show.json", user: user)
+    user = Users.get_user!(id)
+    render(conn, "showProfile.json", user: user)
   end
 
   def update(conn, %{"user" => user_params}) do
@@ -46,5 +45,14 @@ defmodule ClubhousePhxWeb.UserController do
   def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _) do
     {:ok, _user} = Users.delete_user(user)
     send_resp(conn, :no_content, "")
+  end
+
+  def follow(conn, %{"id" => user_id, "user_to_follow_id" => user_to_follow_id}) do
+    user = Users.get_user!(user_id)
+    userToFollow = Users.get_user!(user_to_follow_id)
+    case Users.follow_user(user, userToFollow) do
+      {:ok, user} ->
+        render(conn, "showProfile.json", user: user)
+    end
   end
 end

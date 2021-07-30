@@ -16,9 +16,12 @@ defmodule ClubhousePhxWeb.Router do
     post "/sessions", SessionController, :create
     resources "/users", UserController, except: [:create, :edit]
     resources "/rooms", RoomController
+    get "/users/:id", UserController, :show
+    get "/scheduled", RoomController, :scheduled
     post "/rooms/join", RoomController, :join
     post "/rooms/create", RoomController, :create
     post "/users/create", UserController, :create
+    post "/users/follow", UserController, :follow
     get "/confirms", ConfirmController, :index
     post "/password_resets", PasswordResetController, :create
     put "/password_resets/update", PasswordResetController, :update

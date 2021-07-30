@@ -19,10 +19,14 @@ defmodule ClubhousePhxWeb.RoomController do
       %{} -> 
         render(conn, "index.json", rooms: Rooms.list_rooms(true))
       %{"isScheduled" => true} ->
-        render(conn, "index.json", rooms: Rooms.list_scheduled_rooms())
+        
       %{"live" => live_status} -> 
         render(conn, "index.json", rooms: Rooms.list_rooms(live_status))
     end
+  end
+
+  def scheduled(conn, _) do
+    render(conn, "index.json", rooms: Rooms.list_scheduled_rooms())
   end
 
   def join(conn, %{"room_id" => room_id, "user_id" => user_id}) do
@@ -33,7 +37,7 @@ defmodule ClubhousePhxWeb.RoomController do
     room = RoomSession.add_user(room_id, user)
     roomMap = room_to_map(room)
     conn
-    |> render("show.json", room: roomMap)
+    |> render("showRoomSession", room: roomMap)
   end
 
   defp start_room(room_id, user_id) do
@@ -59,32 +63,31 @@ defmodule ClubhousePhxWeb.RoomController do
     case is_scheduled do
       false -> 
         room_params = %{name: room_name, type: room_type, isScheduled: false}
-        case RoomSessionSupervisor.start_room(room_name, user_id) do
+        case RoomSessionSupervisor.start_room(room_params, user_id) do
           {:ok, pid} ->
             state = :sys.get_state(pid)
             roomMap = room_to_map(state)
             conn
-            |> render("show.json", room: roomMap)
+            |> render("showRoomSession.json", room: roomMap)
         end
       true -> 
         room_params = %{name: room_name, isLive: false, isScheduled: true, scheduledStart: scheduled_start, isEnded: false, numUsers: 0, type: room_type}
         user = Users.get_user!(user_id)
         room = Rooms.create_room_with_user(user, room_params)
-        roomMap = room_to_map(room)
         conn
-        |> render("show.json", room: roomMap)
+        |> render("showRoomData.json", room: room)
     end
   end
 
   def show(conn, %{"id" => id}) do
     room = Rooms.get_room!(id)
-    render(conn, "show.json", room: room)
+    render(conn, "showRoomDatajson", room: room)
   end
 
   def update(conn, %{"id" => room_id, "updates" => update_params}) do
     room = Rooms.get_room!(room_id)
     with {:ok, room} <- Rooms.update_room(room, update_params) do
-      render(conn, "show.json", room: room)
+      render(conn, "showRoomData.json", room: room)
     end
   end
 
