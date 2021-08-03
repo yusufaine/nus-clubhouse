@@ -9,6 +9,8 @@ import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 function ProfileFollowBtn({ id, name, isFollowing }) {
     const { followUser, unfollowUser } = useContext(AuthContext)
     const toast = useToast()
+
+    console.log('is following status: ', isFollowing)
     
     const successToast = () => {
         return toast({
@@ -55,7 +57,8 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
     }
 
     return (
-        <> {isFollowing 
+        <> 
+            {isFollowing 
             ? <ClubhouseBtn text='Unfollow' variant='secondary-small' onClick={handleUnfollowUser} />
             : <ClubhouseBtn text='Follow' variant='primary-small' onClick={handleFollowUser} />
             }
