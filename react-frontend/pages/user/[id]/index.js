@@ -96,7 +96,7 @@ function index() {
                         profileImgUrl={userPageData && userPageData.profileImgUrl}
                         numFollowers={userPageData && userPageData.followers.length} 
                         numFollowing={userPageData && userPageData.following.length}
-                        following={userPageData && userPageData.following}
+                        following={usersFollowing}
                     />
                     <ProfileUpcomingRoomsSection
                         name={userName} 
