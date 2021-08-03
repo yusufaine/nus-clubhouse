@@ -6,6 +6,7 @@ import ProfileHeaderSection from '../ProfileHeaderSection/ProfileHeaderSection'
 import ProfileTabs from '../ProfileTabs/ProfileTabs'
 
 function ProfileSection({ userId, profileId, name, username, bio, profileImgUrl, numFollowers, numFollowing, following }) {
+    console.log('following users value: ', following)
     return (
         <Box w='100%'>
             <ProfileHeaderSection 
