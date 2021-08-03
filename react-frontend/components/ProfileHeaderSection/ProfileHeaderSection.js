@@ -7,6 +7,7 @@ import UserNameText from '../UserNameText/UserNameText'
 import UserUsernameText from '../UserUsernameText/UserUsernameText'
 import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
 import EditProfileModalBtn from '../EditProfileModalBtn/EditProfileModalBtn'
+import ProfileFollowBtn from '../ProfileFollowBtn/ProfileFollowBtn'
 
 function ProfileHeaderSection({ id, name, username, bio, profileImgUrl, isUser, following }) {
     const isExistingFollower = (id, following) => {
