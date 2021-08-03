@@ -4,6 +4,7 @@ import {
 } from '@chakra-ui/react'
 
 import AuthContext from '../../context/AuthContext'
+import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 
 function ProfileFollowBtn({ id, name, isFollowing }) {
     const { followUser, unfollowUser } = useContext(AuthContext)
