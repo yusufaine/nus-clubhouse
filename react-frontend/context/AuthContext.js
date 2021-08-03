@@ -185,8 +185,32 @@ export const AuthProvider = (props) => {
             if(data.id) {
                 console.log(`Successfully followed user, current updated user: ${data}`)
                 setUser(data)
+                return data
             } else {
                 console.log(`Failed to follow user of id: ${user_id}`)
+                return null
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const unfollowUser = async (user_id) => {
+        try {
+            const body = {
+                id: user.id,
+                user_to_unfollow_id: user_id
+            }
+            console.log(`user of id: ${user.id} unfollowing user of id: ${user_id}`)
+            const data = await callAPI('/users/unfollow', 'POST', body)
+            
+            if(data.id) {
+                console.log(`Successfully unfollowed user, current updated user: ${data}`)
+                setUser(data)
+                return data
+            } else {
+                console.log(`Failed to follow user of id: ${user_id}`)
+                return null
             }
         } catch (err) {
             console.error(err)
@@ -306,6 +330,8 @@ export const AuthProvider = (props) => {
             user,
             roomData,
             fetchUser,
+            followUser,
+            unfollowUser,
             registerUser, 
             loginUser,
             logoutUser,

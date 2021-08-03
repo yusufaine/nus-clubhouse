@@ -3,7 +3,6 @@ import {
 } from '@chakra-ui/react'
 
 function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
-
     if (variant == 'primary') {
         return (
             <Button 
@@ -13,6 +12,20 @@ function ClubhouseBtn({ text, variant, type, onClick, ...props }) {
                 fontSize='sm'
                 px='40px'
                 py='16px'
+                type={type}
+                onClick={onClick}
+                {...props}
+            >
+                {text}
+            </Button>
+        )
+    } else if (variant == 'primary-small') {
+        return (
+            <Button 
+                variant='solid'
+                colorScheme='clubhouseorange'
+                size='sm'
+                fontSize='sm'
                 type={type}
                 onClick={onClick}
                 {...props}

@@ -20,6 +20,7 @@ function index() {
 
     const [userPageData, setUserPageData] = useState(null)
     const [scheduledRooms, setScheduledRooms] = useState([])
+    const [userId, setUserId] = useState('')
     const [userName, setUserName] = useState('')
     const [userUsername, setUserUsername] = useState('')
     const [userBio, setUserBio] = useState('')
@@ -27,6 +28,17 @@ function index() {
     const [usersFollowing, setUsersFollowing] = useState([])
     const [numFollowers, setNumFollowers] = useState('')
     const [numFollowing, setNumFollowing] = useState('')
+
+    const setUserData = (user) => {
+        setUserId(user.id)
+        setUserUsername(user.username)
+        setUserName(user.name)
+        setUserBio(user.bio)
+        setUserProfileImgUrl(user.profileImgUrl)
+        setNumFollowers(user.followers.length)
+        setNumFollowing(user.following.length)
+        setUsersFollowing(user.following)
+    }
 
     useEffect(() => {
         if (router.query.id) {
@@ -43,13 +55,7 @@ function index() {
                 console.log('scheduled rooms value: ', rooms)
                 setScheduledRooms(rooms)
             })
-            setUserUsername(user.username)
-            setUserName(user.name)
-            setUserBio(user.bio)
-            setUserProfileImgUrl(user.profileImgUrl)
-            setNumFollowers(user.followers.length)
-            setNumFollowing(user.following.length)
-            setUsersFollowing(user.following)
+            setUserData(user)
         }
     }, [])
 
@@ -66,13 +72,7 @@ function index() {
 
     useEffect(() => {
         if (user) {
-            setUserUsername(user.username)
-            setUserName(user.name)
-            setUserBio(user.bio)
-            setUserProfileImgUrl(user.profileImgUrl)
-            setNumFollowers(user.followers.length)
-            setNumFollowing(user.following.length)
-            setUsersFollowing(user.following)
+            setUserData(user)
         }
     }, [user])
 
@@ -87,13 +87,16 @@ function index() {
             <Container maxW='1320px' w='100%' mb={6} centerContent p={0}>
                 <Stack direction='row' w='100%' spacing='60px'>
                     <FriendsList users={usersFollowing}/>
-                    <ProfileSection 
+                    <ProfileSection
+                        userId={userId}
+                        profileId={userPageData && userPageData.id}
                         name={userPageData && userPageData.name} 
                         username={userPageData && userPageData.username}
                         bio={userPageData && userPageData.bio}
                         profileImgUrl={userPageData && userPageData.profileImgUrl}
                         numFollowers={userPageData && userPageData.followers.length} 
                         numFollowing={userPageData && userPageData.following.length}
+                        following={userPageData && userPageData.following}
                     />
                     <ProfileUpcomingRoomsSection
                         name={userName} 

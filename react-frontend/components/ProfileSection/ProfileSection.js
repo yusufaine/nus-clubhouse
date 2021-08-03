@@ -5,10 +5,18 @@ import {
 import ProfileHeaderSection from '../ProfileHeaderSection/ProfileHeaderSection'
 import ProfileTabs from '../ProfileTabs/ProfileTabs'
 
-function ProfileSection({ name, username, bio, profileImgUrl, numFollowers, numFollowing }) {
+function ProfileSection({ userId, profileId, name, username, bio, profileImgUrl, numFollowers, numFollowing, following }) {
     return (
         <Box w='100%'>
-            <ProfileHeaderSection name={name} username={username} bio={bio} profileImgUrl={profileImgUrl}/>
+            <ProfileHeaderSection 
+                id={profileId} 
+                name={name} 
+                username={username} 
+                bio={bio} 
+                profileImgUrl={profileImgUrl}
+                isUser={userId == profileId} 
+                following={following}
+            />
             <ProfileTabs numFollowers={numFollowers} numFollowing={numFollowing}/>
         </Box>
     )
