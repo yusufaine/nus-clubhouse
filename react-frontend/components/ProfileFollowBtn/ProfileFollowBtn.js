@@ -3,13 +3,15 @@ import {
     useToast
 } from '@chakra-ui/react'
 
+import AuthContext from '../../context/AuthContext'
+
 function ProfileFollowBtn({ id, name, isFollowing }) {
     const { followUser, unfollowUser } = useContext(AuthContext)
     const toast = useToast()
     
     const successToast = () => {
         return toast({
-            title: `You\'re now following ${profileName}`,
+            title: `You\'re now following ${name}`,
             status: 'success',
             duration: 5000,
             isClosable: true,
@@ -18,7 +20,7 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
 
     const errorToast = () => {
         return toast({
-            title: `Error following ${profileName}`,
+            title: `Error following ${name}`,
             status: 'error',
             duration: 5000,
             isClosable: true,
