@@ -6,7 +6,7 @@ import FriendProfile from '../FriendProfile/FriendProfile'
 
 function FriendProfileList({ users }) {
     return (
-        <Stack direction='column' spacing={6} mt={6}>
+        <Stack direction='column' spacing={6} mt={12}>
             {users.map((user,i) => (
                 <FriendProfile user={user} key={i}/>
             ))}
