@@ -11,8 +11,12 @@ import ProfileFollowBtn from '../ProfileFollowBtn/ProfileFollowBtn'
 
 function ProfileHeaderSection({ id, name, username, bio, profileImgUrl, isUser, following }) {
     const isExistingFollower = (id, following) => {
-        if (following.filter(userFollowing => userFollowing.id == id).length > 0) {
-            return true
+        if (following) {
+            if (following.filter(userFollowing => userFollowing.id == id).length > 0) {
+                return true
+            } else {
+                return false
+            }
         } else {
             return false
         }
