@@ -8,7 +8,15 @@ import UserUsernameText from '../UserUsernameText/UserUsernameText'
 import UserProfileAvatar from '../UserProfileAvatar/UserProfileAvatar'
 import EditProfileModalBtn from '../EditProfileModalBtn/EditProfileModalBtn'
 
-function ProfileHeaderSection({ name, username, bio, profileImgUrl }) {
+function ProfileHeaderSection({ id, name, username, bio, profileImgUrl, isUser, following }) {
+    const isExistingFollower = (id, following) => {
+        if (following.filter(userFollowing => userFollowing.id == id).length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     return (
         <Box
             rounded='8px'
@@ -27,7 +35,9 @@ function ProfileHeaderSection({ name, username, bio, profileImgUrl }) {
                         <UserUsernameText text={username}/>
                     </Box>
                 </Stack>
-                <EditProfileModalBtn name={name} username={username} bio={bio} profileImgUrl={profileImgUrl}/>
+                {isUser 
+                ? <EditProfileModalBtn name={name} username={username} bio={bio} profileImgUrl={profileImgUrl} />
+                : <ProfileFollowBtn id={id} name={name} isFollowing={isExistingFollower(id, following)} />}
             </Stack>
         </Box>
     )
