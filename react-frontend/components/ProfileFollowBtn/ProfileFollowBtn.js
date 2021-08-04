@@ -12,18 +12,18 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
 
     console.log('is following status: ', isFollowing)
     
-    const successToast = () => {
+    const successToast = (text) => {
         return toast({
-            title: `You\'re now following ${name}`,
+            title: text,
             status: 'success',
             duration: 5000,
             isClosable: true,
         })
     }
 
-    const errorToast = () => {
+    const errorToast = (text) => {
         return toast({
-            title: `Error following ${name}`,
+            title: text,
             status: 'error',
             duration: 5000,
             isClosable: true,
@@ -34,9 +34,9 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
         try {
             const user = followUser(id)
             if (user) {
-                successToast()
+                successToast(`You\'re now following ${name}`)
             } else {
-                errorToast()
+                errorToast(`Error following ${name}`)
             }
         } catch (err) {
             console.error(err)
@@ -47,9 +47,9 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
         try {
             const user = unfollowUser(id)
             if (user) {
-                successToast()
+                successToast(`You\'re now unfollowing ${name}`)
             } else {
-                errorToast()
+                errorToast(`Error unfollowing ${name}`)
             }
         } catch (err) {
             console.error(err)
