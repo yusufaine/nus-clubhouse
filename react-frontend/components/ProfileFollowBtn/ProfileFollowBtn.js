@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import {
     useToast
 } from '@chakra-ui/react'
@@ -7,6 +7,7 @@ import AuthContext from '../../context/AuthContext'
 import ClubhouseBtn from '../ClubhouseBtn/ClubhouseBtn'
 
 function ProfileFollowBtn({ id, name, isFollowing }) {
+    const [following, setFollowing] = useState(isFollowing)
     const { followUser, unfollowUser } = useContext(AuthContext)
     const toast = useToast()
 
@@ -57,11 +58,12 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
     }
 
     return (
-        <> 
-            {isFollowing 
-            ? <ClubhouseBtn text='Unfollow' variant='secondary-small' onClick={handleUnfollowUser} />
-            : <ClubhouseBtn text='Follow' variant='primary-small' onClick={handleFollowUser} />
-            }
+        <>
+            <ClubhouseBtn
+                text={following ? 'Unfollow' : 'Follow'}
+                variant={following ? 'secondary-small' : 'primary-small'}
+                onClick={following ? handleUnfollowUser : handleFollowUser}
+            />
         </>
     )
 }
