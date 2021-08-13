@@ -34,6 +34,7 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
     const handleFollowUser = () => {
         try {
             const user = followUser(id)
+            setFollowing(true)
             if (user) {
                 successToast(`You\'re now following ${name}`)
             } else {
@@ -47,6 +48,7 @@ function ProfileFollowBtn({ id, name, isFollowing }) {
     const handleUnfollowUser = () => {
         try {
             const user = unfollowUser(id)
+            setFollowing(false)
             if (user) {
                 successToast(`You\'re now unfollowing ${name}`)
             } else {
